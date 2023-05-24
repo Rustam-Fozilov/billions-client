@@ -3,13 +3,9 @@
     <Banner/>
 
     <div class="container mt-12">
-        <a href="/">
-            <span>
-                <div class="flex items-center text-base font-futura gap-3">Популярные товары <ArrowIcon/></div>
-            </span>
-        </a>
+        <NavigationText @navigate="console.log('navigate')">Популярные товары</NavigationText>
 
-        <div class="flex mt-8 flex-wrap justify-between">
+        <div class="mt-8">
             <Cards :products="books"/>
         </div>
     </div>
@@ -17,14 +13,10 @@
     <Banner/>
 
     <div class="mt-8 container">
-        <a href="/">
-            <span>
-                <div class="flex items-center text-base font-futura gap-3">Популярные товары <ArrowIcon/></div>
-            </span>
-        </a>
+        <NavigationText @navigate="console.log('navigate2')">Популярные товары</NavigationText>
     </div>
 
-    <div class="flex mt-8 flex-wrap justify-between container">
+    <div class="mt-8 container">
         <Cards :products="books"/>
     </div>
 
@@ -37,6 +29,7 @@ import Banner from '@/components/HomePage/Banner.vue'
 import ArrowIcon from '../components/ui/ArrowIcon.vue';
 import Cards from '../components/Cards.vue';
 import TheFooter from '../components/TheFooter.vue';
+import NavigationText from '../components/ui/NavigationText.vue';
 
 const books = [
     {
