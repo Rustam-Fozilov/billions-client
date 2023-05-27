@@ -21,7 +21,7 @@
                 </div>
             </form>
             <div class="flex gap-5">
-                <LikeIcon/>
+                <LikeIcon @click="gotoFavorites"/>
                 <CartIcon/>
             </div>
         </div>
@@ -57,6 +57,10 @@ const searchBooks = () => {
     router.push({ name: 'Home', query: { search: search.value } });
 
     search.value = '';
+}
+
+const gotoFavorites = () => {
+    window.location.href = '/favorites';
 }
 
 </script>

@@ -54,6 +54,7 @@
                     <div id="book-buttons" class="flex gap-5">
                         <div class="px-20 py-4 bg-gold cursor-pointer text-sm font-futura">В корзину</div>
                         <div class="px-20 py-4 bg-white cursor-pointer text-sm font-futura">Купить в 1 клик</div>
+                        <div class="px-4 py-4 flex justify-center items-center bg-white cursor-pointer"><LikeIcon/></div>
                     </div>
                 </div>
 
@@ -89,6 +90,7 @@ import TheNavbar from '../components/TheNavbar.vue';
 import TheFooter from '../components/TheFooter.vue';
 import Cards from '../components/Cards.vue';
 import NavigationText from '../components/ui/NavigationText.vue';
+import LikeIcon from '../components/ui/LikeIcon.vue';
 
 const books = [
     {

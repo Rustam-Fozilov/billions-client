@@ -27,4 +27,24 @@
         width: 1520px;
         margin: 0 auto;
     }
+
+    .hide-arrows::-webkit-outer-spin-button,.hide-arrows::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .liked {
+        animation: like-animation 0.5s ease-in-out;
+    }
+
+    @keyframes like-animation {
+        100% {
+            transform: scale(1.4);
+        }
+    } 
 }

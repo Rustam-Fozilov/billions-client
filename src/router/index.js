@@ -2,6 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('../views/NotFound.vue'),
+  },
+  {
     path: '/',
     name: 'Home',
     component: () => import('../views/Home.vue'),
@@ -12,11 +17,6 @@ const routes = [
     component: () => import('../views/Favorites.vue'),
   },
   {
-    path: '/:pathMatch(.*)*',
-    name: 'NotFound',
-    component: () => import('../views/NotFound.vue'),
-  },
-  {
     path: '/cart',
     name: 'Cart',
     component: () => import('../views/Cart.vue'),
@@ -25,6 +25,11 @@ const routes = [
     path: '/book/:name',
     name: 'BookInfo',
     component: () => import('../views/BookInfo.vue'),
+  },
+  {
+    path: '/popular',
+    name: 'Popular',
+    component: () => import('../views/Popular.vue'),
   }
 ]
 

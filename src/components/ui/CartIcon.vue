@@ -11,9 +11,6 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
 
 defineProps({
     cartLength: {
@@ -24,7 +21,7 @@ defineProps({
 
 
 function gotoCart() {
-    router.push('/cart');
+    window.location.href = '/cart';
 }
 
 </script>

@@ -9,7 +9,8 @@
             <div class="mt-10 flex justify-between items-center">
                 <div class="font-futura text-[22px]">{{ product.price }} so'm</div>
                 <div>
-                    <LikeIcon @click.stop="addToFavorites"/>
+                    <LikeIcon class="like-icon" v-if="!isLiked" @click.stop="doFavorite"/>
+                    <LikeRedIcon class="like-icon" v-if="isLiked" @click.stop="removeFavorite"/>
                 </div>
             </div>
         </div>
@@ -18,7 +19,9 @@
 
 <script setup>
 import LikeIcon from './ui/LikeIcon.vue';
+import LikeRedIcon from './ui/LikeRedIcon.vue';
 import { useRouter } from 'vue-router';
+import { ref } from 'vue';
 
 const router = useRouter();
 
@@ -29,14 +32,19 @@ const props = defineProps({
     }
 })
 
+const isLiked = ref(props.product.isLiked);
+
 const gotoBookInfo = () => {
-    router.push({
-        name: 'BookInfo',
-        params: { name: props.product.title.split(' ').join('-').toLowerCase() }
-    });
+    window.location.href = `/book/${props.product.title.split(' ').join('-').toLowerCase()}`;
 }
 
-const addToFavorites = (e) => {
+const doFavorite = () => {
     console.log('add to favorites');
+    isLiked.value = !isLiked.value;
+    document.querySelector('.like-icon').classList.toggle('liked');
+}
+
+const removeFavorite = () => {
+    console.log('remove from favorites');
 }
 </script>
