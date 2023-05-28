@@ -22,7 +22,7 @@
             </form>
             <div class="flex gap-5">
                 <LikeIcon @click="gotoFavorites"/>
-                <CartIcon/>
+                <CartIcon cart-length="4"/>
             </div>
         </div>
         <div class="mt-7">

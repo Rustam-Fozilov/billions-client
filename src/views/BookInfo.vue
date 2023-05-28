@@ -3,7 +3,7 @@
 
     <div class="container mt-20">
         <div id="book-info__header" class="flex justify-between">
-            <div id="image-container" class=" w-2/5 flex justify-between h-[500px] sticky top-3  bottom-9">
+            <div id="image-container" class=" w-2/5 flex justify-between h-[500px] sticky top-3 bottom-9">
                 <div id="image-carousel" class="w-1/4 h-full flex flex-col justify-between">
                     <div class="w-full  h-[32%] bg-white border-[0.5px] border-black cursor-pointer">
                         <img src="../assets/books-image/image-02.png" alt="Book image" class="w-full h-full object-contain p-1">

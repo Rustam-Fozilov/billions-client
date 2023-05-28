@@ -5,7 +5,7 @@
         </svg>
 
         <div v-if="cartLength" class="w-5 h-5 flex font-interreg text-[14px] items-center justify-center bg-orange-500 -mr-2 -mt-2 -ml-2 rounded-full text-white">
-            2
+            {{ cartLength }}
         </div>
     </div>
 </template>
@@ -18,7 +18,6 @@ defineProps({
         required: false,
     }
 })
-
 
 function gotoCart() {
     window.location.href = '/cart';

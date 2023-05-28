@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full bg-white">
+    <footer class="w-full bg-white">
         <div class="container">
             <div class="flex justify-between pt-12">
                 <div class="w-[150px]">
@@ -26,5 +26,5 @@
             </div>
             <div class="text-center pb-3 text-sm font-futura mt-24">2023 BILLIONS, Все права защищены</div>
         </div>
-    </div>
+    </footer>
 </template>

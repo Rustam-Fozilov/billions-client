@@ -27,16 +27,19 @@
 
                     <div>
                         <div class="">Цена, сум</div>
-                        <div class=" my-3">
-                            <input type="range" name="price" id="">
-                        </div>
-                        <div class="flex gap-3 items-center">
-                            <div class="border border-black py-2 w-2/5">
-                                <input type="number" required name="" id="" class="bg-transparent w-full outline-none hide-arrows text-center" value="1">
+                        <div class="flex gap-3 items-center mt-3">
+                            <div class="w-2/5">
+                                <p class="text-[14px] opacity-70">От</p>
+                                <div class="border border-black py-2">
+                                    <input type="number" required name="" id="" class="bg-transparent w-full outline-none hide-arrows text-center" value="1">
+                                </div>
                             </div>
                             <div>—</div>
-                            <div class="border border-black py-2 w-2/5">
-                                <input type="number" required name="" id="" class="bg-transparent w-full outline-none hide-arrows text-center" value="250">
+                            <div class="w-2/5">
+                                <p class="text-[14px] opacity-70">До</p>
+                                <div class="border border-black py-2">
+                                    <input type="number" required name="" id="" class="bg-transparent w-full outline-none hide-arrows text-center" value="250">
+                                </div>
                             </div>
                         </div>
                     </div>
