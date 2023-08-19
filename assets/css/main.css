@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Onest Regular';
+    src: url('../fonts/OnestRegular1602-hint.ttf');
+}
+
+@font-face {
+    font-family: 'Onest Medium';
+    src: url('../fonts/OnestMedium1602-hint.ttf');
+}
+
+@layer components {
+  .container {
+    width: 1520px;
+    margin: 0 auto;
+  }
+}
