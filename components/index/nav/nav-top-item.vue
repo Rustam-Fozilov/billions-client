@@ -31,7 +31,7 @@
                     </div>
                     <div>
                         <div class="relative">
-                            <div class=" m-3 h-full cursor-pointer flex items-center gap-2">
+                            <div @click="callme" class=" m-3 h-full cursor-pointer flex items-center gap-2">
                                 <div class="w-7 h-7">
                                     <img class="w-full h-full object-cover rounded-2xl" src="~/assets/images/uzb-flag.png" alt="language uz">
                                 </div>
@@ -52,3 +52,25 @@
         </div>
     </div>
 </template>
+
+<script>
+import { inject } from 'vue'
+
+export default {
+    setup() {
+        const myMixin = inject('myMixin')
+        console.log(myMixin);
+        return {
+            ...myMixin
+        }
+    }
+} 
+
+// const myMixin = inject('myMixin')
+// console.log(myMixin);
+
+// return {
+//     ...myMixin
+// }
+
+</script>

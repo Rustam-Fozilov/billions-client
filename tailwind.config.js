@@ -16,7 +16,15 @@ module.exports = {
       },
       colors: {
         'nav-bg': '#EEEEEE',
-      }
+      },
+      fontSize: {
+        'sm': '18px',
+        'base': '24px',
+        'lg': '28px',
+        'xl': '32px',
+        '2xl': '46px',
+        'xxl': '72px',
+      },
     },
   },
   plugins: [],

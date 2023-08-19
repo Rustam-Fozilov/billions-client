@@ -1,12 +1,17 @@
 <template>
     <div>
         <the-navbar/>
+
+        <header-banner/>
+
+        <catalog-list/>
     </div>
 </template>
 
 <script setup>
-import axios from 'axios';
+
+const nuxtApp = useNuxtApp()
 
 
 
-</script> 
+</script>

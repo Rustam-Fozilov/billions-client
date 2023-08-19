@@ -4,6 +4,8 @@
 
         <div class="mt-5">
             <div class="container">
+                
+                <!-- SEARCH -->
                 <div class="flex items-center justify-between">
                     <div>
                         <ui-brand w="150"/>
@@ -18,13 +20,7 @@
     
                 <!-- CATEGORIES -->
                 <div>
-                    <div id="nav-categories" class="w-full flex justify-between mt-7">
-                        <div v-for="category in categories">
-                            <div class="font-onest-regular cursor-pointer">
-                                {{ category.name.ru }}
-                            </div>
-                        </div>
-                    </div>
+                    <nav-categories/>
                 </div>
             </div>
         </div>
@@ -32,19 +28,5 @@
 </template>
 
 <script setup>
-import axios from 'axios';
-
-const config = useRuntimeConfig()
-const categories = ref([])
-
-await axios
-    .get(`${config.public.apiUrl}/categories`)
-    .then((res) => {
-        categories.value = res.data.data
-        console.log('res data', categories.value);
-    })
-    .catch((err) => {
-        console.log(err)
-    })
 
 </script>
