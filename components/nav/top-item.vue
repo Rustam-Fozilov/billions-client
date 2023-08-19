@@ -37,14 +37,14 @@
                                 </div>
                                 <div class="font-onest-regular">O'zbekcha</div>
                             </div>
-                            <div class="bg-white shadow-lg absolute top-full cursor-pointer mt-2 w-full">
+                            <!-- <div class="bg-white shadow-lg absolute top-full cursor-pointer mt-2 w-full">
                                 <div class="flex gap-2 items-center m-3">
                                     <div class="w-7 h-7">
                                         <img class="w-full h-full object-cover rounded-2xl" src="~/assets/images/russia-flag.png" alt="language ru">
                                     </div>
                                     <div class="font-onest-regular">Русский</div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
