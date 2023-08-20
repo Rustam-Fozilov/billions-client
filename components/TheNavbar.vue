@@ -1,21 +1,21 @@
 <template>
     <div>
-        <nav-top-item/>
+        <nav-top-item />
 
         <div class="mt-5">
             <div class="container">
                 <div class="flex items-center justify-between">
                     <div>
-                        <ui-brand w="150"/>
+                        <ui-brand w="150" />
                     </div>
                     <div class="w-full">
-                        <ui-search-input/>
+                        <ui-search-input />
                     </div>
                     <div>
-                        <nav-actions/>
+                        <nav-actions />
                     </div>
                 </div>
-    
+
                 <!-- CATEGORIES -->
                 <div>
                     <div id="nav-categories" class="w-full flex justify-between mt-7">
