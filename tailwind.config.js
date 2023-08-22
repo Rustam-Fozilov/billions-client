@@ -16,10 +16,13 @@ module.exports = {
       },
       colors: {
         'nav-bg': '#EEEEEE',
+        'soft-white': '#F3F5F7',
+        'soft-black': '#333333',
       },
       fontSize: {
+        'xs': '12px',
         'sm': '18px',
-        'base': '24px',
+        'base': '22px',
         'lg': '28px',
         'xl': '32px',
         '2xl': '46px',

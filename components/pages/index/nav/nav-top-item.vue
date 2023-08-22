@@ -53,24 +53,6 @@
     </div>
 </template>
 
-<script>
-import { inject } from 'vue'
-
-export default {
-    setup() {
-        const myMixin = inject('myMixin')
-        console.log(myMixin);
-        return {
-            ...myMixin
-        }
-    }
-} 
-
-// const myMixin = inject('myMixin')
-// console.log(myMixin);
-
-// return {
-//     ...myMixin
-// }
+<script setup>
 
 </script>

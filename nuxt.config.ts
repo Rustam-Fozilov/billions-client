@@ -3,9 +3,6 @@ export default defineNuxtConfig({
   components: [
     { path: '~/components', pathPrefix: false },
   ],
-  plugins: [
-    { src: '~/plugins/myMixinPlugin.js', mode: 'client' },
-  ],
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   postcss: {

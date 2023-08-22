@@ -5,13 +5,17 @@
         <header-banner/>
 
         <catalog-list/>
+
+        <new-books-list/>
+
+        <bestsellers-list/>
+
+        <purchased-today/>
+
+        <the-footer/>
     </div>
 </template>
 
 <script setup>
-
-const nuxtApp = useNuxtApp()
-
-
 
 </script>
