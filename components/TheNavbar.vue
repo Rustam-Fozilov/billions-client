@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav-top-item/>
+        <nav-top-item />
 
         <div class="mt-5">
             <div class="container">
@@ -8,16 +8,16 @@
                 <!-- SEARCH -->
                 <div class="flex items-center justify-between">
                     <div>
-                        <ui-brand w="150"/>
+                        <ui-brand w="150" />
                     </div>
                     <div class="w-full">
-                        <ui-search-input/>
+                        <ui-search-input />
                     </div>
                     <div>
-                        <nav-actions/>
+                        <nav-actions />
                     </div>
                 </div>
-    
+
                 <!-- CATEGORIES -->
                 <div>
                     <nav-categories/>
