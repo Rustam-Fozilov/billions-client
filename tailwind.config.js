@@ -15,6 +15,7 @@ module.exports = {
         'onest-medium': ["Onest Medium", "sans-serif", "monospace", "system-ui", "ui-sans-serif", "ui-serif", "sans-serif", "apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"],
       },
       colors: {
+        'primary-red': '#8C2230',
         'nav-bg': '#EEEEEE',
         'soft-white': '#F3F5F7',
         'soft-black': '#333333',

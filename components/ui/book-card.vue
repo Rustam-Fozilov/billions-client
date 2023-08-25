@@ -1,5 +1,5 @@
 <template>
-    <div id="books-card">
+    <div @click="gotoBook(book)" id="books-card" class="cursor-pointer">
         <div class=" w-[17rem]">
             <div class="w-full h-80">
                 <img class="w-full h-full object-cover" src="~/assets/images/books/book-cover.png" alt="book cover">
@@ -28,7 +28,14 @@
 </template>
 
 <script setup>
-
 defineProps(['book'])
+
+const router = useRouter();
+
+const gotoBook = (book) => {
+    router.push({
+        path: `/books/${book.name.uz.split(' ').join('-')}-${book.id}`,
+    });
+}
 
 </script>
