@@ -17,7 +17,11 @@ const config = useRuntimeConfig()
 const categories = ref([])
 
 await axios
-    .get(`${config.public.apiUrl}/categories`)
+    .get(`${config.public.apiUrl}/categories`, {
+        params: {
+            'only_parents': true
+        }
+    })
     .then((res) => {
         categories.value = res.data.data
     })

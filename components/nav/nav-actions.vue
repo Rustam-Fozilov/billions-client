@@ -28,7 +28,7 @@
                         </div>
                         <div class="font-onest-regular">Savat</div>
                     </div>
-                    <div class="h-5 w-5 text-center rounded-xl absolute right-0 top-[-10px] bg-[#FF7833] font-onest-regular text-[14px]">1</div>
+                    <div class="h-5 w-5 text-center text-white rounded-xl absolute right-0 top-[-10px] bg-primary-red font-onest-regular text-[14px]">1</div>
                 </div>
             </div>
         </div>

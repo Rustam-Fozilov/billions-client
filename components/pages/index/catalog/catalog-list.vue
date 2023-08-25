@@ -31,6 +31,10 @@ import { fetchUrl } from '~/composable/fetchUrl';
 const config = useRuntimeConfig();
 
 const { data, load} = fetchUrl();
-await load(`${config.public.apiUrl}/categories`);
+await load(`${config.public.apiUrl}/categories`, {
+    params: {
+        'only_parents': true
+    }
+});
 
 </script>
