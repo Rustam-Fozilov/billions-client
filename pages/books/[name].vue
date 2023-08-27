@@ -2,7 +2,9 @@
     <div>
         <the-navbar/>
 
-        <category-path :category_id="data.category_id"/>
+        <category-path :category_id="bookData.category_id"/>
+
+        <book-info :book="bookData"/>
 
         <the-footer/>
     </div>
@@ -13,7 +15,7 @@ import { fetchUrl } from '~/composable/fetchUrl';
 
 const route = useRoute();
 const config = useRuntimeConfig();
-const {data, load} = fetchUrl();
+const {data: bookData, load} = fetchUrl();
 
 await load(`${config.public.apiUrl}/books/${route.params.name.split('-').pop()}`)
 
