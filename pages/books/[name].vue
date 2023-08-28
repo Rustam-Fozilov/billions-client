@@ -2,9 +2,15 @@
     <div>
         <the-navbar/>
 
-        <category-path :category_id="bookData.category_id"/>
+        <div class="bg-soft-white py-12">
+            <category-path :category_id="bookData.data.category.id" :book_name="bookData.data.name"/>
+            
+            <book-info :book="bookData"/>
 
-        <book-info :book="bookData"/>
+            <book-properties :book="bookData"/>
+        </div>
+
+        <bestsellers-list/>
 
         <the-footer/>
     </div>

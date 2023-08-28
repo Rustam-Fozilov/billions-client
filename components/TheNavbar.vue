@@ -2,7 +2,7 @@
     <div>
         <nav-top-item />
 
-        <div class="mt-5">
+        <div class="my-7">
             <div class="container">
                 
                 <!-- SEARCH -->

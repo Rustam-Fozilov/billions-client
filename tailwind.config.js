@@ -19,6 +19,7 @@ module.exports = {
         'nav-bg': '#EEEEEE',
         'soft-white': '#F3F5F7',
         'soft-black': '#333333',
+        'stock-green': '#00BA34'
       },
       fontSize: {
         'xs': '12px',

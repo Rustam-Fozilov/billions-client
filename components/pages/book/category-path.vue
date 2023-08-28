@@ -1,18 +1,22 @@
 <template>
     <div>
-        <div class="container py-12">
+        <div class="container">
             <div class="flex items-center gap-3">
                 <div v-for="category in categoriesTree.slice().reverse()">
                     <div @click="gotoCategory" class="flex items-center gap-3 cursor-pointer opacity-50 hover:opacity-100 hover:text-primary-red transition">
-                        <div v-if="category.parent_id !== null">
+                        <div class="font-onest-regular">
+                            {{ category.name.uz }}
+                        </div>
+                        <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="3" height="3" viewBox="0 0 3 3" fill="none">
                                 <circle cx="1.5" cy="1.5" r="1.5" fill="black"/>
                             </svg>
                         </div>
-                        <div class="font-onest-regular">
-                            {{ category.name.ru }}
-                        </div>
                     </div>
+                </div>
+
+                <div class="font-onest-regular opacity-50 cursor-pointer hover:opacity-100 hover:text-primary-red transition">
+                    {{ book_name.uz }}
                 </div>
             </div>
         </div>
@@ -22,7 +26,7 @@
 <script setup>
 import { fetchUrl } from '~/composable/fetchUrl';
 
-const props = defineProps(['category_id'])
+const props = defineProps(['category_id', 'book_name'])
 const config = useRuntimeConfig();
 const {data: categoryData, load} = fetchUrl();
 
