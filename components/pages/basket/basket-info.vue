@@ -1,0 +1,29 @@
+<template>
+    <div>
+        <div class="flex justify-between mt-7">
+            <div class="w-[70%]">
+                <div class="flex justify-between items-end">
+                    <div class="flex gap-5 items-center">
+                        <div class="font-onest-medium text-xl">Savat</div>
+                        <div class="font-onest-regular opacity-50 relative top-[3px]">3ta kitob</div>
+                    </div>
+                    <div class="font-onest-medium text-base opacity-50 uppercase cursor-pointer hover:opacity-100 transition">O'chirish</div>
+                </div>
+
+                <div id="books-in-basket">
+                    <div class="mt-12 flex flex-col gap-7">
+                        <basket-book-card/>
+                        <basket-book-card/>
+                        <basket-book-card/>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div id="basket-info-text">
+                desde
+            </div>
+        </div>
+    </div>
+</template>

@@ -19,7 +19,7 @@
                     </div>
                     <div class="font-onest-regular">Sevimlilar</div>
                 </div>
-                <div class="cursor-pointer flex relative">
+                <div @click="gotoBasket" class="cursor-pointer flex relative">
                     <div class="flex flex-col items-center justify-end gap-2">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
@@ -28,9 +28,20 @@
                         </div>
                         <div class="font-onest-regular">Savat</div>
                     </div>
-                    <div class="h-5 w-5 text-center text-white rounded-xl absolute right-0 top-[-10px] bg-primary-red font-onest-regular text-[14px]">1</div>
+                    <div class="h-5 w-5 text-center text-white rounded-xl absolute right-0 top-[-10px] bg-bronze font-onest-regular text-[14px]">1</div>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const gotoBasket = () => {
+    router.push('/basket')
+}
+
+</script>

@@ -57,7 +57,7 @@
                             </div>
                             <div class="flex items-center gap-7">
                                 <div>
-                                    <div class=" h-11 w-36 flex items-center justify-between border border-opacity-20 border-black">
+                                    <div class="h-11 w-36 flex items-center justify-between border border-opacity-20 border-black">
                                         <div class="font-onest-regular h-full flex items-center ml-4 opacity-50 cursor-not-allowed">
                                             <svg width="14" height="3" viewBox="0 0 12 3" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M12 0.0908813V2.09088H0V0.0908813H12Z" fill="black"/>
@@ -78,7 +78,7 @@
                             </div>
                             <div class="flex gap-7">
                                 <div>
-                                    <button class="bg-primary-red py-7 px-32 font-onest-medium text-white">
+                                    <button class="bg-bronze py-7 px-32 font-onest-medium text-white">
                                         Savatga qo'shish
                                     </button>
                                 </div>
