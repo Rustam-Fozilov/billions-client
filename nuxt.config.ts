@@ -14,6 +14,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiUrl: process.env.NUXT_API_URL,
+      authToken: process.env.NUXT_AUTH_TOKEN,
     }
   },
 })

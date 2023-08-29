@@ -114,7 +114,7 @@ const config = useRuntimeConfig()
 const {data: bookInfo, load} = fetchUrl()
 await load(`${config.public.apiUrl}/books/${props.book.data.id}/reviews`, {
     headers: {
-        'Authorization': `Bearer 1|gcmsMvXnmPK8RsHChkvpl3awPtDDae5Il85N8wim`
+        'Authorization': `Bearer ${config.public.authToken}`
     }
 })
 
