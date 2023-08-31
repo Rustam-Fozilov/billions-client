@@ -1,5 +1,18 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  modules: [
+    '@nuxtjs/i18n',
+  ],
+  i18n: {
+    lazy: true,
+    langDir: 'locales/',
+    defaultLocale: 'ru',
+    strategy: 'prefix_and_default',
+    locales: [
+      { code: 'ru', iso: 'ru-RU', file: 'ru-RU.json' },
+      { code: 'uz', iso: 'uz-UZB', file: 'uz-UZB.json' },
+    ],
+  },
   components: [
     { path: '~/components', pathPrefix: false },
   ],
