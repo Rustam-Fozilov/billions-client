@@ -9,7 +9,7 @@
                         <path d="M17 16.5C17 18.985 17 21 9 21C1 21 1 18.985 1 16.5C1 14.015 4.582 12 9 12C13.418 12 17 14.015 17 16.5Z" stroke="black" stroke-width="1.5"/>
                         </svg>
                     </div>
-                    <div class="font-onest-regular">{{ $t('welcome') }}</div>
+                    <div class="font-onest-regular">{{ $t('home') }}</div>
                 </div>
                 <div class="flex flex-col gap-2 cursor-pointer items-center justify-end">
                     <div>

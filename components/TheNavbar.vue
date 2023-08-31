@@ -14,7 +14,7 @@
                         <ui-search-input />
                     </div>
                     <div>
-                        <nav-actions />
+                        <nav-actions/>
                     </div>
                 </div>
 

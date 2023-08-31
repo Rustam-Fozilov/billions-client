@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   ],
   i18n: {
     lazy: true,
-    langDir: 'locales/',
+    langDir: 'locales',
     defaultLocale: 'ru',
     strategy: 'prefix_and_default',
     locales: [

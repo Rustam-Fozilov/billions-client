@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!-- <the-navbar/>
+        <the-navbar/>
 
         <header-banner/>
 
@@ -12,7 +12,7 @@
 
         <purchased-today/>
 
-        <the-footer/> -->
+        <the-footer/>
     </div>
 </template>
 
@@ -20,26 +20,27 @@
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
+const { setLocale } = useI18n()
 
-if(process.client && localStorage.getItem('lang')) {
-    const lang = JSON.parse(localStorage.getItem('lang'))
-    console.log('data: ', lang);
 
-    if (lang.code === 'ru') {
-        router.push('/ru')
+if(process.client) {
+    if(localStorage.getItem('lang')) {
+        setLocale(JSON.parse(localStorage.getItem('lang')).code)
+
+        router.push('/' + JSON.parse(localStorage.getItem('lang')).code)
     } else {
-        router.push('/uz')
-    }
-} else if(process.client) {
-    localStorage.setItem('lang', JSON.stringify({
-        'code': 'ru',
-        'name': 'Русский',
-        'icon': 'russia-flag.png',
-        'enemy_name': 'O\'zbekcha',
-        'enemy_icon': 'uzb-flag.png'
-    }))
+        setLocale('ru')
 
-    router.push('/ru')
+        localStorage.setItem('lang', JSON.stringify({
+            'code': 'ru',
+            'name': 'Русский',
+            'icon': 'russia-flag.png',
+            'enemy_name': 'O\'zbekcha',
+            'enemy_icon': 'uzb-flag.png'
+        }))
+
+        router.push('/ru')
+    }
 }
 
 </script>
