@@ -31,20 +31,21 @@
                     </div>
                     <div>
                         <div class="relative">
-                            <div @click="callme" class=" m-3 h-full cursor-pointer flex items-center gap-2">
+                            <div @click="showLang = !showLang" class="m-3 h-full cursor-pointer flex items-center gap-2">
                                 <div class="w-7 h-7">
-                                    <img class="w-full h-full object-cover rounded-2xl" src="~/assets/images/uzb-flag.png" alt="language uz">
+                                    <img class="w-full h-full object-cover rounded-2xl" :src='"/images/" + lang.icon ' alt="language uz">
                                 </div>
-                                <div class="font-onest-regular">O'zbekcha</div>
+                                <div class="font-onest-regular">{{ lang.name }}</div>
                             </div>
-                            <!-- <div class="bg-white shadow-lg absolute top-full cursor-pointer mt-2 w-full">
-                                <div class="flex gap-2 items-center m-3">
+
+                            <div v-if="showLang" @click="toggleLang" class="bg-white p-3 shadow-lg absolute top-full cursor-pointer mt-2 z-10">
+                                <div class="flex gap-2 items-center h-full w-full">
                                     <div class="w-7 h-7">
-                                        <img class="w-full h-full object-cover rounded-2xl" src="~/assets/images/russia-flag.png" alt="language ru">
+                                        <img class="w-full h-full object-cover rounded-2xl" :src="'/images/' + lang.enemy_icon" alt="language ru">
                                     </div>
-                                    <div class="font-onest-regular">Русский</div>
+                                    <div class="font-onest-regular">{{ lang.enemy_name }}</div>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -54,5 +55,41 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+const lang = ref(process.client ? JSON.parse(localStorage.getItem('lang')) : {})
+const showLang = ref(false)
+
+
+const toggleLang = () => {
+    showLang.value = !showLang.value
+
+    if(process.client) {
+        if(JSON.parse(localStorage.getItem('lang')).code === 'uz') {
+            localStorage.setItem('lang', JSON.stringify({
+                'code': 'ru',
+                'name': 'Русский',
+                'icon': 'russia-flag.png',
+                'enemy_name': 'O\'zbekcha',
+                'enemy_icon': 'uzb-flag.png'
+            }))
+
+            lang.value = JSON.parse(localStorage.getItem('lang'))
+            router.push('/ru')
+        } else {
+            localStorage.setItem('lang', JSON.stringify({
+                'code': 'uz',
+                'name': 'O\'zbekcha',
+                'icon': 'uzb-flag.png',
+                'enemy_name': 'Русский',
+                'enemy_icon': 'russia-flag.png'
+            }))
+
+            lang.value = JSON.parse(localStorage.getItem('lang'))
+            router.push('/uz')
+        }
+    }
+}
 
 </script>
