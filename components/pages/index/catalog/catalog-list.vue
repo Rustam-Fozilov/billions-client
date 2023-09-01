@@ -4,10 +4,10 @@
             <div class="container">
                 <div class="py-[100px] flex flex-col gap-12">
                     <div class="flex gap-7 items-end">
-                        <div class="text-xl font-onest-medium">Kitoblar katalogi</div>
+                        <div class="text-xl font-onest-medium">{{ $t('catalog.title') }}</div>
                         <div class="font-onest-regular opacity-50 hover:opacity-100">
                             <div class="relative top-[-5px] left-0">
-                                <NuxtLink to="/">Barchasini ko'rish</NuxtLink>
+                                <NuxtLink to="/">{{ $t('catalog.show_all') }}</NuxtLink>
                             </div>
                         </div>
                     </div>

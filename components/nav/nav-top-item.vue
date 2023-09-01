@@ -22,12 +22,12 @@
                                 </svg>
                             </div>
                             <div class="font-onest-regular">
-                                {{ $t('home') }}
+                                {{ $t('top_nav.location') }}
                             </div>
                         </div>
                     </div>
                     <div class="font-onest-regular">
-                        {{ $t('settings') }}
+                        {{ $t('top_nav.delivery') }}
                     </div>
                     <div>
                         <div class="relative">
@@ -58,10 +58,13 @@
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
+const route = useRoute()
 const { setLocale } = useI18n()
 
 const lang = ref(null)
 const showLang = ref(false)
+
+console.log('route', route);
 
 if(process.client) {
     lang.value = JSON.parse(localStorage.getItem('lang'))
@@ -83,7 +86,7 @@ const toggleLang = () => {
             }))
 
             lang.value = JSON.parse(localStorage.getItem('lang'))
-            router.push('/ru')
+            router.push(`/ru`)
         } else {
             setLocale('uz')
 

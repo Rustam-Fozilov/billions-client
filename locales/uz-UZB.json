@@ -1,4 +1,16 @@
 {
-    "home": "Asosiy",
-    "settings": "Sozlamalar"
+    "top_nav": {
+        "location": "Tashkent",
+        "delivery": "1-3 kun ichida yetkazib beramiz"
+    },
+    "nav": {
+        "search-input": "Kitoblar bo'yicha qidiruv",
+        "login": "Kirish",
+        "favorites": "Saralangan",
+        "cart": "Savat"
+    },
+    "catalog": {
+        "title": "Kitoblar katalogi",
+        "show_all": "Barchasini ko'rish"
+    }
 }
