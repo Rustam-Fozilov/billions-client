@@ -30,20 +30,20 @@
                         {{ $t('top_nav.delivery') }}
                     </div>
                     <div>
-                        <div v-if="lang" class="relative">
+                        <div v-if="true" class="relative">
                             <div @click="showLang = !showLang" class="m-3 h-full cursor-pointer flex items-center gap-2">
                                 <div class="w-7 h-7">
-                                    <img class="w-full h-full object-cover rounded-2xl" :src='"/images/" + lang.icon' alt="language uz"/>
+                                    <img class="w-full h-full object-cover rounded-2xl" :src='"/images/" + localeValues.value.details.icon' alt="language icon"/>
                                 </div>
-                                <div class="font-onest-regular">{{ lang.name }}</div>
+                                <div class="font-onest-regular">{{ localeValues.value.details.code === 'ru' ? 'Русский' : 'O\'zbekcha' }}</div>
                             </div>
 
-                            <div v-if="showLang" @click="toggleLang" class="bg-white p-3 shadow-lg absolute top-full cursor-pointer mt-2 z-10">
+                            <div v-if="showLang" @click="changeLang" class="bg-white p-3 shadow-lg absolute top-full cursor-pointer mt-2 z-10">
                                 <div class="flex gap-2 items-center h-full w-full">
                                     <div class="w-7 h-7">
-                                        <img class="w-full h-full object-cover rounded-2xl" :src="'/images/' + lang.enemy_icon" alt="language ru">
+                                        <img class="w-full h-full object-cover rounded-2xl" :src="localeValues.value.details.code === 'ru' ? '/images/uzb-flag.png' : '/images/russia-flag.png'" alt="language icon">
                                     </div>
-                                    <div class="font-onest-regular">{{ lang.enemy_name }}</div>
+                                    <div class="font-onest-regular">{{ localeValues.value.details.code === 'ru' ? 'O\'zbekcha' : 'Русский' }}</div>
                                 </div>
                             </div>
                         </div>
@@ -55,58 +55,62 @@
 </template>
 
 <script setup>
+import { fetchUrl } from '~/composable/fetchUrl';
+import { useRoute, useRouter } from 'vue-router';
+import { split } from 'postcss/lib/list';
 
+
+const route = useRoute()
+const router = useRouter()
+const config = useRuntimeConfig()
 const { locale, setLocale } = useI18n()
-const localeRoute = useLocaleRoute()
-
-const lang = ref(null)
+const { data, load } = fetchUrl()
 const showLang = ref(false)
 
-if (process.client) {
-    lang.value = JSON.parse(localStorage.getItem('lang'))
 
-    setLocale(lang.value.code)
-}
+await load(`${config.public.apiUrl}/guest-settings`)
+setLocale(data.value.data[0].value.details.code)
 
-const toggleLang = () => {
+
+const localeValues = ref(data.value.data[0])
+
+
+const changeLang = async () => {
     showLang.value = !showLang.value
 
-    if(process.client) {
-        if(JSON.parse(localStorage.getItem('lang')).code === 'uz') {
-            setLocale('ru')
+    if (locale.value === 'ru') {
+        
+        
+        await load(`${config.public.apiUrl}/guest-settings/1`, {
+            'setting_id': 1,
+            'value_id': 10,
+        }, 'PUT')
+        
+        
+        setLocale('uz')
+        localeValues.value = data.value.data
 
-            localStorage.setItem('lang', JSON.stringify({
-                'code': 'ru',
-                'name': 'Русский',
-                'icon': 'russia-flag.png',
-                'enemy_name': 'O\'zbekcha',
-                'enemy_icon': 'uzb-flag.png'
-            }))
 
-            lang.value = JSON.parse(localStorage.getItem('lang'))
+        const routePath = split(route.path, '/')
+        console.log(route);
 
-            const route = localeRoute({ name: 'ru' })
-            if (route) {
-                return navigateTo(route.fullPath)
-            }
-        } else {
-            setLocale('uz')
+        router.push(`/uz/${routePath.slice(1).join('/')}`)
 
-            localStorage.setItem('lang', JSON.stringify({
-                'code': 'uz',
-                'name': 'O\'zbekcha',
-                'icon': 'uzb-flag.png',
-                'enemy_name': 'Русский',
-                'enemy_icon': 'russia-flag.png'
-            }))
+    } else if (locale.value === 'uz') {
+        
+        
+        await load(`${config.public.apiUrl}/guest-settings/1`, {
+            'setting_id': 1,
+            'value_id': 11,
+        }, 'PUT')
+        
+        
+        setLocale('ru')
+        localeValues.value = data.value.data
 
-            lang.value = JSON.parse(localStorage.getItem('lang'))
-            
-            const route = localeRoute({ name: 'uz' })
-            if (route) {
-                return navigateTo(route.fullPath)
-            }
-        }
+
+        const routePath = split(route.path, '/')
+        router.push(`/ru/${routePath.slice(1).join('/')}`)
     }
 }
 

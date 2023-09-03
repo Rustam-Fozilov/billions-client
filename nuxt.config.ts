@@ -10,11 +10,11 @@ export default defineNuxtConfig({
   i18n: {
     lazy: true,
     langDir: 'locales',
-    defaultLocale: 'ru',
+    defaultLocale: 'uz',
     strategy: 'prefix_and_default',
     locales: [
-      { code: 'ru', iso: 'ru-RU', file: 'ru-RU.json' },
       { code: 'uz', iso: 'uz-UZB', file: 'uz-UZB.json' },
+      { code: 'ru', iso: 'ru-RU', file: 'ru-RU.json' },
     ],
   },
   components: [
