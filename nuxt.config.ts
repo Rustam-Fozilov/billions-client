@@ -2,7 +2,11 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/i18n',
+    '@nuxt/image',
   ],
+  image: {
+    dir: 'assets/images',
+  },
   i18n: {
     lazy: true,
     langDir: 'locales',

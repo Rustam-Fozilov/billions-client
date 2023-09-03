@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="font-onest-regular">
-                    {{ route.meta.name.uz }}
+                    {{ route.meta.title.uz }}
                 </div>
             </div>
         </div>
@@ -22,8 +22,6 @@
 </template>
 
 <script setup>
-
-defineProps(['paths'])
 
 const route = useRoute()
 

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="bg-soft-white">
-            <div class="container p-12 flex flex-col gap-12">
+            <div class="container py-12 flex flex-col gap-12">
                 <div class="flex gap-7 items-end">
                     <div class="text-xl font-onest-medium">Bugun sotib olingan kitoblar</div>
                     <div class="font-onest-regular opacity-50 hover:opacity-100">

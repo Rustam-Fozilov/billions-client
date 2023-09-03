@@ -30,10 +30,10 @@
                         {{ $t('top_nav.delivery') }}
                     </div>
                     <div>
-                        <div class="relative">
+                        <div v-if="lang" class="relative">
                             <div @click="showLang = !showLang" class="m-3 h-full cursor-pointer flex items-center gap-2">
                                 <div class="w-7 h-7">
-                                    <img class="w-full h-full object-cover rounded-2xl" :src='"/images/" + lang.icon' alt="language uz">
+                                    <img class="w-full h-full object-cover rounded-2xl" :src='"/images/" + lang.icon' alt="language uz"/>
                                 </div>
                                 <div class="font-onest-regular">{{ lang.name }}</div>
                             </div>
@@ -55,19 +55,17 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
 
-const router = useRouter()
-const route = useRoute()
-const { setLocale } = useI18n()
+const { locale, setLocale } = useI18n()
+const localeRoute = useLocaleRoute()
 
 const lang = ref(null)
 const showLang = ref(false)
 
-console.log('route', route);
-
-if(process.client) {
+if (process.client) {
     lang.value = JSON.parse(localStorage.getItem('lang'))
+
+    setLocale(lang.value.code)
 }
 
 const toggleLang = () => {
@@ -86,7 +84,11 @@ const toggleLang = () => {
             }))
 
             lang.value = JSON.parse(localStorage.getItem('lang'))
-            router.push(`/ru`)
+
+            const route = localeRoute({ name: 'ru' })
+            if (route) {
+                return navigateTo(route.fullPath)
+            }
         } else {
             setLocale('uz')
 
@@ -99,7 +101,11 @@ const toggleLang = () => {
             }))
 
             lang.value = JSON.parse(localStorage.getItem('lang'))
-            router.push('/uz')
+            
+            const route = localeRoute({ name: 'uz' })
+            if (route) {
+                return navigateTo(route.fullPath)
+            }
         }
     }
 }

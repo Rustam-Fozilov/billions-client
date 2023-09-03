@@ -25,10 +25,6 @@ definePageMeta({
         uz: 'Savat',
         ru: 'Корзина',
     },
-    name: {
-        uz: 'Savat',
-        ru: 'Корзина',
-    },
     url: '/basket',
 })
 

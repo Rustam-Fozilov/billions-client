@@ -33,7 +33,7 @@
                             <div class="flex justify-between">
                                 <div class="flex items-center gap-3">
                                     <div v-for="overall in 5" class="opacity-50">
-                                        <component :is="starComponent"/>
+                                        <!-- <component :is="starComponent"/> -->
                                     </div>
                                     <div class="font-onest-regular">{{ bookInfo.data.overall_rating }} baho</div>
                                 </div>
@@ -122,15 +122,15 @@ const overallRating = computed(() => {
     return Math.floor(bookInfo.value.data.overall_rating)
 })
 
-const fullStarIcon = resolveComponent('full-star-icon')
-const halfStarIcon = resolveComponent('half-star-icon')
+// const fullStarIcon = resolveComponent('full-star-icon')
+// const halfStarIcon = resolveComponent('half-star-icon')
 
-const starComponent = computed(() => {
-    if (overallRating.value === 0) {
-        return fullStarIcon
-    } else if(overallRating.value > 0 && overallRating.value < 5) {
-        return halfStarIcon
-    }
-})
+// const starComponent = computed(() => {
+//     if (overallRating.value === 0) {
+//         return fullStarIcon
+//     } else if(overallRating.value > 0 && overallRating.value < 5) {
+//         return halfStarIcon
+//     }
+// })
 
 </script>

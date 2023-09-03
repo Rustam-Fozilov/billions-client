@@ -1,6 +1,6 @@
 <template>
     <div @click="gotoBook(book)" id="books-card" class="cursor-pointer">
-        <div class=" w-[17rem]">
+        <div class="w-72">
             <div class="w-full h-80">
                 <img class="w-full h-full object-cover" src="~/assets/images/books/book-cover.png" alt="book cover">
             </div>

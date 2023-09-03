@@ -7,11 +7,13 @@
                         <div @click="switchToWhatAboutProperty">Tavsif</div>
                         <div @click="switchToPropertiesProperty">Xususiyatlari</div>
                     </div>
-                    <div class="flex flex-col mt-5">
-                        <div v-if="togglePropertiesValue === 'what-about'" id="short-line" class="w-16 bg-primary-red h-2 relative top-1"></div>
-                        <div v-if="togglePropertiesValue === 'properties'" id="short-line" class=" w-36 bg-primary-red h-2 relative top-1 left-[100px]"></div>
+                    <div class="flex flex-col mt-5 z-10">
+                        <div v-if="togglePropertiesValue === 'what-about'" id="short-line" class="w-16 bg-bronze h-2 relative top-1"></div>
+                        <div v-if="togglePropertiesValue === 'properties'" id="short-line" class=" w-36 bg-bronze h-2 relative top-1 left-[100px]"></div>
 
-                        <div id="long-line" class="w-full h-[1px] bg-black opacity-20"></div>
+                        <div class="opacity-20">
+                            <div id="long-line" class="w-full h-[1px] bg-black"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="mt-12">
