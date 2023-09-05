@@ -4,8 +4,8 @@
             <div>
                 <div>
                     <div class="flex gap-12 font-onest-medium text-base cursor-pointer">
-                        <div @click="switchToWhatAboutProperty">Tavsif</div>
-                        <div @click="switchToPropertiesProperty">Xususiyatlari</div>
+                        <div @click="switchToWhatAboutProperty">{{ $t('book_properties.description') }}</div>
+                        <div @click="switchToPropertiesProperty">{{ $t('book_properties.properties') }}</div>
                     </div>
                     <div class="flex flex-col mt-5 z-10">
                         <div v-if="togglePropertiesValue === 'what-about'" id="short-line" class="w-16 bg-bronze h-2 relative top-1"></div>
@@ -19,7 +19,7 @@
                 <div class="mt-12">
                     <div class="w-2/5 relative left-1/4">
                         <div v-if="togglePropertiesValue === 'what-about'" id="what-about" class="flex flex-col gap-7">
-                            <div class="font-onest-medium text-xl">Nima haqda</div>
+                            <div class="font-onest-medium text-xl">{{ $t('book_properties.what-about') }}</div>
                             <div class="font-onest-regular text-base">
                                 {{ props.book.data.description.uz }}
                             </div>
@@ -52,12 +52,15 @@
 <script setup>
 
 const props = defineProps(['book'])
-
 const togglePropertiesValue = ref('what-about')
+const { locale } = useI18n()
+
+
 
 const switchToWhatAboutProperty = () => {
     togglePropertiesValue.value = 'what-about'
 }
+
 
 const switchToPropertiesProperty = () => {
     togglePropertiesValue.value = 'properties'

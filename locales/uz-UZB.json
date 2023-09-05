@@ -24,5 +24,18 @@
     "purchased_today_books": {
         "title": "Bugun sotib olingan kitoblar",
         "show_all": "Barchasini ko'rish"
+    },
+    "delivery" : {
+        "day": "1-3 kun ichida yetkazib beramiz",
+        "price": "Yetkazib berish xizmati 30 000 so'm"
+    },
+    "book_properties": {
+        "description": "Tavsif",
+        "properties": "Xususiyatlar",
+        "what-about": "Nima haqida",
+        "lang": "Til",
+        "cover": "Muqova",
+        "pages": "Sahifalar soni",
+        "year": "Nashr yili"
     }
 }

@@ -35,7 +35,7 @@
                                     <div v-for="overall in 5" class="opacity-50">
                                         <!-- <component :is="starComponent"/> -->
                                     </div>
-                                    <div class="font-onest-regular">{{ bookInfo.data.overall_rating }} baho</div>
+                                    <div class="font-onest-regular">{{ bookInfo.data.overall_rating }} {{ locale === 'ru' ? 'оценка' : 'baho' }}</div>
                                 </div>
                                 <div class="flex gap-3 items-center opacity-50 hover:opacity-100 transition-all cursor-pointer">
                                     <div>
@@ -43,13 +43,15 @@
                                         <path opacity="1" d="M17.7486 6.34742L12.6054 11.2883C12.4446 11.4428 12.2264 11.5296 11.999 11.5296C11.7715 11.5296 11.5534 11.4428 11.3925 11.2883C11.2317 11.1338 11.1413 10.9242 11.1413 10.7057C11.1413 10.4872 11.2317 10.2776 11.3925 10.1231L15.0731 6.58829H10.8203C8.72949 6.58773 6.69776 7.2548 5.04462 8.4846C3.39149 9.71439 2.21073 11.4372 1.68802 13.382C1.63118 13.5936 1.48919 13.7748 1.29327 13.8858C1.09735 13.9968 0.863553 14.0285 0.643315 13.9739C0.423078 13.9193 0.234439 13.7829 0.118897 13.5946C0.00335435 13.4064 -0.0296274 13.1818 0.027208 12.9702C0.643974 10.6712 2.03921 8.63458 3.99321 7.18101C5.94722 5.72745 8.34899 4.93953 10.8203 4.94133H15.0752L11.3925 1.40655C11.3129 1.33004 11.2497 1.23921 11.2066 1.13924C11.1635 1.03928 11.1413 0.932137 11.1413 0.823937C11.1413 0.715736 11.1635 0.608594 11.2066 0.50863C11.2497 0.408665 11.3129 0.317835 11.3925 0.241325C11.5534 0.0868073 11.7715 0 11.999 0C12.1116 0 12.2231 0.0213118 12.3272 0.0627185C12.4313 0.104125 12.5258 0.164816 12.6054 0.241325L17.7486 5.1822C17.8283 5.25868 17.8915 5.3495 17.9347 5.44947C17.9778 5.54943 18 5.65659 18 5.76481C18 5.87303 17.9778 5.98018 17.9347 6.08015C17.8915 6.18012 17.8283 6.27094 17.7486 6.34742Z" fill="black"/>
                                         </svg>
                                     </div>
-                                    <div class="font-onest-regular">Ulashish</div>
+                                    <div class="font-onest-regular">
+                                        {{ locale === 'ru' ? 'поделиться' : 'ulashish' }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div id="book-info-text" class="flex flex-col gap-7">
                             <div>
-                                <div class="font-onest-medium text-xl">{{ book.data.name.uz }}</div>
+                                <div class="font-onest-medium text-xl">{{ locale === 'ru' ? book.data.name.ru : book.data.name.uz }}</div>
                                 <div class="font-onest-medium text-base">Как решать нерешаемые задачи, посмотрев на проблему с другой стороны</div>
                             </div>
                             <div>
@@ -71,7 +73,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="font-onest-regular text-stock-green">{{ book.data.inventory[0].quantity }} dona bor</div>
+                                <div v-if="locale === 'ru'" class="font-onest-regular text-stock-green">Есть {{ book.data.inventory[0].quantity }} штуки</div>
+                                <div v-if="locale === 'uz'" class="font-onest-regular text-stock-green">{{ book.data.inventory[0].quantity }} dona bor</div>
                             </div>
                             <div class="font-onest-medium text-xl">
                                 {{ book.data.prices[1].price }} so'm
@@ -79,7 +82,7 @@
                             <div class="flex gap-7">
                                 <div>
                                     <button class="bg-bronze py-7 px-32 font-onest-medium text-white">
-                                        Savatga qo'shish
+                                        {{ locale === 'ru' ? 'Добавить в корзину' : 'Savatga qo\'shish' }}
                                     </button>
                                 </div>
                                 <div>
@@ -93,9 +96,9 @@
                         </div>
                         <div id="book-delivery-text">
                             <div class="font-onest-regular opacity-50">
-                                <div>1-3 kun ichida yetkazib beramiz.</div>
-                                <div>Yetkazib berish xizmati 30 000 so’m.</div>
-                                <div>300 ta buyurtma.</div>
+                                <div>{{ $t('delivery.day') }}</div>
+                                <div>{{ $t('delivery.price') }}</div>
+                                <div>{{ locale === 'ru' ? '300 заказов.' : '300 ta buyurtma' }}</div>
                             </div>
                         </div>
                     </div>
@@ -108,15 +111,19 @@
 <script setup>
 import { fetchUrl } from '~/composable/fetchUrl';
 
-const props = defineProps(['book'])
 
+const props = defineProps(['book'])
+const { locale } = useI18n()
 const config = useRuntimeConfig()
 const {data: bookInfo, load} = fetchUrl()
+
+
 await load(`${config.public.apiUrl}/books/${props.book.data.id}/reviews`, {
     headers: {
         'Authorization': `Bearer ${config.public.authToken}`
     }
 })
+
 
 const overallRating = computed(() => {
     return Math.floor(bookInfo.value.data.overall_rating)
