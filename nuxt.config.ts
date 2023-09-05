@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   i18n: {
     lazy: true,
     langDir: 'locales',
-    defaultLocale: 'uz',
+    defaultLocale: 'ru',
     strategy: 'prefix_and_default',
     locales: [
       { code: 'uz', iso: 'uz-UZB', file: 'uz-UZB.json' },
@@ -20,7 +20,7 @@ export default defineNuxtConfig({
   components: [
     { path: '~/components', pathPrefix: false },
   ],
-  devtools: { enabled: true },
+  // devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   postcss: {
     plugins: {

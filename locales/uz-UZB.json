@@ -12,5 +12,17 @@
     "catalog": {
         "title": "Kitoblar katalogi",
         "show_all": "Barchasini ko'rish"
+    },
+    "new_books": {
+        "title": "Yangi kitoblar",
+        "show_all": "Barchasini ko'rish"
+    },
+    "bestseller_books": {
+        "title": "Bestsellerlar",
+        "show_all": "Barchasini ko'rish"
+    },
+    "purchased_today_books": {
+        "title": "Bugun sotib olingan kitoblar",
+        "show_all": "Barchasini ko'rish"
     }
 }

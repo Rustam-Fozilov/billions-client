@@ -7,7 +7,7 @@
             <div class="mt-5 flex flex-col gap-2 font-onest-regular">
                 <div class="flex justify-between">
                     <div class="font-onest-medium">
-                        {{ book.prices[1].price }} {{ book.prices[1].currency.name.uz }}
+                        {{ book.prices[1].price }} {{ locale === 'ru' ? book.prices[1].currency.name.ru : book.prices[1].currency.name.uz }}
                     </div>
                     <div class="cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -19,8 +19,13 @@
                         </svg>
                     </div>
                 </div>
-                <div class="opacity-50">{{ book.inventory[0].cover_type.uz }} muqova</div>
-                <div>{{ book.name.uz }}</div>
+                <div class="opacity-50">
+                    {{ locale === 'ru' ? book.inventory[0].cover_type.ru : book.inventory[0].cover_type.uz }}
+                    {{ locale === 'ru' ? 'обложка' : 'muqova' }}
+                </div>
+
+                <div>{{ locale === 'ru' ? book.name.ru : book.name.uz }}</div>
+
                 <div class="opacity-50">{{ book.author }}</div>
             </div>
         </div>
@@ -28,13 +33,17 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
 defineProps(['book'])
 
-const router = useRouter();
+
+const { locale } = useI18n()
+const router = useRouter()
+
 
 const gotoBook = (book) => {
     router.push({
-        path: `/books/${book.name.uz.split(' ').join('-')}-${book.id}`,
+        path: `/${locale.value}/books/${book.name.uz.split(' ').join('-')}-${book.id}`,
     });
 }
 

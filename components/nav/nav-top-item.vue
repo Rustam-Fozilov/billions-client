@@ -30,7 +30,7 @@
                         {{ $t('top_nav.delivery') }}
                     </div>
                     <div>
-                        <div v-if="true" class="relative">
+                        <div class="relative">
                             <div @click="showLang = !showLang" class="m-3 h-full cursor-pointer flex items-center gap-2">
                                 <div class="w-7 h-7">
                                     <img class="w-full h-full object-cover rounded-2xl" :src='"/images/" + localeValues.value.details.icon' alt="language icon"/>
@@ -69,10 +69,21 @@ const showLang = ref(false)
 
 
 await load(`${config.public.apiUrl}/guest-settings`)
-setLocale(data.value.data[0].value.details.code)
 
 
 const localeValues = ref(data.value.data[0])
+
+
+if (route.path === '/ru') {
+    const localeCode = data.value.data[0].value.details.code
+    setLocale(localeCode)
+
+    if (localeCode === 'uz') {
+        router.push('/uz')
+    } else if (localeCode === 'ru') {
+        router.push('/ru')
+    }
+}
 
 
 const changeLang = async () => {
@@ -92,7 +103,6 @@ const changeLang = async () => {
 
 
         const routePath = split(route.path, '/')
-        console.log(route);
 
         router.push(`/uz/${routePath.slice(1).join('/')}`)
 

@@ -10,18 +10,18 @@
                         <div class="mt-12">
                             <div class="flex justify-between text-white font-onest-regular">
                                 <div v-for="footer in footerData" class="flex flex-col gap-5">
-                                    <div class="font-onest-medium">{{ footer.title }}</div>
-                                    <nuxt-link v-for="link in footer.links" :to="link.link" class="opacity-70 hover:opacity-100 transition">{{ link.title }}</nuxt-link>
+                                    <div class="font-onest-medium">{{ locale === 'ru' ? footer.title.ru : footer.title.uz }}</div>
+                                    <nuxt-link v-for="link in footer.links" :to="link.link" class="opacity-70 hover:opacity-100 transition">{{ locale === 'ru' ? link.title.ru : link.title.uz }}</nuxt-link>
                                 </div>
 
                                 <div id="contacts" class="flex flex-col gap-5 font-onest-medium text-base">
-                                    <div class="text-sm">Kontaktlar</div>
+                                    <div class="text-sm">{{ locale === 'ru' ? 'Контакты' : 'Kontaktlar' }}</div>
                                     <div>shop@billions.uz</div>
                                     <div>(+998) 97 767-20-97</div>
                                     <div>(+998) 93 123-45-67</div>
 
                                     <div class="px-11 py-4 bg-white cursor-pointer">
-                                        <div class="text-black">Xabar yuborish</div>
+                                        <div class="text-black">{{ locale === 'ru' ? 'Отправить сообщение' : 'Xabar yuborish' }}</div>
                                     </div>
 
                                     <div id="social-media">
@@ -62,7 +62,7 @@
                         </div>
                         <div class="mt-[100px] font-onest-regular text-center text-white text-xs">
                             <div>2023, OOO, Billions</div>
-                            <div>Barcha huquqlar himoyalangan</div>
+                            <div>{{ locale === 'ru' ? 'Все права защищены' : 'Barcha huquqlar himoyalangan'}}</div>
                         </div>
                     </div>
                 </div>
@@ -74,101 +74,167 @@
 <script setup>
 import { fetchUrl } from '~/composable/fetchUrl';
 
+const { locale } = useI18n()
 const config = useRuntimeConfig();
-
 const { data, load} = fetchUrl();
 await load(`${config.public.apiUrl}/categories`);
 
 
 const footerData = [
     {
-        title: 'Biz haqimizda',
+        title: {
+            'uz': 'Biz haqimizda',
+            'ru': 'О нас'
+        },
         links: [
             {
-                title: 'Kitoblar',
+                title: {
+                    'uz': 'Kitoblar',
+                    'ru': 'Книги'
+                },
                 link: '/'
             },
             {
-                title: 'Mualliflar',
+                title: {
+                    'uz': 'Mualliflar',
+                    'ru': 'Авторы'
+                },
                 link: '/'
             },
             {
-                title: 'Maxfiylik siyosati',
+                title: {
+                    'uz': 'Maxfiylik siyosati',
+                    'ru': 'Политика конфиденциальности'
+                },
                 link: '/'
             }
         ]
     },
     {
-        title: 'Kategoriyalar',
+        title: {
+            'uz': 'Kategoriyalar',
+            'ru': 'Категории'
+        },
         links: [
             {
-                'title': 'Shaxsiy rivojlanish',
+                'title': {
+                    'uz': 'Shaxsiy rivojlanish',
+                    'ru': 'Личное развитие'
+                },
                 'link': '/'
             },
             {
-                'title': 'Biznes',
+                'title': {
+                    'uz': 'Biznes',
+                    'ru': 'Бизнес'
+                },
                 'link': '/'
             },
             {
-                'title': 'Menejment',
+                'title': {
+                    'uz': 'Menejment',
+                    'ru': 'Менеджмент'
+                },
                 'link': '/'
             },
             {
-                'title': 'Badiiy',
+                'title': {
+                    'uz': 'Badiiy',
+                    'ru': 'Художественная литература'
+                },
                 'link': '/'
             },
             {
-                'title': 'Fantastik',
+                'title': {
+                    'uz': 'Fantastik',
+                    'ru': 'Фантастика'
+                },
                 'link': '/'
             },
             {
-                'title': 'Bolalar adabiyoti',
+                'title': {
+                    'uz': 'Bolalar adabiyoti',
+                    'ru': 'Детская литература'
+                },
                 'link': '/'
             },
             {
-                'title': 'Biznes',
+                'title': {
+                    'uz': 'Biznes',
+                    'ru': 'Бизнес'
+                },
                 'link': '/'
             },
             {
-                'title': 'Menejment',
+                'title': {
+                    'uz': 'Menejment',
+                    'ru': 'Менеджмент'
+                },
                 'link': '/'
             },
             {
-                'title': 'Badiiy',
+                'title': {
+                    'uz': 'Badiiy',
+                    'ru': 'Художественная литература'
+                },
                 'link': '/'
             },
         ]
     },
     {
-        title: 'Sotib olish',
+        title: {
+            'uz': 'Sotib olish',
+            'ru': 'Купить'
+        },
         links: [
             {
-                title: 'Qanday kitob sotib olish mumkin',
+                title: {
+                    'uz': 'Qanday kitob sotib olish mumkin',
+                    'ru': 'Как купить книгу'
+                },
                 link: '/'
             },
             {
-                title: 'To\'lov',
+                title: {
+                    'uz': 'To\'lov',
+                    'ru': 'Оплата'
+                },
                 link: '/'
             },
             {
-                title: 'Yetkazib berish',
+                title: {
+                    'uz': 'Yetkazib berish',
+                    'ru': 'Доставка'
+                },
                 link: '/'
             },
             {
-                title: 'Qaytarish',
+                title: {
+                    'uz': 'Qaytarish',
+                    'ru': 'Возврат'
+                },
                 link: '/'
             }
         ]
     },
     {
-        title: 'Shaxsiy',
+        title: {
+            'uz': 'Shaxsiy',
+            'ru': 'Личный'
+        },
         links: [
             {
-                title: 'Mening buyurtmalarim',
+                title: {
+                    'uz': 'Mening buyurtmalarim',
+                    'ru': 'Мои заказы'
+                },
                 link: '/'
             },
             {
-                title: 'Shaxsiy kabinet',
+                title: {
+                    'uz': 'Shaxsiy kabinet',
+                    'ru': 'Личный кабинет'
+                },
                 link: '/'
             },
         ]

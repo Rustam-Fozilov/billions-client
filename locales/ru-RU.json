@@ -12,5 +12,17 @@
     "catalog": {
         "title": "Каталог книг",
         "show_all": "Показать все"
+    },
+    "new_books": {
+        "title": "Новые книги",
+        "show_all": "Показать все"
+    },
+    "bestseller_books": {
+        "title": "Бестселлеры",
+        "show_all": "Показать все"
+    },
+    "purchased_today_books": {
+        "title": "Купленные сегодня",
+        "show_all": "Показать все"
     }
 }

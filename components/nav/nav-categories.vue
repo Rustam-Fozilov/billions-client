@@ -3,7 +3,7 @@
         <div id="nav-categories" class="w-full flex justify-between mt-7">
             <div v-for="category in categories">
                 <div class="font-onest-regular cursor-pointer">
-                    {{ category.name.uz }}
+                    {{ locale === 'ru' ? category.name.ru : category.name.uz }}
                 </div>
             </div>
         </div>
@@ -13,8 +13,10 @@
 <script setup>
 import axios from 'axios';
 
+const { locale } = useI18n()
 const config = useRuntimeConfig()
 const categories = ref([])
+
 
 await axios
     .get(`${config.public.apiUrl}/categories`, {
