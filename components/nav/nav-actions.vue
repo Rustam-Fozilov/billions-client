@@ -2,6 +2,7 @@
     <div>
         <div id="nav-actions">
             <div class="flex gap-5">
+                
                 <div class="flex flex-col gap-2 cursor-pointer items-center justify-end">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="22" viewBox="0 0 18 22" fill="none">
@@ -11,14 +12,16 @@
                     </div>
                     <div class="font-onest-regular">{{ $t('nav.login') }}</div>
                 </div>
-                <div class="flex flex-col gap-2 cursor-pointer items-center justify-end">
+
+                <NuxtLink :to="'/' + locale + '/favorites'" class="flex flex-col gap-2 cursor-pointer items-center justify-end">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="19" viewBox="0 0 22 19" fill="none">
                         <path d="M11 18.203L11.343 18.87C11.2369 18.9247 11.1193 18.9533 11 18.9533C10.8807 18.9533 10.7631 18.9247 10.657 18.87L10.654 18.868L10.647 18.865L10.622 18.852C8.76058 17.8411 7.00716 16.6429 5.389 15.276C2.8 13.073 0 9.832 0 6.014V6.013C0 2.553 2.829 0 5.736 0C8.03 0 9.881 1.226 11 3.105C12.12 1.226 13.97 0 16.264 0C19.17 0 22 2.552 22 6.014C22 9.832 19.199 13.074 16.611 15.276C14.9928 16.6428 13.2394 17.841 11.378 18.852L11.353 18.865L11.346 18.868L11.344 18.869L11 18.203ZM5.736 1.5C3.657 1.5 1.5 3.38 1.5 6.014C1.5 9.121 3.824 11.974 6.361 14.134C7.78018 15.333 9.3089 16.396 10.927 17.309L11 17.35L11.073 17.31C11.344 17.157 11.734 16.93 12.203 16.636C13.143 16.048 14.393 15.195 15.639 14.134C18.176 11.974 20.5 9.121 20.5 6.014C20.5 3.38 18.343 1.5 16.264 1.5C14.158 1.5 12.463 2.889 11.711 5.143C11.6605 5.29149 11.5648 5.42043 11.4373 5.51175C11.3097 5.60307 11.1568 5.65217 11 5.65217C10.8432 5.65217 10.6903 5.60307 10.5627 5.51175C10.4352 5.42043 10.3395 5.29149 10.289 5.143C9.537 2.889 7.841 1.5 5.736 1.5Z" fill="black"/>
                         </svg>
                     </div>
                     <div class="font-onest-regular">{{ $t('nav.favorites') }}</div>
-                </div>
+                </NuxtLink>
+
                 <NuxtLink :to="'/' + locale + '/basket'" class="cursor-pointer flex relative">
                     <span>
                         <div class="flex flex-col items-center justify-end gap-2">
@@ -41,12 +44,6 @@
 import { useRouter } from 'vue-router'
 
 const {locale} = useI18n()
-const localeRoute = useLocaleRoute()
-const localePath = useLocalePath()
 const router = useRouter()
-
-const gotoBasket = () => {
-    router.push(`/${locale.value}/basket`);
-}
 
 </script>

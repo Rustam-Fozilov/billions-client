@@ -8,7 +8,8 @@
             <div class="container pt-12">
                 <breadcrumbs-path/>
 
-                <basket-info/>
+                <favorites-list/>
+
             </div>
         </div>
 
@@ -22,8 +23,8 @@
 
 definePageMeta({
     title: {
-        uz: 'Savat',
-        ru: 'Корзина',
+        uz: 'Sevimlilar',
+        ru: 'Избранные',
     },
 })
 

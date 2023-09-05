@@ -2,8 +2,8 @@
     <div>
         <div class="flex items-center gap-3 opacity-50">
 
-            <NuxtLink to="/" class="font-onest-regular hover:opacity-100 transition">
-                Asosiy
+            <NuxtLink :to="'/' + locale" class="font-onest-regular hover:opacity-100 transition">
+                {{ locale === 'ru' ? 'Главная' : 'Asosiy' }}
             </NuxtLink>
 
             <div class="flex items-center gap-3 hover:opacity-100 transition">
@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="font-onest-regular">
-                    {{ route.meta.title.uz }}
+                    {{ locale === 'ru' ? route.meta.title.ru : route.meta.title.uz }}
                 </div>
             </div>
         </div>
@@ -22,5 +22,11 @@
 </template>
 
 <script setup>
+import { useRoute } from 'vue-router';
+
+
+const route = useRoute()
+const { locale } = useI18n()
+
 
 </script>
