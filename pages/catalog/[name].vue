@@ -1,5 +1,15 @@
 <template>
     <div>
-        CATALOG/NAME
+        <div>
+            <the-navbar/>
+        </div>
+
+        <div class="container">
+            
+        </div>
+
+        <div>
+            <the-footer/>
+        </div>
     </div>
 </template>

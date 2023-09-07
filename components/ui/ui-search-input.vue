@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div id="search-input" class="w-full flex justify-center">
+        <form @submit.prevent="gotoSearch" id="search-input" class="w-full flex justify-center">
             <div class=" w-1/2 flex justify-between items-center px-7 py-4 border border-black border-opacity-20">
                 <div class=" font-onest-regular w-4/5">
-                    <input class="w-full outline-none" type="text" :placeholder="$t('nav.search-input')">
+                    <input v-model="input" class="w-full outline-none" type="text" :placeholder="$t('nav.search-input')">
                 </div>
                 <div class="cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
@@ -11,6 +11,21 @@
                     </svg>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </template>
+
+<script setup>
+import { useRouter } from 'vue-router'
+
+
+const { locale } = useI18n()
+const router = useRouter()
+const input = ref('')
+
+
+const gotoSearch = () => {
+    router.push(`/${locale.value}/search/not-found`)
+}
+
+</script>

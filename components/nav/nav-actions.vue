@@ -3,7 +3,7 @@
         <div id="nav-actions">
             <div class="flex gap-5">
                 
-                <div class="flex flex-col gap-2 cursor-pointer items-center justify-end">
+                <div @click="openAuthModal" class="flex flex-col gap-2 cursor-pointer items-center justify-end">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="22" viewBox="0 0 18 22" fill="none">
                         <path d="M9 9C11.2091 9 13 7.20914 13 5C13 2.79086 11.2091 1 9 1C6.79086 1 5 2.79086 5 5C5 7.20914 6.79086 9 9 9Z" stroke="black" stroke-width="1.5"/>
@@ -35,6 +35,21 @@
                         <div class="h-5 w-5 text-center text-white rounded-xl absolute right-0 top-[-10px] bg-bronze font-onest-regular text-[14px]">1</div>
                     </span>
                 </NuxtLink>
+
+
+                <div class="">
+                    <div>
+                        <div class="fixed top-0 left-0 right-0 bottom-0 w-screen h-screen bg-black opacity-50"></div>
+                        <div>
+                            <div class="w-1/2 bg-white fixed top-1/2 left-0 right-0">
+                                <div class="">
+                                    TELEFOn
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -43,7 +58,13 @@
 <script setup>
 import { useRouter } from 'vue-router'
 
+
 const {locale} = useI18n()
 const router = useRouter()
+
+
+const openAuthModal = () => {
+    console.log('open auth');
+}
 
 </script>
