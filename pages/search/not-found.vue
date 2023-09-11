@@ -19,9 +19,9 @@
                     </div>
                 </div>
                 <div class="mt-12">
-                    <div class="cursor-pointer px-20 py-5 bg-bronze font-onest-medium text-center text-white">
+                    <NuxtLink :to="'/' + locale + '/catalog'" class="cursor-pointer px-20 py-5 bg-bronze font-onest-medium text-center text-white">
                         {{ locale === 'ru' ? 'Каталог' : 'Katalog' }}
-                    </div>
+                    </NuxtLink>
                 </div>
             </div>
         </div>

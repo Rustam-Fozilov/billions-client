@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import {fetchUrl} from '~/composable/fetchUrl'
+import {fetchUrl} from '~/composables/fetchUrl'
 
 
 const config = useRuntimeConfig()
@@ -32,4 +32,4 @@ const { data, load} = fetchUrl()
 
 await load(`${config.public.apiUrl}/books?limit=10`)
 
-</script>
+</script>composables/fetchUrl

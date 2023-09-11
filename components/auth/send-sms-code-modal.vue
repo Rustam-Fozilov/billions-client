@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <dialog id="confirm-code-dialog" class="p-8 outline-none overscroll-none">
+            <dialog id="auth-dialog" class="p-8 outline-none overscroll-none">
                 <div class="flex flex-col justify-between h-[480px] w-[400px]">
                     <div @click="closeAuthModal" class="cursor-pointer opacity-50 hover:opacity-100 transition flex w-full justify-end">
                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
@@ -14,7 +14,7 @@
                             <div class="font-onest-regular">{{ locale === 'ru' ? 'Войти или зарегистрироваться по номеру телефона' : 'Telefon raqam orqali kirish yoki ro\'yxatdan o\'tish' }}</div>
                             </div>
                         
-                        <form @submit.prevent="sendSMS">
+                        <form @submit.prevent="sendSMSCode">
                             <div class="flex flex-col gap-5">
                                 <div>
                                     <div class="bg-soft-white px-5 py-4 flex gap-2">
@@ -48,14 +48,26 @@
 import { useRouter } from 'vue-router'
 
 
+const props = defineProps(['isOpenAuth'])
+const copyIsOpenAuth = ref(props.isOpenAuth)
+const isSMSCodeSended = useIsSMSCodeSended()
 const { locale } = useI18n()
 const router = useRouter()
 const route = useRoute()
 const phoneNumber = ref('')
 
 
-const sendSMS = () => {
-    console.log(phoneNumber.value);
+onUpdated(() => {
+    copyIsOpenAuth.value = props.isOpenAuth
+
+    if(copyIsOpenAuth.value === true) {
+        document.getElementById('auth-dialog').showModal()
+    }
+})
+
+
+const sendSMSCode = () => {
+    console.log(isSMSCodeSended.value);
 }
 
 

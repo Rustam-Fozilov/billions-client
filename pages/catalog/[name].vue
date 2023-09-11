@@ -5,7 +5,7 @@
         </div>
 
         <div class="container">
-            
+            CATALOG / NAME
         </div>
 
         <div>
