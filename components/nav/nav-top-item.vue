@@ -55,7 +55,7 @@
 </template>
 
 <script setup>
-import { fetchUrl } from '~/composables/fetchUrl';
+import { fetchUrl } from '~/helpers/fetchUrl';
 import { useRoute, useRouter } from 'vue-router';
 import { split } from 'postcss/lib/list';
 
@@ -125,4 +125,3 @@ const changeLang = async () => {
 }
 
 </script>
-composables/fetchUrl

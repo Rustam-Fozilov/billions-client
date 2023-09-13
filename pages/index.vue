@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { fetchUrl}  from '~/composables/fetchUrl';
+import { fetchUrl}  from '~/helpers/fetchUrl';
 import { useRouter, useRoute } from 'vue-router';
 
 const route = useRoute()
@@ -28,4 +28,4 @@ const { locale, setLocale } = useI18n()
 const { data, load } = fetchUrl()
 
 
-</script>composables/fetchUrl
+</script>

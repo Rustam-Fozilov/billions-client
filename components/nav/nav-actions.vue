@@ -58,8 +58,6 @@ const route = useRoute()
 
 const openAuthModal = () => {
     isOpenAuth.value = true
-
-    // console.log(isOpenAuth.value);
 }
 
 </script>

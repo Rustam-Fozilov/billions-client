@@ -72,7 +72,7 @@
 </template>
 
 <script setup>
-import { fetchUrl } from '~/composables/fetchUrl';
+import { fetchUrl } from '~/helpers/fetchUrl';
 
 const { locale } = useI18n()
 const config = useRuntimeConfig();
@@ -241,4 +241,4 @@ const footerData = [
     },
 ]
 
-</script>composables/fetchUrl
+</script>

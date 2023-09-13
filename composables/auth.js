@@ -5,3 +5,7 @@ export const useIsAuthModalOpen = () => {
 export const useIsSMSCodeSended = () => {
     return useState('isSMSSended', () => false)
 }
+
+export const useAuthModalName = () => {
+    return useState('authModalName', () => '')
+}

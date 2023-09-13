@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import {fetchUrl} from '~/composables/fetchUrl';
+import {fetchUrl} from '~/helpers/fetchUrl';
 
 
 const config = useRuntimeConfig()
@@ -41,4 +41,4 @@ await load(`${config.public.apiUrl}/categories`, {
     }
 });
 
-</script>composables/fetchUrl
+</script>

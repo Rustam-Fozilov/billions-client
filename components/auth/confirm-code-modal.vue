@@ -10,7 +10,7 @@
                     </div>
                     <div class="flex flex-col gap-12">
                         <div>
-                            <div class="font-onest-medium text-base">{{ locale === 'ru' ? 'Введите номер телефона' : 'Telefon raqamingizni kiriting' }}</div>
+                            <div class="font-onest-medium text-base">{{ locale === 'ru' ? 'Введите номер телефона' : 'Kodni kiriting' }}</div>
                             <div class="font-onest-regular">{{ locale === 'ru' ? 'Войти или зарегистрироваться по номеру телефона' : 'Telefon raqam orqali kirish yoki ro\'yxatdan o\'tish' }}</div>
                             </div>
                         

@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { fetchUrl } from '~/composables/fetchUrl';
+import { fetchUrl } from '~/helpers/fetchUrl';
 
 
 const props = defineProps(['category_id', 'book_name'])
@@ -50,4 +50,3 @@ const gotoCategory = () => {
 }
 
 </script>
-composables/fetchUrl

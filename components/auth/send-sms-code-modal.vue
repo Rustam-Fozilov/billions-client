@@ -60,7 +60,7 @@ const phoneNumber = ref('')
 onUpdated(() => {
     copyIsOpenAuth.value = props.isOpenAuth
 
-    if(copyIsOpenAuth.value === true) {
+    if (copyIsOpenAuth.value === true) {
         document.getElementById('auth-dialog').showModal()
     }
 })

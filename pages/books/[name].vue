@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { fetchUrl } from '~/composables/fetchUrl';
+import { fetchUrl } from '~/helpers/fetchUrl';
 
 const route = useRoute();
 const config = useRuntimeConfig();
@@ -25,4 +25,4 @@ const {data: bookData, load} = fetchUrl();
 
 await load(`${config.public.apiUrl}/books/${route.params.name.split('-').pop()}`)
 
-</script>composables/fetchUrl
+</script>

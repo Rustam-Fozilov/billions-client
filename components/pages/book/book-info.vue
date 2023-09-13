@@ -109,7 +109,7 @@
 </template>
 
 <script setup>
-import { fetchUrl } from '~/composables/fetchUrl';
+import { fetchUrl } from '~/helpers/fetchUrl';
 
 
 const props = defineProps(['book'])
@@ -141,4 +141,3 @@ const overallRating = computed(() => {
 // })
 
 </script>
-composables/fetchUrl
