@@ -1,7 +1,7 @@
 <template>
-    <div @click="gotoBook(book)" id="books-card" class="cursor-pointer">
+    <div id="books-card">
         <div class="w-72">
-            <div class="w-full h-80">
+            <div @click="gotoBook(book)" class="w-full h-80 cursor-pointer">
                 <img class="w-full h-full object-cover" src="~/assets/images/books/book-cover.png" alt="book cover">
             </div>
             <div class="mt-5 flex flex-col gap-2 font-onest-regular">
@@ -9,7 +9,7 @@
                     <div class="font-onest-medium">
                         {{ book.prices[1].price }} {{ locale === 'ru' ? book.prices[1].currency.name.ru : book.prices[1].currency.name.uz }}
                     </div>
-                    <div class="cursor-pointer">
+                    <div class="cursor-pointer" @click.stop="addToCart(book)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <path d="M1.98601 16.2896C1.03196 12.4734 0.554928 10.5664 1.5568 9.28319C2.55755 8 4.52571 8 8.45868 8H13.607C17.5411 8 19.507 8 20.5089 9.28319C21.5108 10.5653 21.0337 12.4745 20.0797 16.2896C19.4726 18.717 19.1701 19.9301 18.265 20.6373C17.3598 21.3434 16.1089 21.3434 13.607 21.3434H8.45868C5.95679 21.3434 4.70584 21.3434 3.80071 20.6373C2.89558 19.9301 2.59202 18.717 1.98601 16.2896Z" stroke="black"/>
                         <path d="M19.3726 8.22755L18.5831 5.33091C18.2785 4.2134 18.1261 3.6552 17.8137 3.23377C17.5021 2.81509 17.079 2.49255 16.5927 2.30307C16.1035 2.11182 15.5253 2.11182 14.3688 2.11182M2.69336 8.22755L3.48284 5.33091C3.78752 4.2134 3.93986 3.6552 4.25231 3.23377C4.56386 2.81509 4.98697 2.49255 5.47324 2.30307C5.9625 2.11182 6.54071 2.11182 7.69714 2.11182" stroke="black"/>
@@ -33,10 +33,14 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
+import { fetchUrl } from '~/helpers/fetchUrl';
+
+
 defineProps(['book'])
 
 
+const booksInCart = useBooksInCart()
 const { locale } = useI18n()
 const router = useRouter()
 
@@ -45,6 +49,19 @@ const gotoBook = (book) => {
     router.push({
         path: `/${locale.value}/books/${book.name.uz.split(' ').join('-')}-${book.id}`,
     });
+}
+
+
+const addToCart = (book) => {
+
+    const isBookExistsInCart = book.id === booksInCart.value.find(item => item.id === book.id)?.id
+
+    if (!isBookExistsInCart) {
+        booksInCart.value.push(book)
+    } else {
+        console.log('exists');
+    }
+
 }
 
 </script>

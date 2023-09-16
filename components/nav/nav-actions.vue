@@ -37,8 +37,8 @@
                 </NuxtLink>
 
 
-                <div>
-                    <auth-modal :is-open-auth="isOpenAuth"/>
+                <div class="z-10">
+                    <auth-modal/>
                 </div>
 
             </div>
@@ -47,17 +47,14 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
 
 
-const isOpenAuth = ref(false)
+const isAuthModalOpen = useIsAuthModalOpen()
 const { locale } = useI18n()
-const router = useRouter()
-const route = useRoute()
 
 
 const openAuthModal = () => {
-    isOpenAuth.value = true
+    isAuthModalOpen.value = true
 }
 
 </script>

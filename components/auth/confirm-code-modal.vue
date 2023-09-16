@@ -1,7 +1,8 @@
 <template>
     <div>
-        <div>
-            <dialog id="confirm-code-dialog" class="p-8 outline-none overscroll-none">
+        <div v-if="isAuthModalOpen" @click="closeAuthModal" class="fixed w-screen h-screen top-0 bottom-0 left-0 right-0 bg-black opacity-50"></div>
+        <div v-if="isAuthModalOpen" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white">
+            <div id="confirm-code-dialog" class="p-8 outline-none overscroll-none">
                 <div class="flex flex-col justify-between h-[480px] w-[400px]">
                     <div @click="closeAuthModal" class="cursor-pointer opacity-50 hover:opacity-100 transition flex w-full justify-end">
                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
@@ -10,57 +11,81 @@
                     </div>
                     <div class="flex flex-col gap-12">
                         <div>
-                            <div class="font-onest-medium text-base">{{ locale === 'ru' ? 'Введите номер телефона' : 'Kodni kiriting' }}</div>
-                            <div class="font-onest-regular">{{ locale === 'ru' ? 'Войти или зарегистрироваться по номеру телефона' : 'Telefon raqam orqali kirish yoki ro\'yxatdan o\'tish' }}</div>
+                            <div class="font-onest-medium text-base">{{ locale === 'ru' ? 'Введите код' : 'Kodni kiriting' }}</div>
+                            <div class="font-onest-regular">{{ locale === 'ru' ? 'Чтобы подтвердить телефон, код был отправлен в +998 97 767-20-97.' : 'Telefonni tasdiqlash maqsadida +998 97 767-20-97 raqamiga kod yuborildi' }}</div>
                             </div>
-                        
-                        <form @submit.prevent="sendSMS">
-                            <div class="flex flex-col gap-5">
-                                <div>
-                                    <div class="bg-soft-white px-5 py-4 flex gap-2">
-                                        <div class="font-onest-regular">+998</div>
-                                        <input v-model="phoneNumber" @input="numericOnly" maxlength="9" class="w-full outline-none font-onest-regular bg-transparent" type="tel" placeholder="00 000-00-00">
+                        <div>
+                            <div class="flex justify-center">
+                                <div class="flex gap-3 w-4/5">
+                                    <div class="bg-soft-white px-5 py-4">
+                                        <input v-model="inputCodes[0]" @input="numericOnly" maxlength="1" class="w-full text-center outline-none font-onest-regular bg-transparent" type="text">
+                                    </div>
+
+                                    <div class="bg-soft-white px-5 py-4">
+                                        <input v-model="inputCodes[1]" @input="numericOnly" maxlength="1" class="w-full text-center outline-none font-onest-regular bg-transparent" type="text">
+                                    </div>
+
+                                    <div class="bg-soft-white px-5 py-4">
+                                        <input v-model="inputCodes[2]" @input="numericOnly" maxlength="1" class="w-full text-center outline-none font-onest-regular bg-transparent" type="text">
+                                    </div>
+
+                                    <div class="bg-soft-white px-5 py-4">
+                                        <input v-model="inputCodes[3]" @input="numericOnly" maxlength="1" class="w-full text-center outline-none font-onest-regular bg-transparent" type="text">
+                                    </div>
+
+                                    <div class="bg-soft-white px-5 py-4">
+                                        <input v-model="inputCodes[4]" @input="numericOnly" maxlength="1" class="w-full text-center outline-none font-onest-regular bg-transparent" type="text">
                                     </div>
                                 </div>
-                                <div>
-                                    <button type="submit" class="px-5 py-4 w-full font-onest-medium bg-bronze text-white">
-                                        {{ locale === 'ru' ? 'Получить код' : 'Kodni olish' }}
-                                    </button>
-                                </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <div class="text-center">
-                        <div class="font-onest-regular">
-                            {{ locale === 'ru' ? 'Авторизуясь,' : 'Siz avtotizatsiyadan o\'tib,' }}
-                            <span class=" text-blue-500 hover:underline cursor-pointer">
-                                {{ locale === 'ru' ? 'вы принимаете политику конфиденциальности.' : 'shaxsiy ma\'lumotlarni qayta ishlash siyosatini qabul qilmoqdasiz.' }}
-                            </span>
+                        <div v-if="true" class="font-onest-regular text-[18px] w-full">
+                            {{ locale === 'ru' ? 'Вы можете получить новый код через 33 секунды' : 'Yangi kodni 33 soniyadan so\'ng olishingiz mumkin' }}
+                        </div>
+
+                        <div v-if="false" class="font-onest-regular text-[18px] w-full text-bronze cursor-pointer">
+                            {{ locale === 'ru' ? 'Отправить код повторно' : 'Kodni qayta yuborish' }}
                         </div>
                     </div>
                 </div>
-            </dialog>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
 
 
+const isAuthModalOpen = useIsAuthModalOpen()
 const { locale } = useI18n()
-const router = useRouter()
-const route = useRoute()
 const phoneNumber = ref('')
+const inputCodes = ref([])
 
 
-const sendSMS = () => {
+onUpdated(() => {
+    isAuthModalOpen.value = isAuthModalOpen.value
+})
+
+
+const confirmCode = () => {
     console.log(phoneNumber.value);
 }
 
 
 const closeAuthModal = () => {
-    document.getElementById('auth-dialog').close()
+    isAuthModalOpen.value = false
+}
+
+
+const gotoNextInput = (el) => {
+
+}
+
+
+const gotoPrevInput = (el) => {
+
 }
 
 

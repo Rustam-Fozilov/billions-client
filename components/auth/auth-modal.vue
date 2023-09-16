@@ -1,18 +1,23 @@
 <template>
     <div>
         <div>
-            <send-sms-code-modal :is-open-auth="copyIsOpenAuth"/>
+            <send-sms-code-modal v-if="!isSMSCodeSended"/>
+
+            <confirm-code-modal v-if="isSMSCodeSended"/>
         </div>
     </div>
 </template>
 
 <script setup>
 
-const props = defineProps(['isOpenAuth'])
-const copyIsOpenAuth = ref(props.isOpenAuth)
+
+const isSMSCodeSended = useIsSMSCodeSended()
+const isAuthModalOpen = useIsAuthModalOpen()
+
 
 onUpdated(() => {
-    copyIsOpenAuth.value = props.isOpenAuth
+    isAuthModalOpen.value = isAuthModalOpen.value
+    isSMSCodeSended.value = isSMSCodeSended.value
 })
 
 </script>

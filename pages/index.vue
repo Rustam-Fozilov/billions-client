@@ -20,6 +20,7 @@
 import { fetchUrl}  from '~/helpers/fetchUrl';
 import { useRouter, useRoute } from 'vue-router';
 
+
 const route = useRoute()
 const router = useRouter()
 const config = useRuntimeConfig()
