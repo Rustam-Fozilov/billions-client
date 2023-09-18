@@ -17,35 +17,34 @@
                         <div>
                             <div class="flex justify-center">
                                 <div class="flex gap-3 w-4/5">
-                                    <div class="bg-soft-white px-5 py-4">
-                                        <input v-model="inputCodes[0]" @input="numericOnly" maxlength="1" class="w-full text-center outline-none font-onest-regular bg-transparent" type="text">
-                                    </div>
-
-                                    <div class="bg-soft-white px-5 py-4">
-                                        <input v-model="inputCodes[1]" @input="numericOnly" maxlength="1" class="w-full text-center outline-none font-onest-regular bg-transparent" type="text">
-                                    </div>
-
-                                    <div class="bg-soft-white px-5 py-4">
-                                        <input v-model="inputCodes[2]" @input="numericOnly" maxlength="1" class="w-full text-center outline-none font-onest-regular bg-transparent" type="text">
-                                    </div>
-
-                                    <div class="bg-soft-white px-5 py-4">
-                                        <input v-model="inputCodes[3]" @input="numericOnly" maxlength="1" class="w-full text-center outline-none font-onest-regular bg-transparent" type="text">
-                                    </div>
-
-                                    <div class="bg-soft-white px-5 py-4">
-                                        <input v-model="inputCodes[4]" @input="numericOnly" maxlength="1" class="w-full text-center outline-none font-onest-regular bg-transparent" type="text">
+                                    <div v-for="index in 5" class="bg-soft-white px-5 py-4">
+                                        <input
+                                            :disabled="inputCodes.length === 5"
+                                            @input="numericOnly(index)"
+                                            @keyup.right="focusNext(index)"
+                                            @keyup.left="focusPrev(index)"
+                                            @keyup.delete="focusPrev(index)"
+                                            v-model="inputCodes[index - 1]"
+                                            :id="'confirm-code-input-' + index"
+                                            maxlength="1"
+                                            autocomplete="off"
+                                            class="w-full text-center outline-none font-onest-regular bg-transparent" type="text"
+                                            :class="{
+                                                'cursor-not-allowed': inputCodes.length === 5,
+                                                'opacity-50': inputCodes.length === 5,
+                                            }"
+                                        >
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="text-center">
-                        <div v-if="true" class="font-onest-regular text-[18px] w-full">
-                            {{ locale === 'ru' ? 'Вы можете получить новый код через 33 секунды' : 'Yangi kodni 33 soniyadan so\'ng olishingiz mumkin' }}
+                        <div v-if="timer > 0" class="font-onest-regular text-[18px] w-full">
+                            {{ locale === 'ru' ? `Вы можете получить новый код через ${timer} секунды` : `Yangi kodni ${timer} soniyadan so\'ng olishingiz mumkin` }}
                         </div>
 
-                        <div v-if="false" class="font-onest-regular text-[18px] w-full text-bronze cursor-pointer">
+                        <div v-if="timer === 0" class="font-onest-regular text-[18px] w-full text-bronze cursor-pointer">
                             {{ locale === 'ru' ? 'Отправить код повторно' : 'Kodni qayta yuborish' }}
                         </div>
                     </div>
@@ -60,8 +59,15 @@
 
 const isAuthModalOpen = useIsAuthModalOpen()
 const { locale } = useI18n()
-const phoneNumber = ref('')
-const inputCodes = ref([])
+const inputCodes = reactive([])
+const timer = ref(33)
+
+
+onMounted(() => {
+    focusFirst()
+
+    resendCodeTimer()
+})
 
 
 onUpdated(() => {
@@ -69,8 +75,43 @@ onUpdated(() => {
 })
 
 
+watch(inputCodes, (value) => {
+    if (value.length === 5) {
+        confirmCode()
+    }
+})
+
+
+const resendCodeTimer = () => {
+    setInterval(() => {
+        if (timer.value > 0) {
+            timer.value--
+        }
+    }, 1000)
+}
+
+
+const focusNext = (index) => {
+    if (index < 5) {
+        document.getElementById('confirm-code-input-' + (index + 1)).focus()
+    }
+}
+
+
+const focusPrev = (index) => {
+    if (index > 1) {
+        document.getElementById('confirm-code-input-' + (index - 1)).focus()
+    }
+}
+
+
+const focusFirst = () => {
+    document.getElementById('confirm-code-input-1').focus()
+}
+
+
 const confirmCode = () => {
-    console.log(phoneNumber.value);
+    console.log('confirmCode', inputCodes);
 }
 
 
@@ -79,20 +120,16 @@ const closeAuthModal = () => {
 }
 
 
-const gotoNextInput = (el) => {
+const numericOnly = (index) => {
+    let value = inputCodes[index - 1].replace(/\D/g, ''); // Remove non-numeric characters
+    inputCodes[index - 1] = value;
 
-}
+    if (value.length === 0) {
+        return
+    }
 
-
-const gotoPrevInput = (el) => {
-
-}
-
-
-const numericOnly = () => {
-    let value = phoneNumber.value.replace(/\D/g, ''); // Remove non-numeric characters
-
-    phoneNumber.value = value;
+    focusNext(index)
+    
 }
 
 </script>
