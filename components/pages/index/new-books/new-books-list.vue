@@ -6,7 +6,7 @@
                     <div class="text-xl font-onest-medium">{{ $t('new_books.title') }}</div>
                     <div class="font-onest-regular opacity-50 hover:opacity-100">
                         <div class="relative top-[-5px] left-0">
-                            <NuxtLink :to="localePath('/')">{{ $t('new_books.show_all') }}</NuxtLink>
+                            <NuxtLink :to="`/${locale}/`">{{ $t('new_books.show_all') }}</NuxtLink>
                         </div>
                     </div>
                 </div>
@@ -26,6 +26,7 @@
 import {fetchUrl} from '~/helpers/fetchUrl'
 
 
+const { locale } = useI18n()
 const config = useRuntimeConfig()
 const { data, load} = fetchUrl()
 

@@ -34,7 +34,6 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import { fetchUrl } from '~/helpers/fetchUrl';
 
 
 defineProps(['book'])

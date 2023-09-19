@@ -27,10 +27,10 @@
                     </div>
                 </div>
 
-                <NuxtLink :to="`/${locale}/confirm-order`"  id="cart-confirm-button">
+                <NuxtLink :to="`/${locale}/`"  id="cart-confirm-button">
                     <div class="mt-12 cursor-pointer">
                         <span>
-                            <div class="w-full bg-bronze py-7 text-white text-center font-onest-regular">{{ locale === 'ru' ? 'Перейти к оформлению' : 'Rasmiylashtirish' }}</div>
+                            <div class="w-full bg-bronze py-7 text-white text-center font-onest-regular">{{ locale === 'ru' ? 'Перейти к оформлению' : 'Tasdiqlash' }}</div>
                         </span>
                     </div>
                 </NuxtLink>
