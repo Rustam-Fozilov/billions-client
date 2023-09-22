@@ -106,6 +106,10 @@ const focusPrev = (index) => {
 
 
 const focusFirst = () => {
+    if (document.getElementById('confirm-code-input-1') === null) {
+        return
+    }
+    
     document.getElementById('confirm-code-input-1').focus()
 }
 

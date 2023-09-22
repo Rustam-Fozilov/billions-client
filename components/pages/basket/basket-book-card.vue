@@ -13,13 +13,13 @@
                 </div>
                 <div>
                     <div class="h-11 w-36 flex items-center justify-between border border-opacity-20 border-black">
-                        <div class="font-onest-regular h-full flex items-center ml-4 opacity-50 cursor-not-allowed">
+                        <div @click="decreaseBookQuantity" class="font-onest-regular h-full flex items-center ml-4 opacity-50 cursor-not-allowed">
                             <svg width="14" height="3" viewBox="0 0 12 3" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 0.0908813V2.09088H0V0.0908813H12Z" fill="black"/>
                             </svg>
                         </div>
                         <div class="font-onest-regular">1</div>
-                        <div class="font-onest-regular cursor-pointer mr-4">
+                        <div @click="increaseBookQuantity" class="font-onest-regular cursor-pointer mr-4">
                             <svg width="12" height="13" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4.56667 11.0909V0.0908813H6.43333V11.0909H4.56667ZM0 6.52422V4.65755H11V6.52422H0Z" fill="black"/>
                             </svg>
@@ -42,7 +42,5 @@
 </template>
 
 <script setup>
-
-const { locale } = useI18n()
 
 </script>

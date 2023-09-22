@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { fetchUrl}  from '~/helpers/fetchUrl';
+import { fetchUrl }  from '~/helpers/fetchUrl';
 import { useRouter, useRoute } from 'vue-router';
 
 

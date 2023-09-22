@@ -56,7 +56,14 @@ const addToCart = (book) => {
     const isBookExistsInCart = book.id === booksInCart.value.find(item => item.id === book.id)?.id
 
     if (!isBookExistsInCart) {
-        booksInCart.value.push(book)
+        booksInCart.value.push(
+            {
+                'book': book,
+                'quantity': 1
+            }
+        )
+
+        console.log(booksInCart.value);
     } else {
         console.log('exists');
     }

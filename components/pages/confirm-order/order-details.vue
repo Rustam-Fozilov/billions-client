@@ -34,6 +34,7 @@
                         </span>
                     </div>
                 </NuxtLink>
+                
             </div>
         </div>
     </div>

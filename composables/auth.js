@@ -6,3 +6,6 @@ export const useIsSMSCodeSended = () => {
     return useState('isSMSSended', () => false)
 }
 
+export const useAuthUser = () => {
+    return useState('authUser', () => null)
+}

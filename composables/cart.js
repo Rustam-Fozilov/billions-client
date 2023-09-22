@@ -1,3 +1,3 @@
 export const useBooksInCart = () => {
-    return useState('bookInCart', () => [])
+    return useState('booksInCart', () => [])
 }
