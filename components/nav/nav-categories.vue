@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id="nav-categories" class="w-full flex justify-between mt-7">
-            <div @click="gotoCatalog(category.name.uz)" v-for="category in categories">
+            <div @click="gotoCatalog(category.path_name)" v-for="category in categories">
                 <div class="font-onest-regular cursor-pointer">
                     {{ locale === 'ru' ? category.name.ru : category.name.uz }}
                 </div>
