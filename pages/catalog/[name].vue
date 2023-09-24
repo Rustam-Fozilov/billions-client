@@ -19,10 +19,20 @@
                     </div>
                 </div>
 
-                <div class="mt-12">
+                <div class="mt-12 flex">
                     <div class="w-1/5">
                         <books-filter :category="category" :path-title="pathTitle"/>
                     </div>
+
+                    <div class=" w-4/5 flex flex-wrap gap-5">
+                        <div v-for="book in books">
+                            <book-card :book="book"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end py-24">
+                    <the-pagination/>
                 </div>
             </div>
         </div>
@@ -39,6 +49,7 @@ import { fetchUrl } from "~/helpers/fetchUrl";
 
 
 const pathTitle = ref('')
+const books = ref([])
 const route = useRoute()
 const config = useRuntimeConfig()
 const { data, load } = fetchUrl()
@@ -52,6 +63,10 @@ pathTitle.value = category.name[locale.value]
 
 await load(`${config.public.apiUrl}/categories/${category.id}/books`)
 const countOfBooks = computed(() => data.value.data.length)
+
+
+await load(`${config.public.apiUrl}/books?limit=10`);
+books.value = data.value.data
 
 
 </script>

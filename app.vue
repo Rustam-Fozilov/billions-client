@@ -2,7 +2,7 @@
   <div>
     <div
       v-if="loading"
-      class="fixed left-0 top-0 h-1 w-full z-50 bg-bronze drop-shadow-md"
+      class="fixed left-0 top-0 h-[5px] w-full z-50 bg-bronze drop-shadow-md"
     ></div>
 
     <NuxtPage/>
