@@ -5,8 +5,8 @@
         </div>
 
         <div class="bg-soft-white">
-            <div class="container">
-                <div class="pt-12">
+            <div class="container pt-12">
+                <div>
                     <catalog-paths/>
                 </div>
 

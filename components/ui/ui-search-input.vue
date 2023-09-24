@@ -25,7 +25,7 @@ const input = ref('')
 
 
 const gotoSearch = () => {
-    router.push(`/${locale.value}/search/not-found`)
+    router.push({path: `/${locale.value}/search`, query: {q: input.value}})
 }
 
 </script>
