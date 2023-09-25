@@ -18,6 +18,7 @@
 
 <script setup>
 import { fetchUrl } from '~/helpers/fetchUrl';
+import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const config = useRuntimeConfig();

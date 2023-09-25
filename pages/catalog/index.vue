@@ -4,12 +4,18 @@
             <the-navbar/>
         </div>
 
-        <div class="container">
+        <div class="bg-soft-white">
+            <div class="container">
+                <all-catalogs-list/>
+            </div>
 
-        </div>
-
-        <div>
-            <the-footer/>
+            <div class="mt-24">
+                <the-footer/>
+            </div>
         </div>
     </div>
 </template>
+
+<script setup>
+
+</script>

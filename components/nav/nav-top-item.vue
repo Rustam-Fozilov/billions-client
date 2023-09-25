@@ -74,7 +74,7 @@ await load(`${config.public.apiUrl}/guest-settings`)
 const localeValues = ref(data.value.data[0])
 
 
-if (route.path === '/ru') {
+if (route.path === '/ru' || route.path === '/uz') {
     const localeCode = data.value.data[0].value.details.code
     setLocale(localeCode)
 
