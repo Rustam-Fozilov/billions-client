@@ -17,16 +17,5 @@
 </template>
 
 <script setup>
-import { fetchUrl }  from '~/helpers/fetchUrl';
-import { useRouter, useRoute } from 'vue-router';
-
-
-const route = useRoute()
-const router = useRouter()
-const config = useRuntimeConfig()
-const localePath = useLocalePath()
-const { locale, setLocale } = useI18n()
-const { data, load } = fetchUrl()
-
 
 </script>

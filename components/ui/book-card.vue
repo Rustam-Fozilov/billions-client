@@ -53,7 +53,7 @@ const gotoBook = (book) => {
 
 const addToCart = (book) => {
 
-    const isBookExistsInCart = book.id === booksInCart.value.find(item => item.id === book.id)?.id
+    const isBookExistsInCart = book.id === booksInCart.value.find(item => item.book.id === book.id)?.book.id
 
     if (!isBookExistsInCart) {
         booksInCart.value.push(

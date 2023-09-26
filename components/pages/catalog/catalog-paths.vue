@@ -35,7 +35,7 @@ const { data, load } = fetchUrl()
 const { locale } = useI18n()
 
 
-await load(`${config.public.apiUrl}/categories?only_parents=true`)
+await load(`${config.public.apiUrl}/categories?limit=100`)
 const category = data.value.data.find((category) => category.path_name === route.params.name)
 pathTitle.value = category.name[locale.value]
 

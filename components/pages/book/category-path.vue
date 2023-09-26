@@ -3,7 +3,7 @@
         <div class="container">
             <div class="flex items-center gap-3">
                 <div v-for="category in categoriesTree.slice().reverse()">
-                    <div @click="gotoCategory" class="flex items-center gap-3 cursor-pointer opacity-50 hover:opacity-100 hover:text-bronze transition">
+                    <div @click="gotoCategory(category)" class="flex items-center gap-3 cursor-pointer opacity-50 hover:opacity-100 hover:text-bronze transition">
                         <div class="font-onest-regular">
                             {{ locale === 'ru' ? category.name.ru : category.name.uz }}
                         </div>
@@ -25,9 +25,11 @@
 
 <script setup>
 import { fetchUrl } from '~/helpers/fetchUrl';
+import { useRouter } from "vue-router";
 
 
 const props = defineProps(['category_id', 'book_name'])
+const router = useRouter()
 const { locale } = useI18n()
 const config = useRuntimeConfig();
 const {data: categoryData, load} = fetchUrl();
@@ -45,8 +47,8 @@ while(categoryData.value.data.parent_id !== null){
 }
 
 
-const gotoCategory = () => {
-    console.log('gotoCategory');
+const gotoCategory = (category) => {
+    router.push(`/${locale.value}/catalog/${category.path_name}`)
 }
 
 </script>

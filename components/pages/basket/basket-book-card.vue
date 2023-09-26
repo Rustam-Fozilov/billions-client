@@ -7,8 +7,12 @@
                         <img class="w-full h-full object-cover" src="~/assets/images/books/book-cover.png" alt="book cover" />
                     </div>
                     <div class="font-onest-regular flex flex-col gap-7 w-1/2">
-                        <div class="opacity-50">Мягкая обложка</div>
-                        <div>Чудесное путешествие в Чудинию. Правописание ЖИ, ШИ, ЧА, ЩА, ЧУ, ЩУ</div>
+                        <div class="opacity-50">
+                            {{ locale === 'ru' ? book.book.inventory[0].cover_type.ru : book.book.inventory[0].cover_type.uz }}
+                        </div>
+                        <div>
+                            {{ locale === 'ru' ? book.book.name.ru : book.book.name.uz }}
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -18,7 +22,9 @@
                                 <path d="M12 0.0908813V2.09088H0V0.0908813H12Z" fill="black"/>
                             </svg>
                         </div>
-                        <div class="font-onest-regular">1</div>
+                        <div class="font-onest-regular">
+                            {{ book.quantity }}
+                        </div>
                         <div @click="increaseBookQuantity" class="font-onest-regular cursor-pointer mr-4">
                             <svg width="12" height="13" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4.56667 11.0909V0.0908813H6.43333V11.0909H4.56667ZM0 6.52422V4.65755H11V6.52422H0Z" fill="black"/>
@@ -27,7 +33,10 @@
                     </div>
                 </div>
                 <div>
-                    <div class="font-onest-medium text-base whitespace-nowrap">129 000 so'm</div>
+                    <div class="font-onest-medium text-base whitespace-nowrap">
+                        {{ locale === 'ru' ? book.book.prices : book.book.prices[0].price }}
+                        {{ locale === 'ru' ? 'sum' : 'so\'m' }}
+                    </div>
                 </div>
                 <div>
                     <div class="opacity-50 cursor-pointer hover:opacity-100 transition">
@@ -42,5 +51,18 @@
 </template>
 
 <script setup>
+
+
+const props = defineProps(['book'])
+const booksInCart = useBooksInCart()
+const { locale } = useI18n()
+
+
+const increaseBookQuantity = () => {
+    const book = booksInCart.value.find((item) => item.book.id === props.book.book.id)
+    book.quantity += 1
+    book.book.prices[0].price *= 2
+}
+
 
 </script>

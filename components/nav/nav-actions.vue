@@ -32,7 +32,9 @@
                             </div>
                             <div class="font-onest-regular">{{ $t('nav.cart') }}</div>
                         </div>
-                        <div class="h-5 w-5 text-center text-white rounded-xl absolute right-0 top-[-10px] bg-bronze font-onest-regular text-[14px]">1</div>
+                        <div class="h-5 w-5 text-center text-white rounded-xl absolute right-0 top-[-10px] bg-bronze font-onest-regular text-[14px]">
+                            {{ countOfBooksInCart }}
+                        </div>
                     </span>
                 </NuxtLink>
 
@@ -49,12 +51,20 @@
 <script setup>
 
 
+import {useBooksInCart} from "~/composables/cart";
+
 const isAuthModalOpen = useIsAuthModalOpen()
 const { locale } = useI18n()
+const booksInCart = useBooksInCart()
 
 
 const openAuthModal = () => {
     isAuthModalOpen.value = true
 }
+
+
+const countOfBooksInCart = computed(() => {
+    return booksInCart.value.length
+})
 
 </script>

@@ -81,7 +81,7 @@
                             </div>
                             <div class="flex gap-7">
                                 <div>
-                                    <button class="bg-bronze py-7 px-32 font-onest-medium text-white">
+                                    <button @click="addToCart()" id="add-to-cart-btn" class="bg-bronze py-7 px-32 font-onest-medium text-white disabled:cursor-not-allowed disabled:bg-nav-bg disabled:text-gray-500">
                                         {{ locale === 'ru' ? 'Добавить в корзину' : 'Savatga qo\'shish' }}
                                     </button>
                                 </div>
@@ -113,6 +113,7 @@ import { fetchUrl } from '~/helpers/fetchUrl';
 
 
 const props = defineProps(['book'])
+const booksInCart = useBooksInCart()
 const { locale } = useI18n()
 const config = useRuntimeConfig()
 const {data: bookInfo, load} = fetchUrl()
@@ -125,19 +126,39 @@ await load(`${config.public.apiUrl}/books/${props.book.data.id}/reviews`, {
 })
 
 
-const overallRating = computed(() => {
-    return Math.floor(bookInfo.value.data.overall_rating)
+onMounted(() => {
+    if (isBookExistsInCart.value) {
+        makeBtnDisabled()
+    }
 })
 
-// const fullStarIcon = resolveComponent('full-star-icon')
-// const halfStarIcon = resolveComponent('half-star-icon')
 
-// const starComponent = computed(() => {
-//     if (overallRating.value === 0) {
-//         return fullStarIcon
-//     } else if(overallRating.value > 0 && overallRating.value < 5) {
-//         return halfStarIcon
-//     }
-// })
+const addToCart = () => {
+
+    if (!isBookExistsInCart.value) {
+        booksInCart.value.push(
+            {
+                'book': props.book.data,
+                'quantity': 1
+            }
+        )
+        makeBtnDisabled()
+    }
+
+}
+
+
+const isBookExistsInCart = computed(() => {
+    return props.book.data.id === booksInCart.value.find(item => item.book.id === props.book.data.id)?.book.id
+})
+
+
+const makeBtnDisabled = () => {
+    document.getElementById('add-to-cart-btn').setAttribute('disabled' , 'true')
+    locale.value === 'ru' ?
+        document.getElementById('add-to-cart-btn').innerText = 'Ru Savatga qo\'shildi' :
+        document.getElementById('add-to-cart-btn').innerText = 'Savatga qo\'shildi'
+}
+
 
 </script>

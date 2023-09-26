@@ -56,17 +56,15 @@ const { data, load } = fetchUrl()
 const { locale } = useI18n()
 
 
-await load(`${config.public.apiUrl}/categories?only_parents=true`)
+await load(`${config.public.apiUrl}/categories?limit=100`)
 const category = data.value.data.find((category) => category.path_name === route.params.name)
 pathTitle.value = category.name[locale.value]
 
 
 await load(`${config.public.apiUrl}/categories/${category.id}/books`)
+books.value = data.value.data
 const countOfBooks = computed(() => data.value.data.length)
 
-
-await load(`${config.public.apiUrl}/books?limit=10`);
-books.value = data.value.data
 
 
 </script>

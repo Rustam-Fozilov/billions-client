@@ -13,9 +13,9 @@
     
                     <div id="books-in-basket">
                         <div class="mt-12 flex flex-col gap-7">
-                            <basket-book-card/>
-                            <basket-book-card/>
-                            <basket-book-card/>
+                            <div v-for="book in booksInCart">
+                                <basket-book-card :book="book"/>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -33,6 +33,9 @@
 
 <script setup>
 
+
 const { locale } = useI18n()
+const booksInCart = useBooksInCart()
+
 
 </script>
