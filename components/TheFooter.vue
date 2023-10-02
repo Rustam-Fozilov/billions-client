@@ -92,14 +92,14 @@ const footerData = [
                     'uz': 'Kitoblar',
                     'ru': 'Книги'
                 },
-                link: '/'
+                link: `/${locale.value}/catalog`
             },
             {
                 title: {
                     'uz': 'Mualliflar',
                     'ru': 'Авторы'
                 },
-                link: '/'
+                link: `/${locale.value}/authors`
             },
             {
                 title: {
@@ -206,14 +206,14 @@ const footerData = [
                     'uz': 'Yetkazib berish',
                     'ru': 'Доставка'
                 },
-                link: '/'
+                link: `/${locale.value}/delivery`
             },
             {
                 title: {
                     'uz': 'Qaytarish',
                     'ru': 'Возврат'
                 },
-                link: '/'
+                link: `/${locale.value}/refunding`
             }
         ]
     },

@@ -1,9 +1,9 @@
 <template>
     <div>
         <div>
-            <send-sms-code-modal v-if="!isSMSCodeSended"/>
+            <send-sms-code-modal v-if="!isSMSCodeSent"/>
 
-            <confirm-code-modal v-if="isSMSCodeSended"/>
+            <confirm-code-modal v-if="isSMSCodeSent"/>
         </div>
     </div>
 </template>
@@ -11,13 +11,13 @@
 <script setup>
 
 
-const isSMSCodeSended = useIsSMSCodeSended()
+const isSMSCodeSent = useIsSMSCodeSent()
 const isAuthModalOpen = useIsAuthModalOpen()
 
 
 onUpdated(() => {
     isAuthModalOpen.value = isAuthModalOpen.value
-    isSMSCodeSended.value = isSMSCodeSended.value
+    isSMSCodeSent.value = isSMSCodeSent.value
 })
 
 </script>

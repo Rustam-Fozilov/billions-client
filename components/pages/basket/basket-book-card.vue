@@ -34,7 +34,7 @@
                 </div>
                 <div>
                     <div class="font-onest-medium text-base whitespace-nowrap">
-                        {{ locale === 'ru' ? book.book.prices : book.book.prices[0].price }}
+                        {{ locale === 'ru' ? book.book.prices[0].price : book.book.prices[0].price }}
                         {{ locale === 'ru' ? 'sum' : 'so\'m' }}
                     </div>
                 </div>

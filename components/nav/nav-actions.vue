@@ -51,10 +51,8 @@
 <script setup>
 
 
-import {useBooksInCart} from "~/composables/cart";
-
-const isAuthModalOpen = useIsAuthModalOpen()
 const { locale } = useI18n()
+const isAuthModalOpen = useIsAuthModalOpen()
 const booksInCart = useBooksInCart()
 
 

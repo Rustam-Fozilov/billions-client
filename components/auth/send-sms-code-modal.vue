@@ -48,7 +48,7 @@
 <script setup>
 
 
-const isSMSCodeSended = useIsSMSCodeSended()
+const isSMSCodeSent = useIsSMSCodeSent()
 const isAuthModalOpen = useIsAuthModalOpen()
 const { locale } = useI18n()
 const phoneNumber = ref('')
@@ -60,7 +60,7 @@ onUpdated(() => {
 
 
 const sendSMSCode = () => {
-    isSMSCodeSended.value = true
+    isSMSCodeSent.value = true
 }
 
 
@@ -70,9 +70,8 @@ const closeAuthModal = () => {
 
 
 const numericOnly = () => {
-    let value = phoneNumber.value.replace(/\D/g, ''); // Remove non-numeric characters
-
-    phoneNumber.value = value;
+     // Remove non-numeric characters
+    phoneNumber.value = phoneNumber.value.replace(/\D/g, '');
 }
 
 </script>
