@@ -8,7 +8,13 @@
             <div class="container pt-12">
                 <breadcrumbs-path/>
 
-                <basket-info/>
+                <div v-if="booksInBasket.length">
+                    <basket-info/>
+                </div>
+
+                <div v-if="!booksInBasket.length">
+                    <basket-empty/>
+                </div>
             </div>
         </div>
 
@@ -22,9 +28,11 @@
 
 definePageMeta({
     title: {
-        uz: 'Savat',
         ru: 'Корзина',
+        uz: 'Savat'
     },
 })
+
+const booksInBasket = useBooksInCart()
 
 </script>

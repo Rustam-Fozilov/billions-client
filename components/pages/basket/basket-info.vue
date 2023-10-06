@@ -10,7 +10,7 @@
                         </div>
                         <div class="font-onest-medium text-base opacity-50 uppercase cursor-pointer hover:opacity-100 transition">{{ locale === 'ru' ? 'удалить' : 'O\'chirish' }}</div>
                     </div>
-    
+
                     <div id="books-in-basket">
                         <div class="mt-12 flex flex-col gap-7">
                             <div v-for="book in booksInCart">
@@ -19,7 +19,7 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <div id="basket-details" class="w-[30%] pl-12 mt-12">
                     <basket-details/>
                 </div>

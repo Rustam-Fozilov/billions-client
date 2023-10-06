@@ -56,13 +56,12 @@
 
 <script setup>
 import { fetchUrl } from '~/helpers/fetchUrl';
-import { useRoute, useRouter } from 'vue-router';
-import { split } from 'postcss/lib/list';
 
 
 const route = useRoute()
 const router = useRouter()
 const config = useRuntimeConfig()
+const currencyType = useCurrencyType()
 const { locale, setLocale } = useI18n()
 const { data, load } = fetchUrl()
 const showLang = ref(false)
@@ -72,55 +71,51 @@ await load(`${config.public.apiUrl}/guest-settings`)
 
 
 const localeValues = ref(data.value.data[0])
+currencyType.value = data.value.data[1].value
 
 
-if (route.path === '/ru' || route.path === '/uz' || route.path === '/') {
+// if (route.path === '/ru' || route.path === '/uz' || route.path === '/') {
     const localeCode = data.value.data[0].value.details.code
     setLocale(localeCode)
 
-    if (localeCode === 'uz') {
-        router.push('/uz')
-    } else if (localeCode === 'ru') {
-        router.push('/ru')
-    }
-}
+    // if (localeCode === 'uz') {
+    //     router.push('/uz')
+    // } else if (localeCode === 'ru') {
+    //     router.push('/ru')
+    // }
+// }
 
 
 const changeLang = async () => {
     showLang.value = !showLang.value
 
     if (locale.value === 'ru') {
-        
-        
         await load(`${config.public.apiUrl}/guest-settings/1`, {
             'setting_id': 1,
             'value_id': 10,
         }, 'PUT')
         
         
-        setLocale('uz')
+        await setLocale('uz')
         localeValues.value = data.value.data
 
 
         const routePath = split(route.path, '/')
-
-        router.push(`/uz/${routePath.slice(1).join('/')}`)
+        await router.push(`/uz/${routePath.slice(1).join('/')}`)
 
     } else if (locale.value === 'uz') {
-        
-        
         await load(`${config.public.apiUrl}/guest-settings/1`, {
             'setting_id': 1,
             'value_id': 11,
         }, 'PUT')
         
         
-        setLocale('ru')
+        await setLocale('ru')
         localeValues.value = data.value.data
 
 
         const routePath = split(route.path, '/')
-        router.push(`/ru/${routePath.slice(1).join('/')}`)
+        await router.push(`/ru/${routePath.slice(1).join('/')}`)
     }
 }
 

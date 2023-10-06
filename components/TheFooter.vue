@@ -189,17 +189,17 @@ const footerData = [
         links: [
             {
                 title: {
-                    'uz': 'Qanday kitob sotib olish mumkin',
+                    'uz': 'Kitobni qanday sotib olish mumkin',
                     'ru': 'Как купить книгу'
                 },
-                link: '/'
+                link: `/${locale.value}/howtobuy`
             },
             {
                 title: {
                     'uz': 'To\'lov',
                     'ru': 'Оплата'
                 },
-                link: '/'
+                link: `/${locale.value}/payment`
             },
             {
                 title: {

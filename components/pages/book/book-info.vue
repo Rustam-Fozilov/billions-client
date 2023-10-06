@@ -76,8 +76,11 @@
                                 <div v-if="locale === 'ru'" class="font-onest-regular text-stock-green">Есть {{ book.data.inventory[0].quantity }} штуки</div>
                                 <div v-if="locale === 'uz'" class="font-onest-regular text-stock-green">{{ book.data.inventory[0].quantity }} dona bor</div>
                             </div>
-                            <div class="font-onest-medium text-xl">
-                                {{ book.data.prices[1].price }} so'm
+                            <div v-if="currencyType.id === 12" class="font-onest-medium text-xl">
+                                {{ book.data.prices[1].price }} {{ locale === 'ru' ? book.data.prices[1].currency.name.ru : book.data.prices[1].currency.name.uz }}
+                            </div>
+                            <div v-if="currencyType.id === 13" class="font-onest-medium text-xl">
+                                {{ book.data.prices[0].price }} {{ locale === 'ru' ? book.data.prices[0].currency.name.ru : book.data.prices[0].currency.name.uz }}
                             </div>
                             <div class="flex gap-7">
                                 <div>
@@ -112,6 +115,7 @@
 import { fetchUrl } from '~/helpers/fetchUrl';
 
 
+const currencyType = useCurrencyType()
 const props = defineProps(['book'])
 const booksInCart = useBooksInCart()
 const { locale } = useI18n()

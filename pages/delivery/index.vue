@@ -12,7 +12,7 @@
 
                 <div class="mt-12 flex gap-7 flex-col">
                     <div class="font-onest-medium text-xl">
-                        Доставка
+                        {{ locale === 'ru' ? 'Доставка' : 'Yetkazib berish' }}
                     </div>
                     <div class="font-onest-regular">
                         Доставляем книги курьером до двери, в пункты выдачи и почтой по всей России. Если вы хотите заказать книги в другую страну, пожалуйста, напишите нам на почту shop@alpinabook.ru или позвоните по номеру 8 (800) 550-53-22. Мы поможем оформить заказ и рассчитаем стоимость и сроки доставки.
@@ -49,6 +49,9 @@ definePageMeta({
         ru: 'Доставка'
     }
 })
+
+
+const { locale } = useI18n()
 
 </script>
 

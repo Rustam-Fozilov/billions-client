@@ -22,7 +22,7 @@
                         </div>
                         <div class="font-onest-medium text-base flex justify-between">
                             <div>{{ locale === 'ru' ? 'Итого:' : 'Jami' }}</div>
-                            <div>{{ locale === 'ru' ? '220 000 сум' : '220 000 sum' }}</div>
+                            <div>{{ locale === 'ru' ? `${totalAmountOfCart} сум` : `${totalAmountOfCart} sum` }}</div>
                         </div>
                     </div>
                 </div>
@@ -42,5 +42,6 @@
 <script setup>
 
 const { locale } = useI18n()
+const totalAmountOfCart = useTotalAmountOfCart()
 
 </script>

@@ -12,7 +12,7 @@
 
                 <div class="mt-12 flex gap-7 flex-col">
                     <div class="font-onest-medium text-xl">
-                        Условия возврата
+                        {{ locale === 'ru' ? 'Условия возврата' : 'Qaytarib berish' }}
                     </div>
                     <div class="font-onest-regular">
                         Если у вас возникли проблемы с заказом,
@@ -55,6 +55,9 @@ definePageMeta({
         uz: 'Qaytarib berish'
     }
 })
+
+
+const { locale } = useI18n()
 
 </script>
 
