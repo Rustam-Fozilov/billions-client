@@ -16,7 +16,6 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
 import { fetchUrl } from '~/helpers/fetchUrl'
 
 
@@ -28,15 +27,8 @@ const searchResult = useSearchResult()
 const input = ref('')
 
 
-const search = async () => {
-    await load(`${config.public.apiUrl}/books/search/${input.value}`)
-
-    if (!data.value.success) {
-        await router.push(`/${locale.value}/search/not-found`)
-    } else {
-        searchResult.value = data.value.data
-        await router.push({path: `/${locale.value}/search`, query: {q: input.value}})
-    }
+const search = () => {
+    router.push({path: `/${locale.value}/search`, query: {q: input.value}})
 }
 
 </script>

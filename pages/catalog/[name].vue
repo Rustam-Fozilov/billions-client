@@ -44,12 +44,12 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
-import { fetchUrl } from "~/helpers/fetchUrl";
+import { fetchUrl } from "~/helpers/fetchUrl"
 
 
 const pathTitle = ref('')
 const books = ref([])
+const category = ref(null)
 const route = useRoute()
 const config = useRuntimeConfig()
 const { data, load } = fetchUrl()
@@ -57,11 +57,11 @@ const { locale } = useI18n()
 
 
 await load(`${config.public.apiUrl}/categories?limit=100`)
-const category = data.value.data.find((category) => category.path_name === route.params.name)
-pathTitle.value = category.name[locale.value]
+category.value = data.value.data.find((item) => item.path_name === route.params.name)
+pathTitle.value = category.value.name[locale.value]
 
 
-await load(`${config.public.apiUrl}/categories/${category.id}/books`)
+await load(`${config.public.apiUrl}/categories/${category.value.id}/books`)
 books.value = data.value.data
 const countOfBooks = computed(() => data.value.data.length)
 

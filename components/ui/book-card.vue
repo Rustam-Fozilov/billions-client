@@ -5,7 +5,7 @@
                 <img class="w-full h-full object-cover" src="~/assets/images/books/book-cover.png" alt="book cover">
             </div>
             <div class="mt-5 flex flex-col gap-2 font-onest-regular">
-                <div class="flex justify-between">
+                <div v-if="currencyType" class="flex justify-between">
                     <div v-if="currencyType.id === 12" class="font-onest-medium">
                         {{ book.prices[1].price }} {{ locale === 'ru' ? book.prices[1].currency.name.ru : book.prices[1].currency.name.uz }}
                     </div>

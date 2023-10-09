@@ -74,16 +74,8 @@ const localeValues = ref(data.value.data[0])
 currencyType.value = data.value.data[1].value
 
 
-// if (route.path === '/ru' || route.path === '/uz' || route.path === '/') {
-    const localeCode = data.value.data[0].value.details.code
-    setLocale(localeCode)
-
-    // if (localeCode === 'uz') {
-    //     router.push('/uz')
-    // } else if (localeCode === 'ru') {
-    //     router.push('/ru')
-    // }
-// }
+const localeCode = data.value.data[0].value.details.code
+setLocale(localeCode)
 
 
 const changeLang = async () => {

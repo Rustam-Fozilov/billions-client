@@ -3,5 +3,5 @@ export const useBooksInCart = () => {
 }
 
 export const useTotalAmountOfCart = () => {
-    return useState('totalAmountOfCart', () => 30000)
+    return useState('totalAmountOfCart', () => 0)
 }

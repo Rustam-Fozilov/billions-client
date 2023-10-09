@@ -36,16 +36,37 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router'
+import { fetchUrl } from '~/helpers/fetchUrl'
 
 
+const { data, load } = fetchUrl()
+const { locale } = useI18n()
 const searchResult = useSearchResult()
 const route = useRoute()
+const router = useRouter()
 const query = ref(route.query.q)
+const config = useRuntimeConfig()
 
-onUpdated(() => {
-    query.value = route.query.q
-    searchResult.value = searchResult.value
+onMounted( async () => {
+    await search()
 })
+
+
+onUpdated(async () => {
+    query.value = route.query.q
+    // searchResult.value = searchResult.value
+    await search()
+})
+
+
+const search = async () => {
+    await load(`${config.public.apiUrl}/books/search/${query.value}`)
+
+    if (!data.value.success) {
+        await router.push(`/${locale.value}/search/not-found`)
+    } else {
+        searchResult.value = data.value.data
+    }
+}
 
 </script>

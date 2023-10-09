@@ -66,7 +66,11 @@ const bookPrice = currencyType.value.id === 12 ?
     props.book.book.prices[1].price :
     props.book.book.prices[0].price
 
-totalAmountOfCart.value += bookPrice
+if (totalAmountOfCart.value === 0) {
+    totalAmountOfCart.value += bookPrice + 30000
+} else {
+    totalAmountOfCart.value += bookPrice
+}
 
 
 const increaseBookQuantity = () => {
@@ -103,11 +107,15 @@ const decreaseBookQuantity = () => {
 
 
 const removeFromCart = () => {
-    const book = booksInCart.value.find((item) => item.book.id === props.book.book.id)
-    const bookIndex = booksInCart.value.findIndex((item) => item.book.id !== props.book.book.id)
+    const index = booksInCart.value.findIndex((item) => item.book.id === props.book.book.id);
 
-    booksInCart.value.splice(bookIndex - 1, 1)
-    totalAmountOfCart.value -= bookPrice * book.quantity
-}
+    if (index !== -1) {
+        const removedBook = booksInCart.value.splice(index, 1)[0];
+
+        // Update the totalAmountOfCart by subtracting the removed book's price multiplied by its quantity
+        totalAmountOfCart.value -= removedBook.quantity * bookPrice;
+    }
+};
+
 
 </script>

@@ -8,7 +8,7 @@
                 </div>
 
                 <div class="font-onest-regular text-sm">
-                    У вас еще нет товаров в корзине.
+                    {{ locale === 'ru' ? 'У вас еще нет товаров в корзине.' : 'Savatingizda hech narsa yo‘q.' }}
                 </div>
 
                 <div class="mt-12">
