@@ -23,7 +23,7 @@ export function fetchUrl() {
                     .post(url, params)
                     .then((response) => {
                         data.value = response.data;
-                        // console.log(data.value);
+                        // console.log('data in fetchUrl.js file: ', data.value);
                     })
                     .catch((error) => {
                         console.log(error);

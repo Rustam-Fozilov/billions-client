@@ -3,14 +3,16 @@
         <div id="nav-actions">
             <div class="flex gap-5">
                 
-                <div @click="openAuthModal" class="flex flex-col gap-2 cursor-pointer items-center justify-end">
+                <div @click="openAuthModalOrGotoProfile" class="flex flex-col gap-2 cursor-pointer items-center justify-end">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="22" viewBox="0 0 18 22" fill="none">
                         <path d="M9 9C11.2091 9 13 7.20914 13 5C13 2.79086 11.2091 1 9 1C6.79086 1 5 2.79086 5 5C5 7.20914 6.79086 9 9 9Z" stroke="black" stroke-width="1.5"/>
                         <path d="M17 16.5C17 18.985 17 21 9 21C1 21 1 18.985 1 16.5C1 14.015 4.582 12 9 12C13.418 12 17 14.015 17 16.5Z" stroke="black" stroke-width="1.5"/>
                         </svg>
                     </div>
-                    <div class="font-onest-regular">{{ $t('nav.login') }}</div>
+                    <div v-if="!authToken" class="font-onest-regular">{{ $t('nav.login') }}</div>
+                    <div v-if="authToken && authUser.name" class="font-onest-regular">{{ authUser.name }}</div>
+                    <div v-if="authToken && !authUser.name" class="font-onest-regular">{{ 'Kabinet' }}</div>
                 </div>
 
                 <NuxtLink :to="'/' + locale + '/favorites'" class="flex flex-col gap-2 cursor-pointer items-center justify-end">
@@ -50,14 +52,25 @@
 
 <script setup>
 
-
 const { locale } = useI18n()
 const isAuthModalOpen = useIsAuthModalOpen()
 const booksInCart = useBooksInCart()
+const router = useRouter()
+const authUser = await useAuthUser()
+const authToken = await useAuthToken()
 
 
-const openAuthModal = () => {
-    isAuthModalOpen.value = true
+onUpdated(() => {
+    authUser.value = authUser.value
+})
+
+
+const openAuthModalOrGotoProfile = () => {
+    if (!authToken.value) {
+        isAuthModalOpen.value = true
+    } else {
+        router.push(`/${locale.value}/personal`)
+    }
 }
 
 

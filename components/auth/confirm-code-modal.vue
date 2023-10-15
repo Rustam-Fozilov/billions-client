@@ -55,17 +55,22 @@
 </template>
 
 <script setup>
+import { fetchUrl } from "~/helpers/fetchUrl";
 
 
 const isAuthModalOpen = useIsAuthModalOpen()
+const authToken = useAuthToken()
+const authUser = useAuthUser()
+const config = useRuntimeConfig()
 const { locale } = useI18n()
 const inputCodes = reactive([])
 const timer = ref(33)
+const { data, load } = fetchUrl()
+const smsCode = useSMSCode()
 
 
 onMounted(() => {
     focusFirst()
-
     resendCodeTimer()
 })
 
@@ -80,6 +85,26 @@ watch(inputCodes, (value) => {
         confirmCode()
     }
 })
+
+
+const confirmCode = async () => {
+    const code = +inputCodes.slice(0, 5).join('')
+
+    await load(
+        `${config.public.apiUrl}/auth/verify-sms-code`,
+        {
+            id: smsCode.value.id,
+            code: code
+        },
+        'POST'
+    )
+
+    if (process.client) {
+        localStorage.setItem('token', data.value.data.token)
+        localStorage.setItem('user', JSON.stringify(data.value.data.user))
+        closeAuthModal()
+    }
+}
 
 
 const resendCodeTimer = () => {
@@ -111,11 +136,6 @@ const focusFirst = () => {
     }
     
     document.getElementById('confirm-code-input-1').focus()
-}
-
-
-const confirmCode = () => {
-    console.log('confirmCode', inputCodes);
 }
 
 

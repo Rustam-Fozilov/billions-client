@@ -54,7 +54,6 @@ onMounted( async () => {
 
 onUpdated(async () => {
     query.value = route.query.q
-    // searchResult.value = searchResult.value
     await search()
 })
 

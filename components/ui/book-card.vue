@@ -47,6 +47,7 @@ import { useRouter } from 'vue-router'
 
 
 const props = defineProps(['book'])
+const authToken = useAuthToken()
 const booksInCart = useBooksInCart()
 const { locale } = useI18n()
 const router = useRouter()

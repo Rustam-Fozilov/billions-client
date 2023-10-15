@@ -20,7 +20,7 @@
                                 <div>
                                     <div class="bg-soft-white px-5 py-4 flex gap-2">
                                         <div class="font-onest-regular">+998</div>
-                                        <input v-model="phoneNumber" @input="numericOnly" maxlength="9" class="w-full outline-none font-onest-regular bg-transparent" type="tel" placeholder="00 000-00-00">
+                                        <input v-model="phoneNumber" @input="numericOnly" minlength="9" maxlength="9" class="w-full outline-none font-onest-regular bg-transparent" type="tel" placeholder="00 000-00-00">
                                     </div>
                                 </div>
                                 <div>
@@ -46,12 +46,16 @@
 </template>
 
 <script setup>
+import { fetchUrl } from "~/helpers/fetchUrl";
 
 
 const isSMSCodeSent = useIsSMSCodeSent()
 const isAuthModalOpen = useIsAuthModalOpen()
 const { locale } = useI18n()
+const { data, load } = fetchUrl()
+const config = useRuntimeConfig()
 const phoneNumber = ref('')
+const smsCode = useSMSCode()
 
 
 onUpdated(() => {
@@ -59,8 +63,26 @@ onUpdated(() => {
 })
 
 
-const sendSMSCode = () => {
+const sendSMSCode = async () => {
+    if (phoneNumber.value.length < 9) {
+        return
+    }
+
     isSMSCodeSent.value = true
+
+    await load(
+        `${config.public.apiUrl}/auth/send-sms-code`,
+        {
+            phone: '998' + phoneNumber.value,
+            lang: locale.value
+        },
+        'POST'
+    )
+
+    smsCode.value.id = data.value.data.id
+    smsCode.value.code = data.value.data.code
+
+    // console.log(data.value)
 }
 
 
