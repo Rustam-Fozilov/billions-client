@@ -55,7 +55,10 @@
                                 <div class="font-onest-medium text-base">Как решать нерешаемые задачи, посмотрев на проблему с другой стороны</div>
                             </div>
                             <div>
-                                <div class="font-onest-regular opacity-50">{{ book.data.author }}</div>
+                                <div class="font-onest-regular opacity-50">{{
+                                        locale === 'ru' ? book.data.author.first_name.ru + ' ' + book.data.author.last_name.ru :
+                                        book.data.author.first_name.uz + ' ' + book.data.author.last_name.uz
+                                    }}</div>
                             </div>
                             <div class="flex items-center gap-7">
                                 <div>
@@ -76,11 +79,8 @@
                                 <div v-if="locale === 'ru'" class="font-onest-regular text-stock-green">Есть {{ book.data.inventory[0].quantity }} штуки</div>
                                 <div v-if="locale === 'uz'" class="font-onest-regular text-stock-green">{{ book.data.inventory[0].quantity }} dona bor</div>
                             </div>
-                            <div v-if="currencyType.id === 12" class="font-onest-medium text-xl">
+                            <div class="font-onest-medium text-xl">
                                 {{ book.data.prices[1].price }} {{ locale === 'ru' ? book.data.prices[1].currency.name.ru : book.data.prices[1].currency.name.uz }}
-                            </div>
-                            <div v-if="currencyType.id === 13" class="font-onest-medium text-xl">
-                                {{ book.data.prices[0].price }} {{ locale === 'ru' ? book.data.prices[0].currency.name.ru : book.data.prices[0].currency.name.uz }}
                             </div>
                             <div class="flex gap-7">
                                 <div>

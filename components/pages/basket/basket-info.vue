@@ -6,9 +6,9 @@
                     <div class="flex justify-between items-end">
                         <div class="flex gap-5 items-center">
                             <div class="font-onest-medium text-xl">{{ locale === 'ru' ? 'Корзина' : 'Savat' }}</div>
-                            <div class="font-onest-regular opacity-50 relative top-[3px]">{{ locale === 'ru' ? '3 книги' : '3ta kitob' }}</div>
+                            <div class="font-onest-regular opacity-50 relative top-[3px]">{{ locale === 'ru' ? `${booksInCart.length} книги` : `${booksInCart.length}ta kitob` }}</div>
                         </div>
-                        <div class="font-onest-medium text-base opacity-50 uppercase cursor-pointer hover:opacity-100 transition">{{ locale === 'ru' ? 'удалить' : 'O\'chirish' }}</div>
+                        <div @click="removeAllFromCart" class="font-onest-medium text-base opacity-50 uppercase cursor-pointer hover:opacity-100 transition">{{ locale === 'ru' ? 'удалить' : 'O\'chirish' }}</div>
                     </div>
 
                     <div id="books-in-basket">
@@ -33,9 +33,44 @@
 
 <script setup>
 
-
 const { locale } = useI18n()
 const booksInCart = useBooksInCart()
+const totalAmountOfCart = useTotalAmountOfCart()
+const config = useRuntimeConfig()
+
+
+onMounted(() => {
+    calculateTotalValue()
+})
+
+
+onUpdated(() => {
+    calculateTotalValue()
+})
+
+
+const calculateTotalValue = () => {
+    if (totalAmountOfCart.value === 0) {
+        totalAmountOfCart.value = +config.public.deliveryAmount
+
+        for (let i = 0; i < booksInCart.value.length; i++) {
+            totalAmountOfCart.value += booksInCart.value[i].book.prices[1].price
+        }
+    } else if (totalAmountOfCart.value === +config.public.deliveryAmount) {
+        for (let i = 0; i < booksInCart.value.length; i++) {
+            totalAmountOfCart.value += booksInCart.value[i].book.prices[1].price
+        }
+    } else {
+        totalAmountOfCart.value = 0
+        calculateTotalValue()
+    }
+}
+
+
+const removeAllFromCart = () => {
+    booksInCart.value = []
+    totalAmountOfCart.value = +config.public.deliveryAmount
+}
 
 
 </script>

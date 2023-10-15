@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="booksInCart.length !== 0">
         <div>
             <the-navbar/>
         </div>
@@ -26,5 +26,15 @@ definePageMeta({
         ru: 'Оформление заказа',
     },
 })
+
+
+const router = useRouter()
+const { locale } = useI18n()
+const booksInCart = useBooksInCart()
+
+
+if (booksInCart.value.length === 0) {
+    router.push(`/${locale.value}/`)
+}
 
 </script>

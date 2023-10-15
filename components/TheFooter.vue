@@ -74,13 +74,17 @@
 <script setup>
 import { fetchUrl } from '~/helpers/fetchUrl';
 
+
 const { locale } = useI18n()
 const config = useRuntimeConfig();
+const footerData = ref([])
 const { data, load} = fetchUrl();
-await load(`${config.public.apiUrl}/categories`);
 
 
-const footerData = [
+await load(`${config.public.apiUrl}/categories?only_parents=true`);
+
+
+footerData.value = [
     {
         title: {
             'uz': 'Biz haqimizda',
@@ -106,7 +110,7 @@ const footerData = [
                     'uz': 'Maxfiylik siyosati',
                     'ru': 'Политика конфиденциальности'
                 },
-                link: '/'
+                link: `/${locale.value}/privacy`
             }
         ]
     },
@@ -121,63 +125,63 @@ const footerData = [
                     'uz': 'Shaxsiy rivojlanish',
                     'ru': 'Личное развитие'
                 },
-                'link': '/'
+                'link': `/${locale.value}/catalog/personal-development`
             },
             {
                 'title': {
-                    'uz': 'Biznes',
-                    'ru': 'Бизнес'
+                    'uz': 'Psixologiya',
+                    'ru': 'Психология'
                 },
-                'link': '/'
+                'link': `/${locale.value}/catalog/psychology`
             },
             {
                 'title': {
-                    'uz': 'Menejment',
-                    'ru': 'Менеджмент'
+                    'uz': "Biznes",
+                    'ru': "Бизнес"
                 },
-                'link': '/'
+                'link': `/${locale.value}/catalog/business`
             },
             {
                 'title': {
-                    'uz': 'Badiiy',
-                    'ru': 'Художественная литература'
+                    'uz': 'Moliya',
+                    'ru': "Финансы"
                 },
-                'link': '/'
+                'link': `/${locale.value}/catalog/finance`
             },
             {
                 'title': {
-                    'uz': 'Fantastik',
-                    'ru': 'Фантастика'
+                    'uz': 'Bolalar va ota-onalar uchun',
+                    'ru': "Для детей и родителей"
                 },
-                'link': '/'
+                'link': `/${locale.value}/catalog/for-children-and-parents`
             },
             {
                 'title': {
-                    'uz': 'Bolalar adabiyoti',
-                    'ru': 'Детская литература'
+                    'uz': "Marketing va sotuvlar",
+                    'ru': "Маркетинг и продажи"
                 },
-                'link': '/'
+                'link': `/${locale.value}/catalog/marketing-and-sales`
             },
             {
                 'title': {
-                    'uz': 'Biznes',
-                    'ru': 'Бизнес'
+                    'uz': "Iqtisodiyot va siyosat",
+                    'ru': "Экономика и политика"
                 },
-                'link': '/'
+                'link': `/${locale.value}/catalog/economics-and-politics`
             },
             {
                 'title': {
-                    'uz': 'Menejment',
-                    'ru': 'Менеджмент'
+                    'uz': "Sog'lom hayot tarzi",
+                    'ru': "Здоровый образ жизни"
                 },
-                'link': '/'
+                'link': `/${locale.value}/catalog/healthy-lifestyle`
             },
             {
                 'title': {
-                    'uz': 'Badiiy',
-                    'ru': 'Художественная литература'
+                    'uz': "San'at va ijod",
+                    'ru': "Искусство и творчество"
                 },
-                'link': '/'
+                'link': `/${locale.value}/catalog/art-and-creativity`
             },
         ]
     },
@@ -228,14 +232,14 @@ const footerData = [
                     'uz': 'Mening buyurtmalarim',
                     'ru': 'Мои заказы'
                 },
-                link: '/'
+                link: `/${locale.value}/personal/my-orders`
             },
             {
                 title: {
                     'uz': 'Shaxsiy kabinet',
                     'ru': 'Личный кабинет'
                 },
-                link: '/'
+                link: `/${locale.value}/personal`
             },
         ]
     },

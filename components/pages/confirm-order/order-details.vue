@@ -5,7 +5,7 @@
                 <div class="font-onest-regular flex flex-col gap-4">
                     <div class="flex justify-between">
                         <div class="opacity-50">{{ locale === 'ru' ? 'Товаров в заказе' : 'Buyurtma bo\'yicha tovarlar' }}</div>
-                        <div>{{ locale === 'ru' ? '3 шт' : '3 dona' }}.</div>
+                        <div>{{ locale === 'ru' ? `${booksInCart.length} шт` : `${booksInCart.length} dona` }}.</div>
                     </div>
                     <div class="flex justify-between">
                         <div class="opacity-50">{{ locale === 'ru' ? 'Доставка' : 'Yetkazib berish' }}</div>
@@ -22,7 +22,7 @@
                         </div>
                         <div class="font-onest-medium text-base flex justify-between">
                             <div>{{ locale === 'ru' ? 'Итого:' : 'Jami' }}</div>
-                            <div>{{ locale === 'ru' ? '220 000 сум' : '220 000 sum' }}</div>
+                            <div>{{ locale === 'ru' ? `${totalAmountOfCart} сум` : `${totalAmountOfCart} sum` }}</div>
                         </div>
                     </div>
                 </div>
@@ -43,5 +43,7 @@
 <script setup>
 
 const { locale } = useI18n()
+const totalAmountOfCart = useTotalAmountOfCart()
+const booksInCart = useBooksInCart()
 
 </script>

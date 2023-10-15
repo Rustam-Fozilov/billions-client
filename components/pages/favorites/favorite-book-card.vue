@@ -22,11 +22,8 @@
             </div>
             <div class="mt-5 flex flex-col gap-2 font-onest-regular">
                 <div class="flex justify-between">
-                    <div v-if="currencyType.id === 12" class="font-onest-medium">
+                    <div class="font-onest-medium">
                         {{ book.prices[1].price }} {{ locale === 'ru' ? book.prices[1].currency.name.ru : book.prices[1].currency.name.uz }}
-                    </div>
-                    <div v-if="currencyType.id === 13" class="font-onest-medium">
-                        {{ book.prices[0].price }} {{ locale === 'ru' ? book.prices[0].currency.name.ru : book.prices[0].currency.name.uz }}
                     </div>
                     <div v-if="!isBookExistsInCart" @click.stop="addToCart" class="cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -50,7 +47,13 @@
 
                 <div>{{ locale === 'ru' ? book.name.ru : book.name.uz }}</div>
 
-                <div class="opacity-50">{{ book.author }}</div>
+                <div class="opacity-50">
+                    {{
+                        locale === 'ru' ?
+                        book.author.first_name.ru + ' ' + book.author.last_name.ru :
+                        book.author.first_name.uz + ' ' + book.author.last_name.uz
+                    }}
+                </div>
             </div>
         </div>
     </div>
@@ -59,7 +62,6 @@
 <script setup>
 
 const props = defineProps(['book'])
-const currencyType = useCurrencyType()
 const booksInCart = useBooksInCart()
 const { locale } = useI18n()
 const router = useRouter()

@@ -61,7 +61,6 @@ import { fetchUrl } from '~/helpers/fetchUrl';
 const route = useRoute()
 const router = useRouter()
 const config = useRuntimeConfig()
-const currencyType = useCurrencyType()
 const { locale, setLocale } = useI18n()
 const { data, load } = fetchUrl()
 const showLang = ref(false)
@@ -71,9 +70,6 @@ await load(`${config.public.apiUrl}/guest-settings`)
 
 
 const localeValues = ref(data.value.data[0])
-currencyType.value = data.value.data[1].value
-
-
 const localeCode = data.value.data[0].value.details.code
 setLocale(localeCode)
 

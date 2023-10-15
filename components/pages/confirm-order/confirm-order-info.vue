@@ -6,7 +6,7 @@
                     <div class="flex flex-col gap-12">
                         <div class="flex gap-5 items-center">
                             <div class="font-onest-medium text-xl">{{ locale === 'ru' ? 'Оформление заказа' : 'Buyurtmani rasmiylashtirish' }}</div>
-                            <div class="font-onest-regular opacity-50 relative top-[3px]">{{ locale === 'ru' ? '3 книги' : '3ta kitob' }}</div>
+                            <div class="font-onest-regular opacity-50 relative top-[3px]">{{ locale === 'ru' ? `${booksInCart.length} книги` : `${booksInCart.length}ta kitob` }}</div>
                         </div>
 
                         <div>
@@ -41,5 +41,6 @@
 <script setup>
 
 const { locale } = useI18n()
+const booksInCart = useBooksInCart()
 
 </script>

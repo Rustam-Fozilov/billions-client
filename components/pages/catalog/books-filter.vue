@@ -26,13 +26,13 @@
                                 <div>
                                     {{ locale === 'ru' ? 'От' : 'Dan' }}
                                 </div>
-                                <input v-model="priceValue[0]" class="font-onest-regular w-24 py-2 text-center border border-black border-opacity-20 bg-transparent outline-none" type="number" placeholder="50 000">
+                                <input v-model="priceValue[0]" class="font-onest-regular w-24 py-2 text-center border border-black border-opacity-20 bg-transparent outline-none" type="number">
                             </div>
                             <div>
                                 <div>
                                     {{ locale === 'ru' ? 'До' : 'Gacha' }}
                                 </div>
-                                <input v-model="priceValue[1]" class="font-onest-regular w-24 py-2 text-center border border-black border-opacity-20 bg-transparent outline-none" type="number" placeholder="200 000">
+                                <input v-model="priceValue[1]" class="font-onest-regular w-24 py-2 text-center border border-black border-opacity-20 bg-transparent outline-none" type="number">
                             </div>
                         </div>
                     </div>

@@ -17,7 +17,7 @@
                 </div>
                 <div>
                     <div class="h-11 w-36 flex items-center justify-between border border-opacity-20 border-black">
-                        <div @click="decreaseBookQuantity" class="font-onest-regular h-full flex items-center ml-4 opacity-50" :class="book.quantity <= 1 ? 'cursor-not-allowed' : 'cursor-pointer'">
+                        <div @click="decreaseBookQuantity" class="font-onest-regular h-full flex items-center ml-4" :class="book.quantity <= 1 ? 'cursor-not-allowed opacity-50' : 'cursor-pointer opacity-100'">
                             <svg width="14" height="3" viewBox="0 0 12 3" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 0.0908813V2.09088H0V0.0908813H12Z" fill="black"/>
                             </svg>
@@ -33,13 +33,9 @@
                     </div>
                 </div>
                 <div>
-                    <div v-if="currencyType.id === 12" class="font-onest-medium text-base whitespace-nowrap">
+                    <div class="font-onest-medium text-base whitespace-nowrap">
                         {{ book.book.prices[1].price }}
                         {{ locale === 'ru' ? book.book.prices[1].currency.name.ru : book.book.prices[1].currency.name.uz }}
-                    </div>
-                    <div v-if="currencyType.id === 13" class="font-onest-medium text-base whitespace-nowrap">
-                        {{ book.book.prices[0].price }}
-                        {{ locale === 'ru' ? book.book.prices[0].currency.name.ru : book.book.prices[0].currency.name.uz }}
                     </div>
                 </div>
                 <div>
@@ -62,27 +58,14 @@ const booksInCart = useBooksInCart()
 const totalAmountOfCart = useTotalAmountOfCart()
 const { locale } = useI18n()
 
-const bookPrice = currencyType.value.id === 12 ?
-    props.book.book.prices[1].price :
-    props.book.book.prices[0].price
-
-if (totalAmountOfCart.value === 0) {
-    totalAmountOfCart.value += bookPrice + 30000
-} else {
-    totalAmountOfCart.value += bookPrice
-}
+const bookPrice = props.book.book.prices[1].price
 
 
 const increaseBookQuantity = () => {
     const book = booksInCart.value.find((item) => item.book.id === props.book.book.id)
     book.quantity += 1
 
-    if (currencyType.value.id === 12) {
-        book.book.prices[1].price += bookPrice
-    } else {
-        book.book.prices[0].price += bookPrice
-    }
-
+    book.book.prices[1].price += bookPrice
     totalAmountOfCart.value += bookPrice
 }
 
@@ -95,12 +78,7 @@ const decreaseBookQuantity = () => {
     } else {
         book.quantity -= 1
 
-        if (currencyType.value.id === 12) {
-            book.book.prices[1].price -= bookPrice
-        } else {
-            book.book.prices[0].price -= bookPrice
-        }
-
+        book.book.prices[1].price -= bookPrice
         totalAmountOfCart.value -= bookPrice
     }
 }
@@ -111,11 +89,9 @@ const removeFromCart = () => {
 
     if (index !== -1) {
         const removedBook = booksInCart.value.splice(index, 1)[0];
-
-        // Update the totalAmountOfCart by subtracting the removed book's price multiplied by its quantity
         totalAmountOfCart.value -= removedBook.quantity * bookPrice;
     }
-};
+}
 
 
 </script>
