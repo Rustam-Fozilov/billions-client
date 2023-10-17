@@ -12,3 +12,7 @@ export const useReceiverInfo = () => {
 export const useOrderPaymentType = () => {
     return useState('orderPaymentType', () => 'online')
 }
+
+export const useOrderAddressId = () => {
+    return useState('orderAddressId', () => null)
+}

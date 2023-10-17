@@ -13,7 +13,8 @@
                         <div>
                             <div class="font-onest-medium text-base">{{ locale === 'ru' ? 'Введите код' : 'Kodni kiriting' }}</div>
                             <div class="font-onest-regular">{{ locale === 'ru' ? 'Чтобы подтвердить телефон, код был отправлен в +998 97 767-20-97.' : 'Telefonni tasdiqlash maqsadida +998 97 767-20-97 raqamiga kod yuborildi' }}</div>
-                            </div>
+                            <div v-if="error" class="font-onest-regular text-red-500 text-center transition">Kod notog'ri terildi</div>
+                        </div>
                         <div>
                             <div class="flex justify-center">
                                 <div class="flex gap-3 w-4/5">
@@ -44,7 +45,7 @@
                             {{ locale === 'ru' ? `Вы можете получить новый код через ${timer} секунды` : `Yangi kodni ${timer} soniyadan so\'ng olishingiz mumkin` }}
                         </div>
 
-                        <div v-if="timer === 0" class="font-onest-regular text-[18px] w-full text-bronze cursor-pointer">
+                        <div @click="resendCode" v-if="timer === 0" class="font-onest-regular text-[18px] w-full text-bronze cursor-pointer">
                             {{ locale === 'ru' ? 'Отправить код повторно' : 'Kodni qayta yuborish' }}
                         </div>
                     </div>
@@ -63,10 +64,12 @@ const authToken = useAuthToken()
 const authUser = useAuthUser()
 const config = useRuntimeConfig()
 const { locale } = useI18n()
-const inputCodes = reactive([])
+let inputCodes = reactive([])
+const error = ref(false)
 const timer = ref(33)
 const { data, load } = fetchUrl()
 const smsCode = useSMSCode()
+const userPhoneNumber = useUserPhoneNumber()
 
 
 onMounted(() => {
@@ -77,18 +80,15 @@ onMounted(() => {
 
 onUpdated(() => {
     isAuthModalOpen.value = isAuthModalOpen.value
-})
 
-
-watch(inputCodes, (value) => {
-    if (value.length === 5) {
+    if (inputCodes.length === 5) {
         confirmCode()
     }
 })
 
 
 const confirmCode = async () => {
-    const code = +inputCodes.slice(0, 5).join('')
+    const code = +inputCodes.join('')
 
     await load(
         `${config.public.apiUrl}/auth/verify-sms-code`,
@@ -99,11 +99,41 @@ const confirmCode = async () => {
         'POST'
     )
 
-    if (process.client) {
-        localStorage.setItem('token', data.value.data.token)
-        localStorage.setItem('user', JSON.stringify(data.value.data.user))
-        closeAuthModal()
+    if (data.value.success) {
+        error.value = false
+
+        if (process.client) {
+            localStorage.setItem('token', data.value.data.token)
+            localStorage.setItem('user', JSON.stringify(data.value.data.user))
+            closeAuthModal()
+
+            window.location.reload(true)
+        }
+    } else {
+        inputCodes = []
+        error.value = true
+
+        return setTimeout(() => {
+            error.value = false
+        }, 3000)
     }
+}
+
+
+const resendCode = async () => {
+    timer.value = 60
+
+    await load(
+        `${config.public.apiUrl}/auth/send-sms-code`,
+        {
+            phone: '998' + userPhoneNumber.value,
+            lang: locale.value
+        },
+        'POST'
+    )
+
+    smsCode.value.id = data.value.data.id
+    smsCode.value.code = data.value.data.code
 }
 
 

@@ -117,7 +117,7 @@ import { fetchUrl } from '~/helpers/fetchUrl';
 
 const currencyType = useCurrencyType()
 const props = defineProps(['book'])
-const booksInCart = useBooksInCart()
+const booksInCart = await useBooksInCart()
 const { locale } = useI18n()
 const config = useRuntimeConfig()
 const {data: bookInfo, load} = fetchUrl()

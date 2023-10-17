@@ -6,7 +6,7 @@
                     <div class="flex justify-between items-end">
                         <div class="flex gap-5 items-center">
                             <div class="font-onest-medium text-xl">{{ locale === 'ru' ? 'Корзина' : 'Savat' }}</div>
-                            <div class="font-onest-regular opacity-50 relative top-[3px]">{{ locale === 'ru' ? `${booksInCart.length} книги` : `${booksInCart.length}ta kitob` }}</div>
+                            <div class="font-onest-regular opacity-50 relative top-[3px]">{{ locale === 'ru' ? `${booksInCart ? booksInCart.length : 0} книги` : `${booksInCart ? booksInCart.length : 0}ta kitob` }}</div>
                         </div>
                         <div @click="removeAllFromCart" class="font-onest-medium text-base opacity-50 uppercase cursor-pointer hover:opacity-100 transition">{{ locale === 'ru' ? 'удалить' : 'O\'chirish' }}</div>
                     </div>
@@ -34,8 +34,8 @@
 <script setup>
 
 const { locale } = useI18n()
-const booksInCart = useBooksInCart()
-const totalAmountOfCart = useTotalAmountOfCart()
+const booksInCart = await useBooksInCart()
+const totalAmountOfCart = await useTotalAmountOfCart()
 const config = useRuntimeConfig()
 
 
@@ -53,12 +53,16 @@ const calculateTotalValue = () => {
     if (totalAmountOfCart.value === 0) {
         totalAmountOfCart.value = +config.public.deliveryAmount
 
-        for (let i = 0; i < booksInCart.value.length; i++) {
-            totalAmountOfCart.value += booksInCart.value[i].book.prices[1].price
+        if (booksInCart.value) {
+            for (let i = 0; i < booksInCart.value.length; i++) {
+                totalAmountOfCart.value += booksInCart.value[i].book.prices[1].price
+            }
         }
     } else if (totalAmountOfCart.value === +config.public.deliveryAmount) {
-        for (let i = 0; i < booksInCart.value.length; i++) {
-            totalAmountOfCart.value += booksInCart.value[i].book.prices[1].price
+        if (booksInCart.value) {
+            for (let i = 0; i < booksInCart.value.length; i++) {
+                totalAmountOfCart.value += booksInCart.value[i].book.prices[1].price
+            }
         }
     } else {
         totalAmountOfCart.value = 0
@@ -70,6 +74,9 @@ const calculateTotalValue = () => {
 const removeAllFromCart = () => {
     booksInCart.value = []
     totalAmountOfCart.value = +config.public.deliveryAmount
+
+    localStorage.setItem('booksInCart', JSON.stringify(booksInCart.value))
+    localStorage.setItem('totalAmountOfCart', totalAmountOfCart.value)
 }
 
 

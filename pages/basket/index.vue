@@ -8,11 +8,11 @@
             <div class="container pt-12">
                 <breadcrumbs-path/>
 
-                <div v-if="booksInBasket.length">
+                <div v-if="booksInBasket ? booksInBasket.length : 0">
                     <basket-info/>
                 </div>
 
-                <div v-if="!booksInBasket.length">
+                <div v-if="booksInBasket ? !booksInBasket.length : 0">
                     <basket-empty/>
                 </div>
             </div>
@@ -33,6 +33,6 @@ definePageMeta({
     },
 })
 
-const booksInBasket = useBooksInCart()
+const booksInBasket = await useBooksInCart()
 
 </script>

@@ -47,12 +47,12 @@ import { useRouter } from 'vue-router'
 
 
 const props = defineProps(['book'])
-const authToken = useAuthToken()
-const booksInCart = useBooksInCart()
+const authToken = await useAuthToken()
+const booksInCart = await useBooksInCart()
 const { locale } = useI18n()
 const router = useRouter()
 const isBookExistsInCart = ref(
-    props.book.id === booksInCart.value.find(item => item.book.id === props.book.id)?.book.id
+    booksInCart.value ? props.book.id === booksInCart.value.find(item => item.book.id === props.book.id)?.book.id : false
 )
 
 
@@ -72,7 +72,11 @@ const addToCart = () => {
             }
         )
 
-        isBookExistsInCart.value = props.book.id === booksInCart.value.find(item => item.book.id === props.book.id)?.book.id
+        if (process.client) {
+            localStorage.setItem('booksInCart', JSON.stringify(booksInCart.value))
+        }
+
+        isBookExistsInCart.value = booksInCart.value ? props.book.id === booksInCart.value.find(item => item.book.id === props.book.id)?.book.id : false
     } else {
         console.log('exists');
     }

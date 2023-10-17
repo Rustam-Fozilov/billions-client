@@ -1,5 +1,5 @@
 <template>
-    <div v-if="booksInCart.length !== 0">
+    <div v-if="booksInCart ? booksInCart.length !== 0 : 0">
         <div>
             <the-navbar/>
         </div>
@@ -30,10 +30,11 @@ definePageMeta({
 
 const router = useRouter()
 const { locale } = useI18n()
-const booksInCart = useBooksInCart()
+const booksInCart = await useBooksInCart()
+const authToken = await useAuthToken()
 
 
-if (booksInCart.value.length === 0) {
+if (!authToken.value) {
     router.push(`/${locale.value}/`)
 }
 

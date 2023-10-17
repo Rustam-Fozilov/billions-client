@@ -1,9 +1,15 @@
 <template>
     <div>
         <div class="flex flex-col gap-7">
-            <order-book-card/>
-            <order-book-card/>
-            <order-book-card/>
+            <div v-for="book in booksInCart">
+                <order-book-card :book="book"/>
+            </div>
         </div>
     </div>
 </template>
+
+<script setup>
+
+const booksInCart = await useBooksInCart()
+
+</script>

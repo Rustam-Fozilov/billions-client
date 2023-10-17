@@ -54,24 +54,29 @@
 
 const currencyType = useCurrencyType()
 const props = defineProps(['book'])
-const booksInCart = useBooksInCart()
-const totalAmountOfCart = useTotalAmountOfCart()
+const booksInCart = await useBooksInCart()
+const totalAmountOfCart = await useTotalAmountOfCart()
 const { locale } = useI18n()
 
 const bookPrice = props.book.book.prices[1].price
 
 
 const increaseBookQuantity = () => {
-    const book = booksInCart.value.find((item) => item.book.id === props.book.book.id)
+    const book = booksInCart.value ? booksInCart.value.find((item) => item.book.id === props.book.book.id) : null
     book.quantity += 1
 
     book.book.prices[1].price += bookPrice
     totalAmountOfCart.value += bookPrice
+
+    if (process.client) {
+        localStorage.setItem('booksInCart', JSON.stringify(booksInCart.value))
+        localStorage.setItem('totalAmountOfCart', totalAmountOfCart.value)
+    }
 }
 
 
 const decreaseBookQuantity = () => {
-    const book = booksInCart.value.find((item) => item.book.id === props.book.book.id)
+    const book = booksInCart.value ? booksInCart.value.find((item) => item.book.id === props.book.book.id) : null
 
     if (book.quantity <= 1) {
         book.quantity = 1
@@ -80,6 +85,11 @@ const decreaseBookQuantity = () => {
 
         book.book.prices[1].price -= bookPrice
         totalAmountOfCart.value -= bookPrice
+    }
+
+    if (process.client) {
+        localStorage.setItem('booksInCart', JSON.stringify(booksInCart.value))
+        localStorage.setItem('totalAmountOfCart', totalAmountOfCart.value)
     }
 }
 
@@ -90,6 +100,11 @@ const removeFromCart = () => {
     if (index !== -1) {
         const removedBook = booksInCart.value.splice(index, 1)[0];
         totalAmountOfCart.value -= removedBook.quantity * bookPrice;
+    }
+
+    if (process.client) {
+        localStorage.setItem('booksInCart', JSON.stringify(booksInCart.value))
+        localStorage.setItem('totalAmountOfCart', totalAmountOfCart.value)
     }
 }
 

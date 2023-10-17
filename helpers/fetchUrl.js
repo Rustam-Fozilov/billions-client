@@ -2,6 +2,7 @@ import axios from "axios";
 
 export function fetchUrl() {
     const data = ref(null);
+    const error = ref(false)
 
     async function load(url, params = null, method = 'GET') {
         switch (method) {
@@ -14,6 +15,7 @@ export function fetchUrl() {
                     })
                     .catch((error) => {
                         console.log(error);
+                        error.value = true;
                     });
 
                 break;
@@ -27,6 +29,7 @@ export function fetchUrl() {
                     })
                     .catch((error) => {
                         console.log(error);
+                        error.value = true;
                     });
 
                 break;
@@ -39,6 +42,7 @@ export function fetchUrl() {
                     })
                     .catch((error) => {
                         console.log(error);
+                        error.value = true;
                     });
 
                 break;

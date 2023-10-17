@@ -65,6 +65,20 @@ const { locale } = useI18n()
 const receiverInfo = useReceiverInfo()
 
 
+if (process.client) {
+    const user = JSON.parse(localStorage.getItem('user'))
+    receiverInfo.value.phoneNumber = user.phone.slice(3)
+
+    if (user.name) {
+        receiverInfo.value.name = user.name
+    }
+
+    if (user.surname) {
+        receiverInfo.value.surname = user.surname
+    }
+}
+
+
 const numericOnly = () => {
     receiverInfo.value.phoneNumber = receiverInfo.value.phoneNumber.replace(/\D/g, '');
 }

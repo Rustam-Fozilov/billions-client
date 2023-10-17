@@ -6,7 +6,7 @@
                     <div class="flex flex-col gap-12">
                         <div class="flex gap-5 items-center">
                             <div class="font-onest-medium text-xl">{{ locale === 'ru' ? 'Оформление заказа' : 'Buyurtmani rasmiylashtirish' }}</div>
-                            <div class="font-onest-regular opacity-50 relative top-[3px]">{{ locale === 'ru' ? `${booksInCart.length} книги` : `${booksInCart.length}ta kitob` }}</div>
+                            <div class="font-onest-regular opacity-50 relative top-[3px]">{{ locale === 'ru' ? `${booksInCart ? booksInCart.length : 0} книги` : `${booksInCart ? booksInCart.length : 0}ta kitob` }}</div>
                         </div>
 
                         <div>
@@ -15,6 +15,10 @@
 
                         <div>
                             <order-payment-type/>
+                        </div>
+
+                        <div>
+                            <order-addresses/>
                         </div>
 
                         <div class="bg-black bg-opacity-20 h-[1px]"></div>
@@ -34,6 +38,10 @@
                     <order-details/>
                 </div>
             </div>
+
+            <div>
+                <add-user-address-modal/>
+            </div>
         </div>
     </div>
 </template>
@@ -41,6 +49,6 @@
 <script setup>
 
 const { locale } = useI18n()
-const booksInCart = useBooksInCart()
+const booksInCart = await useBooksInCart()
 
 </script>

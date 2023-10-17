@@ -1,5 +1,11 @@
+import {useOrderPaymentType} from "~/composables/order";
+
 export function changePaymentType(type) {
+    const orderPaymentType = useOrderPaymentType()
+
     if (type === 'online') {
+        orderPaymentType.value = 'online'
+
         document.getElementById('order-payment-cash').classList.remove('border-bronze')
         document.getElementById('order-payment-cash').classList.remove('border-opacity-100')
         document.getElementById('order-payment-cash').classList.add('border-black')
@@ -23,6 +29,8 @@ export function changePaymentType(type) {
         document.getElementById('order-payment-online-radio').classList.add('border-opacity-100')
 
     } else if (type === 'cash') {
+        orderPaymentType.value = 'cash'
+
         document.getElementById('order-payment-online').classList.remove('border-bronze')
         document.getElementById('order-payment-online').classList.remove('border-opacity-100')
         document.getElementById('order-payment-online').classList.add('border-black')

@@ -7,17 +7,17 @@
                         <img class="w-full h-full object-cover" src="~/assets/images/books/book-cover.png" alt="book cover" />
                     </div>
                     <div class="font-onest-regular flex flex-col gap-7 w-1/2">
-                        <div class="opacity-50">{{ locale === 'ru' ? 'Мягкая обложка' : 'Yumshoq muqova' }}</div>
-                        <div>Чудесное путешествие в Чудинию. Правописание ЖИ, ШИ, ЧА, ЩА, ЧУ, ЩУ</div>
+                        <div class="opacity-50">{{ locale === 'ru' ? `${book.book.inventory[0].cover_type.ru} обложка` : `${book.book.inventory[0].cover_type.uz} muqova` }}</div>
+                        <div>{{ locale === 'ru' ? book.book.name.ru: book.book.name.uz }}</div>
                     </div>
                 </div>
                 <div>
                     <div class=" font-onest-regular">
-                        {{ locale === 'ru' ? '1 шт' : '1 dona' }}
+                        {{ locale === 'ru' ? `${book.quantity} шт` : `${book.quantity} dona` }}
                     </div>
                 </div>
                 <div>
-                    <div class="font-onest-medium text-base whitespace-nowrap">129 000 {{ locale === 'ru' ? 'сум' : 'so\'m' }}</div>
+                    <div class="font-onest-medium text-base whitespace-nowrap">{{ book.book.prices[1].price }} {{ locale === 'ru' ? 'сум' : 'so\'m' }}</div>
                 </div>
             </div>
         </div>
@@ -26,6 +26,7 @@
 
 <script setup>
 
+defineProps(['book'])
 const { locale } = useI18n()
 
 </script>

@@ -20,7 +20,7 @@
                                 <div>
                                     <div class="bg-soft-white px-5 py-4 flex gap-2">
                                         <div class="font-onest-regular">+998</div>
-                                        <input v-model="phoneNumber" @input="numericOnly" minlength="9" maxlength="9" class="w-full outline-none font-onest-regular bg-transparent" type="tel" placeholder="00 000-00-00">
+                                        <input v-model="userPhoneNumber" @input="numericOnly" minlength="9" maxlength="9" class="w-full outline-none font-onest-regular bg-transparent" type="tel" placeholder="00 000-00-00">
                                     </div>
                                 </div>
                                 <div>
@@ -54,7 +54,7 @@ const isAuthModalOpen = useIsAuthModalOpen()
 const { locale } = useI18n()
 const { data, load } = fetchUrl()
 const config = useRuntimeConfig()
-const phoneNumber = ref('')
+const userPhoneNumber = useUserPhoneNumber()
 const smsCode = useSMSCode()
 
 
@@ -64,7 +64,7 @@ onUpdated(() => {
 
 
 const sendSMSCode = async () => {
-    if (phoneNumber.value.length < 9) {
+    if (userPhoneNumber.value.length < 9) {
         return
     }
 
@@ -73,7 +73,7 @@ const sendSMSCode = async () => {
     await load(
         `${config.public.apiUrl}/auth/send-sms-code`,
         {
-            phone: '998' + phoneNumber.value,
+            phone: '998' + userPhoneNumber.value,
             lang: locale.value
         },
         'POST'
@@ -81,8 +81,6 @@ const sendSMSCode = async () => {
 
     smsCode.value.id = data.value.data.id
     smsCode.value.code = data.value.data.code
-
-    // console.log(data.value)
 }
 
 
@@ -92,8 +90,7 @@ const closeAuthModal = () => {
 
 
 const numericOnly = () => {
-     // Remove non-numeric characters
-    phoneNumber.value = phoneNumber.value.replace(/\D/g, '');
+    userPhoneNumber.value = userPhoneNumber.value.replace(/\D/g, '');
 }
 
 </script>

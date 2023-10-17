@@ -62,11 +62,11 @@
 <script setup>
 
 const props = defineProps(['book'])
-const booksInCart = useBooksInCart()
+const booksInCart = await useBooksInCart()
 const { locale } = useI18n()
 const router = useRouter()
 const isBookExistsInCart = ref(
-    props.book.id === booksInCart.value.find(item => item.book.id === props.book.id)?.book.id
+    booksInCart.value ? props.book.id === booksInCart.value.find(item => item.book.id === props.book.id)?.book.id : false
 )
 
 

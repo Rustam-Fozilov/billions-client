@@ -25,9 +25,11 @@
 <script setup>
 import { fetchUrl } from '~/helpers/fetchUrl';
 
-const config = useRuntimeConfig();
 
+const config = useRuntimeConfig();
 const { data, load} = fetchUrl();
+
+
 await load(`${config.public.apiUrl}/books?limit=10`);
 
 </script>

@@ -5,7 +5,7 @@
                 <div class="font-onest-regular flex flex-col gap-4">
                     <div class="flex justify-between">
                         <div class="opacity-50">{{ locale === 'ru' ? 'Товаров в заказе' : 'Buyurtma bo\'yicha tovarlar' }}</div>
-                        <div>{{ locale === 'ru' ? '3 шт' : '3 dona' }}.</div>
+                        <div>{{ locale === 'ru' ? `${booksInCart ? booksInCart.length : 0} шт` : `${booksInCart ? booksInCart.length : 0} dona` }}.</div>
                     </div>
                     <div class="flex justify-between">
                         <div class="opacity-50">{{ locale === 'ru' ? 'Доставка' : 'Yetkazib berish' }}</div>
@@ -27,13 +27,13 @@
                     </div>
                 </div>
 
-                <NuxtLink :to="`/${locale}/confirm-order`"  id="cart-confirm-button">
+                <div @click="gotoConfirmOrder" id="cart-confirm-button">
                     <div class="mt-12 cursor-pointer">
                         <span>
                             <div class="w-full bg-bronze py-7 text-white text-center font-onest-regular">{{ locale === 'ru' ? 'Перейти к оформлению' : 'Rasmiylashtirish' }}</div>
                         </span>
                     </div>
-                </NuxtLink>
+                </div>
             </div>
         </div>
     </div>
@@ -42,6 +42,33 @@
 <script setup>
 
 const { locale } = useI18n()
-const totalAmountOfCart = useTotalAmountOfCart()
+const totalAmountOfCart = await useTotalAmountOfCart()
+const router = useRouter()
+const authToken = await useAuthToken()
+const isAuthModalOpen = useIsAuthModalOpen()
+const booksInCart = await useBooksInCart()
+
+
+onUpdated(async () => {
+    if (process.client) {
+        if (localStorage.getItem('redirect')) {
+            await router.push(`/${locale.value}/confirm-order`)
+            localStorage.removeItem('redirect')
+        }
+    }
+})
+
+
+const gotoConfirmOrder = () => {
+    if (!authToken.value) {
+        isAuthModalOpen.value = true
+
+        if (process.client) {
+            localStorage.setItem('redirect', true)
+        }
+    } else {
+        router.push(`/${locale.value}/confirm-order`)
+    }
+}
 
 </script>
