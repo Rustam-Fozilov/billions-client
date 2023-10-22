@@ -42,6 +42,10 @@
             <div>
                 <add-user-address-modal/>
             </div>
+
+            <div>
+                <order-created-modal/>
+            </div>
         </div>
     </div>
 </template>

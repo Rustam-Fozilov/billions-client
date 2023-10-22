@@ -34,6 +34,18 @@
                         </span>
                     </div>
                 </div>
+
+                <div v-if="addressError" class="font-onest-regular text-red-500 mt-3">
+                    {{ locale === 'ru' ? '* Адрес не выбран' : '* Manzil tanlanmagan' }}
+                </div>
+
+                <div v-if="nameError" class="font-onest-regular text-red-500 mt-3">
+                    {{ locale === 'ru' ? '* Имя не заполнено' : '* Ism to\'ldirilmagan' }}
+                </div>
+
+                <div v-if="phoneError" class="font-onest-regular text-red-500 mt-3">
+                    {{ locale === 'ru' ? '* Телефон не заполнен' : '* Telefon to\'ldirilmagan' }}
+                </div>
                 
             </div>
         </div>
@@ -41,52 +53,70 @@
 </template>
 
 <script setup>
-import { fetchUrl } from "~/helpers/fetchUrl";
+import { fetchUrl } from "~/helpers/fetchUrl"
+import axios from "axios"
 
 
+const addressError = ref(false)
+const nameError = ref(false)
+const phoneError = ref(false)
 const { data, load } = fetchUrl()
 const { locale } = useI18n()
 const config = useRuntimeConfig()
 const totalAmountOfCart = await useTotalAmountOfCart()
 const booksInCart = await useBooksInCart()
-const isAuthModalOpen = useIsAuthModalOpen()
-const isSMSCodeSent = useIsSMSCodeSent()
 const orderPaymentType = useOrderPaymentType()
 const receiverInfo = useReceiverInfo()
+const orderAddressId = useOrderAddressId()
 const authToken = await useAuthToken()
+const isOrderCreated = useIsOrderCreated()
 
 
 const confirmOrder = () => {
-    if (authToken.value) {
-        isAuthModalOpen.value = true
-        isSMSCodeSent.value = true
-    } else {
-        load(
+    if (receiverInfo.value.name === '') {
+        return nameError.value = true
+    }
+
+    if (receiverInfo.value.phoneNumber.length !== 9) {
+        return phoneError.value = true
+    }
+
+    if (typeof orderAddressId.value !== 'number') {
+        return addressError.value = true
+    }
+
+    axios
+        .post(
             `${config.public.apiUrl}/orders`,
+            {
+                comment: receiverInfo.value.textToCourier,
+                delivery_method_id: 3,
+                payment_type_id: orderPaymentType.value === 'online' ? 1 : 2,
+                sum: totalAmountOfCart.value,
+                address_id: orderAddressId.value,
+                books: [
+                    ...booksInCart.value.map(book => {
+                        return {
+                            book_id: book.book.id,
+                            stock_id: book.book.inventory[0].stock_id,
+                            quantity: book.quantity
+                        }
+                    })
+                ]
+            },
             {
                 headers: {
                     Authorization: `Bearer ${authToken.value}`
-                },
-                body: {
-                    comment: receiverInfo.value.textToCourier,
-                    delivery_method_id: 3,
-                    payment_type_id: orderPaymentType.value === 'online' ? 1 : 2,
-                    sum: totalAmountOfCart.value,
-                    address_id: 1,
-                    books: [
-                        ...booksInCart.value.map(book => {
-                            return {
-                                book_id: book.book.id,
-                                stock_id: 1,
-                                quantity: book.quantity
-                            }
-                        })
-                    ]
                 }
-            },
-            'POST'
+            }
         )
-    }
+        .then(res => {
+            // console.log(res)
+            isOrderCreated.value = true
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }
 
 </script>

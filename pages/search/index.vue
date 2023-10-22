@@ -59,7 +59,7 @@ onUpdated(async () => {
 
 
 const search = async () => {
-    await load(`${config.public.apiUrl}/books/search/${query.value}`)
+    await load(`${config.public.apiUrl}/books/search/${query.value}?withAuthor=true`)
 
     if (!data.value.success) {
         await router.push(`/${locale.value}/search/not-found`)

@@ -20,8 +20,8 @@
 </template>
 
 <script setup>
-defineProps(['w', 'fill'])
 
+defineProps(['w', 'fill'])
 
 const { locale } = useI18n()
 

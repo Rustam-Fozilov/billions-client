@@ -16,3 +16,7 @@ export const useOrderPaymentType = () => {
 export const useOrderAddressId = () => {
     return useState('orderAddressId', () => null)
 }
+
+export const useIsOrderCreated = () => {
+    return useState('isOrderCreated', () => false)
+}

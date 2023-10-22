@@ -11,6 +11,9 @@
                     </div>
 
                     <div class="flex flex-col gap-7">
+                        <div v-if="error" class="text-center text-red-500 font-onest-regular">
+                            {{ locale === 'ru' ? 'Пожалуйста, заполните все обязательные поля' : 'Iltimos barcha kerakli maydonlarni to\'ldiring' }}
+                        </div>
                         <div class="font-onest-medium text-base text-center">
                             {{ locale === 'ru' ? 'Добавить адрес' : 'Manzil qo\'shish' }}
                         </div>
@@ -85,10 +88,12 @@
 
 <script setup>
 import { fetchUrl } from "~/helpers/fetchUrl"
+import axios from "axios";
 
 
 const config = useRuntimeConfig()
 const authToken = await useAuthToken()
+const error = ref(false)
 const isAddUserAddressModalOpen = useIsAddUserAddressModalOpen()
 const { locale } = useI18n()
 const { data, load } = fetchUrl()
@@ -102,25 +107,32 @@ const addressInfo = ref({
 
 const addUserAddress = async () => {
     if (addressInfo.value.name === '' || addressInfo.value.street === '' || addressInfo.value.home === '') {
-        return
+        error.value = true
+        return setTimeout(() => {
+            error.value = false
+        }, 3000)
     }
 
-    await load(
-        `${config.public.apiUrl}/user-addresses`,
-        JSON.stringify({
+    axios
+        .post(`${config.public.apiUrl}/user-addresses`, {
+            address_name: addressInfo.value.name,
+            region: 'Tashkent',
+            street: addressInfo.value.street,
+            house: addressInfo.value.home,
+            additional_info: addressInfo.value.additional
+        }, {
             headers: {
                 "Authorization": `Bearer ${authToken.value}`
-            },
-            body: {
-                address_name: addressInfo.value.name,
-                region: 'Tashkent',
-                street: addressInfo.value.street,
-                house: addressInfo.value.home,
-                additional_info: addressInfo.value.additional
             }
-        }),
-        'POST'
-    )
+        })
+        .then(res => {
+            window.location.reload(true)
+            isAddUserAddressModalOpen.value = false
+            error.value = false
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }
 
 

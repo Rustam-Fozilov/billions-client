@@ -44,7 +44,6 @@
 <script setup>
 import { changePaymentType } from '~/helpers/ui/orderPaymentType'
 
-
 const { locale } = useI18n()
 
 </script>

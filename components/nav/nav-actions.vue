@@ -11,8 +11,8 @@
                         </svg>
                     </div>
                     <div v-if="!authToken" class="font-onest-regular">{{ $t('nav.login') }}</div>
-                    <div v-if="authToken && authUser.name" class="font-onest-regular">{{ authUser.name }}</div>
-                    <div v-if="authToken && !authUser.name" class="font-onest-regular">{{ locale === 'ru' ? 'Кабинет' : 'Kabinet' }}</div>
+                    <div v-if="authToken && authUser.first_name" class="font-onest-regular">{{ authUser.first_name }}</div>
+                    <div v-if="authToken && !authUser.first_name" class="font-onest-regular">{{ locale === 'ru' ? 'Кабинет' : 'Kabinet' }}</div>
                 </div>
 
                 <div @click="gotoFavorites" class="flex flex-col gap-2 cursor-pointer items-center justify-end">

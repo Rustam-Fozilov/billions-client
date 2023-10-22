@@ -9,9 +9,9 @@
 
                     <div class="w-full flex flex-col items-center">
                         <div v-for="category in categoriesTree" class="mt-3 w-3/4 flex flex-col gap-5">
-                            <div class="font-onest-regular opacity-50 hover:opacity-100 cursor-pointer transition">
+                            <NuxtLink :to="category.path_name" class="font-onest-regular opacity-50 hover:opacity-100 cursor-pointer transition">
                                 {{ locale === 'ru' ? category.name.ru : category.name.uz }}
-                            </div>
+                            </NuxtLink>
                         </div>
                     </div>
                 </div>

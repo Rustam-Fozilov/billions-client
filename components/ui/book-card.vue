@@ -68,7 +68,8 @@ const addToCart = () => {
         booksInCart.value.push(
             {
                 'book': props.book,
-                'quantity': 1
+                'quantity': 1,
+                'originalPrice': props.book.prices[1].price,
             }
         )
 

@@ -30,6 +30,6 @@ const config = useRuntimeConfig();
 const { data, load} = fetchUrl();
 
 
-await load(`${config.public.apiUrl}/books?limit=10`);
+await load(`${config.public.apiUrl}/books?limit=10&withAuthor=true`);
 
 </script>

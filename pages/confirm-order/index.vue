@@ -36,6 +36,10 @@ const authToken = await useAuthToken()
 
 if (!authToken.value) {
     router.push(`/${locale.value}/`)
+} else if (booksInCart.value) {
+    if (booksInCart.value.length === 0) {
+        router.push(`/${locale.value}/`)
+    }
 }
 
 </script>

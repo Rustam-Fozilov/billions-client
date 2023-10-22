@@ -12,12 +12,12 @@
                 <div class="mt-5">
                     <div>
                         <select @input="selectAddress" class="w-1/3 p-3 cursor-pointer outline-none bg-white border border-black border-opacity-20 font-onest-regular" name="" id="">
-                            <option class="p-2" value="" disabled selected>{{ locale === 'ru' ? 'Выберите адрес' : 'Manzilni tanlang' }}</option>
+                            <option class="p-2" value="null" disabled selected>{{ locale === 'ru' ? 'Выберите адрес' : 'Manzilni tanlang' }}</option>
                             <option v-for="address in userAddresses" :value="address.id" class="font-onest-regular">
-                                {{ locale === 'ru' ? address.address_name.ru : address.address_name.uz}},
+                                {{ address.address_name }},
                                 {{ address.street }}, {{ address.house }}
                             </option>
-                            <option nonce="" value="add"    >
+                            <option value="add">
                                 {{ locale === 'ru' ? '+ Добавить адрес' : '+ Manzil qo\'shish' }}
                             </option>
                         </select>
@@ -37,7 +37,9 @@ const authToken = await useAuthToken()
 const { locale } = useI18n()
 const config = useRuntimeConfig()
 const userAddresses = useUserAddresses()
+const orderAddressId = useOrderAddressId()
 const isAddUserAddressModalOpen = useIsAddUserAddressModalOpen()
+
 
 await load(
     `${config.public.apiUrl}/user-addresses`,
@@ -54,6 +56,8 @@ userAddresses.value = data.value.data
 const selectAddress = (e) => {
     if (e.target.value === 'add') {
         isAddUserAddressModalOpen.value = true
+    } else {
+        orderAddressId.value = +e.target.value
     }
 }
 

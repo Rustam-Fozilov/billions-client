@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="flex justify-start gap-5 flex-wrap mt-12">
-                    <div v-for="author in data.data">
+                    <div v-for="author in data.data" :key="author.id">
                         <author-card :author="author"/>
                     </div>
                 </div>
@@ -35,6 +35,7 @@
 <script setup>
 import { fetchUrl } from "~/helpers/fetchUrl";
 
+
 definePageMeta({
     title: {
         ru: 'Авторы',
@@ -48,10 +49,6 @@ const config = useRuntimeConfig()
 const { locale } = useI18n()
 
 
-await load(`${config.public.apiUrl}/authors`)
+await load(`${config.public.apiUrl}/authors?withBooks=true`)
 
 </script>
-
-<style scoped>
-
-</style>

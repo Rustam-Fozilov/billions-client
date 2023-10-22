@@ -55,21 +55,23 @@
                                 <div class="font-onest-medium text-base">Как решать нерешаемые задачи, посмотрев на проблему с другой стороны</div>
                             </div>
                             <div>
-                                <div class="font-onest-regular opacity-50">{{
+                                <div class="font-onest-regular opacity-50">
+                                    {{
                                         locale === 'ru' ? book.data.author.first_name.ru + ' ' + book.data.author.last_name.ru :
                                         book.data.author.first_name.uz + ' ' + book.data.author.last_name.uz
-                                    }}</div>
+                                    }}
+                                </div>
                             </div>
                             <div class="flex items-center gap-7">
                                 <div>
                                     <div class="h-11 w-36 flex items-center justify-between border border-opacity-20 border-black">
-                                        <div class="font-onest-regular h-full flex items-center ml-4 opacity-50 cursor-not-allowed">
+                                        <div @click="decreaseQuantity" class="font-onest-regular h-full flex items-center ml-4" :class="quantity <= 1 ? 'cursor-not-allowed opacity-50' : 'cursor-pointer opacity-100'">
                                             <svg width="14" height="3" viewBox="0 0 12 3" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M12 0.0908813V2.09088H0V0.0908813H12Z" fill="black"/>
                                             </svg>
                                         </div>
-                                        <div class="font-onest-regular">2</div>
-                                        <div class="font-onest-regular cursor-pointer mr-4">
+                                        <div class="font-onest-regular">{{ quantity }}</div>
+                                        <div @click="increaseQuantity" class="font-onest-regular mr-4" :class="quantity === book.data.inventory[0].quantity ? 'cursor-not-allowed opacity-50' : 'cursor-pointer opacity-100'">
                                             <svg width="12" height="13" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M4.56667 11.0909V0.0908813H6.43333V11.0909H4.56667ZM0 6.52422V4.65755H11V6.52422H0Z" fill="black"/>
                                             </svg>
@@ -115,8 +117,9 @@
 import { fetchUrl } from '~/helpers/fetchUrl';
 
 
-const currencyType = useCurrencyType()
 const props = defineProps(['book'])
+const quantity = ref(1)
+const currencyType = useCurrencyType()
 const booksInCart = await useBooksInCart()
 const { locale } = useI18n()
 const config = useRuntimeConfig()
@@ -137,15 +140,36 @@ onMounted(() => {
 })
 
 
-const addToCart = () => {
+const increaseQuantity = () => {
+    if (props.book.data.inventory[0].quantity > quantity.value) {
+        quantity.value++
+    }
+}
 
+
+const decreaseQuantity = () => {
+    if (quantity.value <= 1) {
+        quantity.value = 1
+    } else {
+        quantity.value--
+    }
+}
+
+
+const addToCart = () => {
     if (!isBookExistsInCart.value) {
         booksInCart.value.push(
             {
                 'book': props.book.data,
-                'quantity': 1
+                'quantity': 1,
+                'originalPrice': props.book.data.prices[1].price,
             }
         )
+
+        if (process.client) {
+            localStorage.setItem('booksInCart', JSON.stringify(booksInCart.value))
+        }
+
         makeBtnDisabled()
     }
 
@@ -160,7 +184,7 @@ const isBookExistsInCart = computed(() => {
 const makeBtnDisabled = () => {
     document.getElementById('add-to-cart-btn').setAttribute('disabled' , 'true')
     locale.value === 'ru' ?
-        document.getElementById('add-to-cart-btn').innerText = 'Ru Savatga qo\'shildi' :
+        document.getElementById('add-to-cart-btn').innerText = 'Добавлено в корзину' :
         document.getElementById('add-to-cart-btn').innerText = 'Savatga qo\'shildi'
 }
 

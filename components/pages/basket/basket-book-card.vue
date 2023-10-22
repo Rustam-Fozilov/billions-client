@@ -25,11 +25,16 @@
                         <div class="font-onest-regular">
                             {{ book.quantity }}
                         </div>
-                        <div @click="increaseBookQuantity" class="font-onest-regular cursor-pointer mr-4">
+                        <div @click="increaseBookQuantity" class="font-onest-regular mr-4" :class="book.quantity === book.book.inventory[0].quantity ? 'cursor-not-allowed opacity-50' : 'cursor-pointer opacity-100'">
                             <svg width="12" height="13" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4.56667 11.0909V0.0908813H6.43333V11.0909H4.56667ZM0 6.52422V4.65755H11V6.52422H0Z" fill="black"/>
                             </svg>
                         </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="font-onest-regular text-stock-green">
+                        {{ locale === 'ru' ? `Есть ${book.book.inventory[0].quantity} штуки` : `${book.book.inventory[0].quantity} dona bor` }}
                     </div>
                 </div>
                 <div>
@@ -57,20 +62,22 @@ const props = defineProps(['book'])
 const booksInCart = await useBooksInCart()
 const totalAmountOfCart = await useTotalAmountOfCart()
 const { locale } = useI18n()
-
-const bookPrice = props.book.book.prices[1].price
+const bookPrice = props.book.originalPrice
 
 
 const increaseBookQuantity = () => {
     const book = booksInCart.value ? booksInCart.value.find((item) => item.book.id === props.book.book.id) : null
-    book.quantity += 1
 
-    book.book.prices[1].price += bookPrice
-    totalAmountOfCart.value += bookPrice
+    if (book.quantity < props.book.book.inventory[0].quantity) {
+        book.quantity += 1
 
-    if (process.client) {
-        localStorage.setItem('booksInCart', JSON.stringify(booksInCart.value))
-        localStorage.setItem('totalAmountOfCart', totalAmountOfCart.value)
+        book.book.prices[1].price += bookPrice
+        totalAmountOfCart.value += bookPrice
+
+        if (process.client) {
+            localStorage.setItem('booksInCart', JSON.stringify(booksInCart.value))
+            localStorage.setItem('totalAmountOfCart', totalAmountOfCart.value)
+        }
     }
 }
 
