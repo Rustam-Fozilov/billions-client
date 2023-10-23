@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="flex justify-end py-24">
-                    <the-pagination :pagination-data="paginationData"/>
+                    <the-pagination v-if="paginationData.length !== 1" :pagination-data="paginationData"/>
                 </div>
             </div>
         </div>
@@ -69,16 +69,12 @@ category.value = data.value.data.find((item) => item.path_name === route.params.
 pathTitle.value = category.value.name[locale.value]
 
 
-if (route.query.page) {
-    await load(`${config.public.apiUrl}/categories/${category.value.id}/books?withAuthor=true&page=${route.query.page}`)
-    paginationData.value.push(data.value.data)
-} else {
-    await load(`${config.public.apiUrl}/categories/${category.value.id}/books?withAuthor=true`)
-    paginationData.value.push(data.value.data)
-}
-
-
+await load(`${config.public.apiUrl}/categories/${category.value.id}/books?withAuthor=true&page=${route.query.page ?? 1}`)
 books.value = data.value.data.books
+
+
+await load(`${config.public.apiUrl}/categories/${category.value.id}/books?withAuthor=true&page=1`)
+paginationData.value.push(data.value.data)
 countOfBooks.value = computed(() => data.value.data.books.length)
 
 
