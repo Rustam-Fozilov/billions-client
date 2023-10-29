@@ -8,7 +8,7 @@
 
             <div>
                 <div class="pt-12 pb-24 flex justify-between flex-wrap">
-                    <div v-for="book in data.data" class="mb-5">
+                    <div v-for="book in data ? data.data : []" class="mb-5">
                         <favorite-book-card :book="book"/>
                     </div>
                 </div>
@@ -23,10 +23,15 @@ import { fetchUrl } from '~/helpers/fetchUrl';
 
 const config = useRuntimeConfig();
 const { locale } = useI18n()
-const { data, load} = fetchUrl();
+const { data, load } = fetchUrl();
+const authToken = await useAuthToken()
 
 
-await load(`${config.public.apiUrl}/books?limit=10`);
+await load(`${config.public.apiUrl}/favorites?withAuthor=true`, {
+    headers: {
+        'Authorization': `Bearer ${authToken.value}`
+    }
+})
 
 
 </script>

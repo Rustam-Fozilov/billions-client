@@ -3,7 +3,7 @@
         <div class="w-72">
             <div class="w-full h-80 relative">
                 <div class="absolute top-3 right-3">
-                    <div class="bg-white w-7 h-7 rounded-full flex justify-center items-center">
+                    <div @click.stop="removeFromFavorite" class="bg-white w-7 h-7 rounded-full flex justify-center items-center">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
                             <g clip-path="url(#clip0_764_1533)">
@@ -25,7 +25,7 @@
                     <div class="font-onest-medium">
                         {{ book.prices[1].price }} {{ locale === 'ru' ? book.prices[1].currency.name.ru : book.prices[1].currency.name.uz }}
                     </div>
-                    <div v-if="!isBookExistsInCart" @click.stop="addToCart" class="cursor-pointer">
+                    <div v-if="!isBookExistsInCart" @click.stop="addToCart" class="cursor-pointer hover:opacity-50 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <path d="M1.98601 16.2896C1.03196 12.4734 0.554928 10.5664 1.5568 9.28319C2.55755 8 4.52571 8 8.45868 8H13.607C17.5411 8 19.507 8 20.5089 9.28319C21.5108 10.5653 21.0337 12.4745 20.0797 16.2896C19.4726 18.717 19.1701 19.9301 18.265 20.6373C17.3598 21.3434 16.1089 21.3434 13.607 21.3434H8.45868C5.95679 21.3434 4.70584 21.3434 3.80071 20.6373C2.89558 19.9301 2.59202 18.717 1.98601 16.2896Z" stroke="black"/>
                         <path d="M19.3726 8.22755L18.5831 5.33091C18.2785 4.2134 18.1261 3.6552 17.8137 3.23377C17.5021 2.81509 17.079 2.49255 16.5927 2.30307C16.1035 2.11182 15.5253 2.11182 14.3688 2.11182M2.69336 8.22755L3.48284 5.33091C3.78752 4.2134 3.93986 3.6552 4.25231 3.23377C4.56386 2.81509 4.98697 2.49255 5.47324 2.30307C5.9625 2.11182 6.54071 2.11182 7.69714 2.11182" stroke="black"/>
@@ -82,14 +82,24 @@ const addToCart = () => {
         booksInCart.value.push(
             {
                 'book': props.book,
-                'quantity': 1
+                'quantity': 1,
+                'originalPrice': props.book.prices[1].price
             }
         )
 
-        isBookExistsInCart.value = props.book.id === booksInCart.value.find(item => item.book.id === props.book.id)?.book.id
+        if (process.client) {
+            localStorage.setItem('booksInCart', JSON.stringify(booksInCart.value))
+        }
+
+        isBookExistsInCart.value = booksInCart.value ? props.book.id === booksInCart.value.find(item => item.book.id === props.book.id)?.book.id : false
     } else {
         console.log('exists');
     }
+}
+
+
+const removeFromFavorite = () => {
+    console.log('removed')
 }
 
 </script>

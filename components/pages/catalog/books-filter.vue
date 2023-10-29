@@ -26,13 +26,13 @@
                                 <div>
                                     {{ locale === 'ru' ? 'От' : 'Dan' }}
                                 </div>
-                                <input v-model="priceValue[0]" class="font-onest-regular w-24 py-2 text-center border border-black border-opacity-20 bg-transparent outline-none" type="number">
+                                <input @input="filterBooks" v-model="priceValue[0]" class="font-onest-regular w-24 py-2 text-center border border-black border-opacity-20 bg-transparent outline-none" type="number">
                             </div>
                             <div>
                                 <div>
                                     {{ locale === 'ru' ? 'До' : 'Gacha' }}
                                 </div>
-                                <input v-model="priceValue[1]" class="font-onest-regular w-24 py-2 text-center border border-black border-opacity-20 bg-transparent outline-none" type="number">
+                                <input @input="filterBooks" v-model="priceValue[1]" class="font-onest-regular w-24 py-2 text-center border border-black border-opacity-20 bg-transparent outline-none" type="number">
                             </div>
                         </div>
                     </div>
@@ -44,11 +44,11 @@
                             {{ locale === 'ru' ? 'Тип покрытия' : 'Muqova turi'}}
                         </div>
                         <div>
-                            <input id="cover-soft" name="cover-type" type="checkbox" class="border border-black border-opacity-20">
+                            <input @input="filterBooks" v-model="coverType" value="soft" id="cover-soft" name="cover-type" type="checkbox" class="border border-black border-opacity-20">
                             <label for="cover-soft" class="font-onest-regular ml-5 opacity-50 cursor-pointer">Yumshoq</label>
                         </div>
                         <div>
-                            <input id="cover-hard" name="cover-type" type="checkbox" class="border border-black border-opacity-20">
+                            <input @input="filterBooks" v-model="coverType" value="hard" id="cover-hard" name="cover-type" type="checkbox" class="border border-black border-opacity-20">
                             <label for="cover-hard" class="font-onest-regular ml-5 opacity-50 cursor-pointer">Qattiq</label>
                         </div>
                     </div>
@@ -60,15 +60,15 @@
                             {{ locale === 'ru' ? 'Язык' : 'Til'}}
                         </div>
                         <div>
-                            <input id="lang-uzb" name="lang" type="checkbox" class="border border-black border-opacity-20">
+                            <input @input="filterBooks" v-model="language" value="uzb" id="lang-uzb" name="lang" type="checkbox" class="border border-black border-opacity-20">
                             <label for="lang-uzb" class="font-onest-regular ml-5 opacity-50 cursor-pointer">O'zbek tili</label>
                         </div>
                         <div>
-                            <input id="lang-eng" name="lang" type="checkbox" class="border border-black border-opacity-20">
+                            <input @input="filterBooks" v-model="language" value="eng" id="lang-eng" name="lang" type="checkbox" class="border border-black border-opacity-20">
                             <label for="lang-eng" class="font-onest-regular ml-5 opacity-50 cursor-pointer">Ingliz tili</label>
                         </div>
                         <div>
-                            <input id="lang-rus" name="lang" type="checkbox" class="border border-black border-opacity-20">
+                            <input @input="filterBooks" v-model="language" value="rus" id="lang-rus" name="lang" type="checkbox" class="border border-black border-opacity-20">
                             <label for="lang-rus" class="font-onest-regular ml-5 opacity-50 cursor-pointer">Rus tili</label>
                         </div>
                     </div>
@@ -86,21 +86,15 @@
 <script setup>
 import { fetchUrl } from "~/helpers/fetchUrl";
 
-const categoriesTree = ref([])
-const config = useRuntimeConfig()
-const { data, load } = fetchUrl()
-const { locale } = useI18n()
+
+const language = ref([])
+const coverType = ref([])
 const priceValue = ref([])
-
-
-const props = defineProps({
-    category: {
-        required: true
-    },
-    pathTitle: {
-        required: true
-    }
-})
+const { locale } = useI18n()
+const categoriesTree = ref([])
+const { data, load } = fetchUrl()
+const config = useRuntimeConfig()
+const props = defineProps(['category', 'pathTitle'])
 
 
 if (props.category.child_id) {
@@ -110,6 +104,15 @@ if (props.category.child_id) {
         categoriesTree.value.push(data.value.data)
     }
 }
+
+
+const filterBooks = async () => {
+    await console.log(language.value)
+}
+
+
+
+
 
 </script>
 
