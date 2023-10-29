@@ -91,9 +91,14 @@
                                     </button>
                                 </div>
                                 <div>
-                                    <button class="p-6 bg-white border border-black border-opacity-10 transition">
-                                        <svg width="36" height="31" viewBox="0 0 36 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path opacity="0.7" d="M18 29.7728L18.5613 30.8638C18.3877 30.9533 18.1953 31 18 31C17.8047 31 17.6123 30.9533 17.4387 30.8638L17.4338 30.8605L17.4224 30.8556L17.3815 30.8344C14.3355 29.1809 11.4663 27.2211 8.81836 24.9854C4.58182 21.3822 0 16.0812 0 9.8365V9.83487C0 4.17569 4.62927 0 9.38618 0C13.14 0 16.1689 2.00525 18 5.07854C19.8327 2.00525 22.86 0 26.6138 0C31.3691 0 36 4.17405 36 9.8365C36 16.0812 31.4165 21.3838 27.1816 24.9854C24.5337 27.221 21.6645 29.1808 18.6185 30.8344L18.5776 30.8556L18.5662 30.8605L18.5629 30.8622L18 29.7728ZM9.38618 2.4534C5.98418 2.4534 2.45455 5.52833 2.45455 9.8365C2.45455 14.9183 6.25745 19.5847 10.4089 23.1176C12.7312 25.0787 15.2328 26.8174 17.8805 28.3106L18 28.3777L18.1195 28.3123C18.5629 28.062 19.2011 27.6907 19.9685 27.2099C21.5067 26.2481 23.5522 24.853 25.5911 23.1176C29.7425 19.5847 33.5455 14.9183 33.5455 9.8365C33.5455 5.52833 30.0158 2.4534 26.6138 2.4534C23.1676 2.4534 20.394 4.72525 19.1635 8.4119C19.0808 8.65476 18.9242 8.86567 18.7155 9.01503C18.5069 9.16439 18.2566 9.2447 18 9.2447C17.7434 9.2447 17.4931 9.16439 17.2845 9.01503C17.0758 8.86567 16.9192 8.65476 16.8365 8.4119C15.606 4.72525 12.8307 2.4534 9.38618 2.4534Z" fill="black"/>
+                                    <button @click="addToFavorites" class="p-6 bg-white border border-black border-opacity-10 transition">
+                                        <svg v-if="!isBookExistsInFavorites" width="36" height="31" viewBox="0 0 36 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path opacity="0.7" d="M18 29.7728L18.5613 30.8638C18.3877 30.9533 18.1953 31 18 31C17.8047 31 17.6123 30.9533 17.4387 30.8638L17.4338 30.8605L17.4224 30.8556L17.3815 30.8344C14.3355 29.1809 11.4663 27.2211 8.81836 24.9854C4.58182 21.3822 0 16.0812 0 9.8365V9.83487C0 4.17569 4.62927 0 9.38618 0C13.14 0 16.1689 2.00525 18 5.07854C19.8327 2.00525 22.86 0 26.6138 0C31.3691 0 36 4.17405 36 9.8365C36 16.0812 31.4165 21.3838 27.1816 24.9854C24.5337 27.221 21.6645 29.1808 18.6185 30.8344L18.5776 30.8556L18.5662 30.8605L18.5629 30.8622L18 29.7728ZM9.38618 2.4534C5.98418 2.4534 2.45455 5.52833 2.45455 9.8365C2.45455 14.9183 6.25745 19.5847 10.4089 23.1176C12.7312 25.0787 15.2328 26.8174 17.8805 28.3106L18 28.3777L18.1195 28.3123C18.5629 28.062 19.2011 27.6907 19.9685 27.2099C21.5067 26.2481 23.5522 24.853 25.5911 23.1176C29.7425 19.5847 33.5455 14.9183 33.5455 9.8365C33.5455 5.52833 30.0158 2.4534 26.6138 2.4534C23.1676 2.4534 20.394 4.72525 19.1635 8.4119C19.0808 8.65476 18.9242 8.86567 18.7155 9.01503C18.5069 9.16439 18.2566 9.2447 18 9.2447C17.7434 9.2447 17.4931 9.16439 17.2845 9.01503C17.0758 8.86567 16.9192 8.65476 16.8365 8.4119C15.606 4.72525 12.8307 2.4534 9.38618 2.4534Z" fill="black"/>
+                                        </svg>
+
+                                        <svg v-if="isBookExistsInFavorites" xmlns="http://www.w3.org/2000/svg" width="36" height="31" viewBox="0 0 36 31" fill="none">
+                                            <path d="M30.8548 1.09534C24.6455 -2.08931 19.7075 2.42228 18.0146 5.07616V31C29.0533 26.5726 34.1127 18.0866 35.2626 14.3971C36.3805 11.2901 37.064 4.28 30.8548 1.09534Z" fill="#FF0000"/>
+                                            <path d="M5.14524 1.09535C11.3545 -2.08931 16.3217 2.42228 18.0146 5.07616V31C6.97589 26.5726 1.88729 18.0866 0.73742 14.3971C-0.380505 11.2901 -1.06404 4.28 5.14524 1.09535Z" fill="#FF0000"/>
                                         </svg>
                                     </button>
                                 </div>
@@ -115,15 +120,19 @@
 
 <script setup>
 import { fetchUrl } from '~/helpers/fetchUrl';
+import axios from "axios";
 
 
-const props = defineProps(['book'])
 const quantity = ref(1)
-const currencyType = useCurrencyType()
-const booksInCart = await useBooksInCart()
 const { locale } = useI18n()
 const config = useRuntimeConfig()
-const {data: bookInfo, load} = fetchUrl()
+const authToken = await useAuthToken()
+const currencyType = useCurrencyType()
+const props = defineProps(['book'])
+const booksInCart = await useBooksInCart()
+const { data: bookInfo, load } = fetchUrl()
+const isAuthModalOpen = useIsAuthModalOpen()
+const isBookExistsInFavorites = ref(false)
 
 
 await load(`${config.public.apiUrl}/books/${props.book.data.id}/reviews`, {
@@ -131,6 +140,19 @@ await load(`${config.public.apiUrl}/books/${props.book.data.id}/reviews`, {
         'Authorization': `Bearer ${config.public.authToken}`
     }
 })
+
+
+if (authToken.value) {
+    await load(
+        `${config.public.apiUrl}/favorites`, {
+            headers: {
+                'Authorization': `Bearer ${authToken.value}`
+            }
+        }
+    )
+
+    isBookExistsInFavorites.value = bookInfo.value.data.find((item) => item.id === props.book.data.id)
+}
 
 
 onMounted(() => {
@@ -186,6 +208,53 @@ const makeBtnDisabled = () => {
     locale.value === 'ru' ?
         document.getElementById('add-to-cart-btn').innerText = 'Добавлено в корзину' :
         document.getElementById('add-to-cart-btn').innerText = 'Savatga qo\'shildi'
+}
+
+
+const addToFavorites = () => {
+    if (!authToken.value) {
+        return isAuthModalOpen.value = true
+    }
+
+    if (isBookExistsInFavorites.value !== undefined) {
+        axios
+            .delete(`${config.public.apiUrl}/favorites/${isBookExistsInFavorites.value.id}`,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${authToken.value}`
+                    }
+                }
+            )
+            .then((res) => {
+                console.log(res.data)
+            })
+            .catch(e => {
+                console.log(e)
+            })
+
+        isBookExistsInFavorites.value = undefined
+    } else {
+        axios
+            .post(`${config.public.apiUrl}/favorites`,
+                {
+                    "book_id": props.book.data.id
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${authToken.value}`
+                    }
+                }
+            )
+            .then((res) => {
+                console.log(res.data)
+            })
+            .catch(e => {
+                console.log(e)
+            })
+
+        isBookExistsInFavorites.value = props.book.data
+
+    }
 }
 
 
