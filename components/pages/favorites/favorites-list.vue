@@ -3,7 +3,9 @@
         <div class="mt-7">
             <div class="flex gap-5 items-center">
                 <div class="font-onest-medium text-xl">{{ locale === 'ru' ? 'Избранное' : 'Sevimlilar' }}</div>
-                <div class="font-onest-regular opacity-50 relative top-[3px]">{{ locale === 'ru' ? '3 книги' : '3ta kitob' }}</div>
+                <div class="font-onest-regular opacity-50 relative top-[3px]">
+                    {{ locale === 'ru' ? `${data ? data.data.length : 0} книги` : `${data ? data.data.length : 0}ta kitob` }}
+                </div>
             </div>
 
             <div>

@@ -60,11 +60,15 @@
 </template>
 
 <script setup>
+import axios from "axios";
 
+
+const router = useRouter()
+const { locale } = useI18n()
+const config = useRuntimeConfig()
+const authToken = await useAuthToken()
 const props = defineProps(['book'])
 const booksInCart = await useBooksInCart()
-const { locale } = useI18n()
-const router = useRouter()
 const isBookExistsInCart = ref(
     booksInCart.value ? props.book.id === booksInCart.value.find(item => item.book.id === props.book.id)?.book.id : false
 )
@@ -99,7 +103,22 @@ const addToCart = () => {
 
 
 const removeFromFavorite = () => {
-    console.log('removed')
+    axios
+        .delete(`${config.public.apiUrl}/favorites/${props.book.id}`,
+            {
+                headers: {
+                    'Authorization': `Bearer ${authToken.value}`
+                }
+            }
+        )
+        .then((res) => {
+            console.log(res.data)
+        })
+        .catch(e => {
+            console.log(e)
+        })
+
+    window.location.reload(1)
 }
 
 </script>
