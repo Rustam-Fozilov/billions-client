@@ -226,7 +226,7 @@ const addToFavorites = () => {
                 }
             )
             .then((res) => {
-                console.log(res.data)
+                // console.log(res.data)
             })
             .catch(e => {
                 console.log(e)
@@ -246,7 +246,7 @@ const addToFavorites = () => {
                 }
             )
             .then((res) => {
-                console.log(res.data)
+                // console.log(res.data)
             })
             .catch(e => {
                 console.log(e)

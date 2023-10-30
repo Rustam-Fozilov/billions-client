@@ -7,12 +7,12 @@
                         <div class="text-xl font-onest-medium">{{ $t('catalog.title') }}</div>
                         <div class="font-onest-regular opacity-50 hover:opacity-100">
                             <div class="relative top-[-5px] left-0">
-                                <NuxtLink :to="localePath('/')">{{ $t('catalog.show_all') }}</NuxtLink>
+                                <NuxtLink :to="`/${locale}/catalog`">{{ $t('catalog.show_all') }}</NuxtLink>
                             </div>
                         </div>
                     </div>
                     <div class="flex gap-7 flex-wrap">
-                        <div @click="gotoCatalog(category.path_name)" v-for="category in data.data" class="w-52">
+                        <div @click="gotoCatalog(category.path_name)" v-for="category in data.data" class="w-52" :key="category.id">
                             <div class="w-full h-52 bg-soft-white cursor-pointer">
 <!--                                 <img class="w-full h-full object-cover" src="~/assets/images/uzb-flag.png" alt="catalog image">-->
                             </div>
@@ -26,8 +26,7 @@
 </template>
 
 <script setup>
-import { fetchUrl } from '~/helpers/fetchUrl';
-import { useRouter } from "vue-router";
+import { fetchUrl } from '~/helpers/fetchUrl'
 
 
 const router = useRouter()
@@ -41,11 +40,12 @@ await load(`${config.public.apiUrl}/categories`, {
     params: {
         'only_parents': true
     }
-});
+})
 
 
 const gotoCatalog = (name) => {
     router.push(`/${locale.value}/catalog/${name}`)
+    // console.log(`/${locale.value}/catalog/${name}`)
 }
 
 </script>

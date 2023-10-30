@@ -3,17 +3,17 @@
         <div class="w-72">
             <div class="w-full h-80 relative">
                 <div class="absolute top-3 right-3">
-                    <div @click.stop="removeFromFavorite" class="bg-white w-7 h-7 rounded-full flex justify-center items-center">
+                    <div @click.stop="removeFromFavorite" class="bg-white w-7 h-7 rounded-full flex justify-center items-center hover:opacity-80 transition">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
-                            <g clip-path="url(#clip0_764_1533)">
-                                <path d="M13.3067 0C11.43 0 9.91778 0.970556 9 2.45722C8.08444 0.970556 6.57 0 4.69333 0C2.31444 0 0 2.02111 0 4.75944C0 7.78111 2.29111 10.3461 4.40944 12.0894C5.73768 13.1745 7.17198 14.1228 8.69056 14.92L8.71111 14.93L8.71667 14.9328C8.8038 14.9763 8.89984 14.9989 8.99722 14.9989C9.0946 14.9989 9.19065 14.9763 9.27778 14.9328L8.99722 14.405L9.27889 14.9322L9.28444 14.9294L9.305 14.9194C10.8237 14.1221 12.2581 13.1738 13.5867 12.0889C15.7083 10.3472 18 7.78111 18 4.75944C18 2.01944 15.6844 0 13.3067 0Z" fill="#D9A53D"/>
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_764_1533">
-                                <rect width="18" height="15" fill="white"/>
-                                </clipPath>
-                            </defs>
+                                <g clip-path="url(#clip0_764_1533)">
+                                    <path d="M13.3067 0C11.43 0 9.91778 0.970556 9 2.45722C8.08444 0.970556 6.57 0 4.69333 0C2.31444 0 0 2.02111 0 4.75944C0 7.78111 2.29111 10.3461 4.40944 12.0894C5.73768 13.1745 7.17198 14.1228 8.69056 14.92L8.71111 14.93L8.71667 14.9328C8.8038 14.9763 8.89984 14.9989 8.99722 14.9989C9.0946 14.9989 9.19065 14.9763 9.27778 14.9328L8.99722 14.405L9.27889 14.9322L9.28444 14.9294L9.305 14.9194C10.8237 14.1221 12.2581 13.1738 13.5867 12.0889C15.7083 10.3472 18 7.78111 18 4.75944C18 2.01944 15.6844 0 13.3067 0Z" fill="#D9A53D"/>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_764_1533">
+                                    <rect width="18" height="15" fill="white"/>
+                                    </clipPath>
+                                </defs>
                             </svg>
                         </div>
                     </div>
@@ -112,7 +112,7 @@ const removeFromFavorite = () => {
             }
         )
         .then((res) => {
-            console.log(res.data)
+            // console.log(res.data)
         })
         .catch(e => {
             console.log(e)

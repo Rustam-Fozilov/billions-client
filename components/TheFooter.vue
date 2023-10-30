@@ -232,7 +232,7 @@ footerData.value = [
                     'uz': 'Mening buyurtmalarim',
                     'ru': 'Мои заказы'
                 },
-                link: `/${locale.value}/personal/my-orders`
+                link: `/${locale.value}/personal/orders`
             },
             {
                 title: {

@@ -31,11 +31,7 @@ const { locale } = useI18n()
 const { data, load } = fetchUrl()
 
 
-await load(`${config.public.apiUrl}/categories`, {
-    params: {
-        'only_parents': true
-    }
-});
+await load(`${config.public.apiUrl}/categories`);
 
 
 const gotoCatalog = (name) => {
