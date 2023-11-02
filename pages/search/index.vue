@@ -5,7 +5,7 @@
         </div>
 
         <div class="bg-soft-white">
-            <div class="container pt-12">
+            <div class="container pt-12 pb-24">
                 <div>
                     <search-query-title :title="query"/>
                 </div>
@@ -21,12 +21,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="flex justify-end py-24">
-                    <the-pagination/>
-                </div>
             </div>
-
         </div>
 
         <div>
@@ -47,6 +42,7 @@ const router = useRouter()
 const query = ref(route.query.q)
 const config = useRuntimeConfig()
 
+
 onMounted( async () => {
     await search()
 })
@@ -59,12 +55,12 @@ onUpdated(async () => {
 
 
 const search = async () => {
-    await load(`${config.public.apiUrl}/books/search/${query.value}?withAuthor=true`)
+    await load(`${config.public.apiUrl}/books/search/${query.value}?withAuthor=true&page=1`)
 
     if (!data.value.success) {
         await router.push(`/${locale.value}/search/not-found`)
     } else {
-        searchResult.value = data.value.data
+        searchResult.value = data.value.data.books
     }
 }
 

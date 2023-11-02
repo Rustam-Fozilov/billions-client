@@ -32,6 +32,7 @@
     "book_properties": {
         "description": "Описание",
         "properties": "Характеристики",
+        "reviews": "Отзывы",
         "what_about": "О чем книга",
         "lang": "Язык",
         "cover": "Переплет",

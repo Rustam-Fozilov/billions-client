@@ -5,26 +5,16 @@
                 <div class="flex justify-between w-full h-full">
                     <div id="book-images" class="w-2/5 h-full">
                         <div class="w-full h-full">
-                            <img class="w-full h-full object-cover" src="~/assets/images/books/book-cover.png" alt="book cover">
+                            <img class="w-full h-full object-cover" :src="`/images/books/${mainImage.link}`" alt="book cover">
                         </div>
-                        <div class="mt-3 flex justify-between w-full gap-3">
-                            <div class="w-1/6 h-[60px]]">
-                                <img class="object-cover" src="~/assets/images/books/book-cover.png" alt="Book image">
-                            </div>
-                            <div class="w-1/6 h-[60px]]">
-                                <img class="object-cover" src="~/assets/images/books/book-cover.png" alt="Book image">
-                            </div>
-                            <div class="w-1/6 h-[60px]]">
-                                <img class="object-cover" src="~/assets/images/books/book-cover.png" alt="Book image">
-                            </div>
-                            <div class="w-1/6 h-[60px]]">
-                                <img class="object-cover" src="~/assets/images/books/book-cover.png" alt="Book image">
-                            </div>
-                            <div class="w-1/6 h-[60px]]">
-                                <img class="object-cover" src="~/assets/images/books/book-cover.png" alt="Book image">
-                            </div>
-                            <div class="w-1/6 h-[60px]]">
-                                <img class="object-cover" src="~/assets/images/books/book-cover.png" alt="Book image">
+                        <div class="mt-3 flex justify-start w-full gap-3">
+                            <div
+                                @click="changeMainImage(image)"
+                                v-for="image in book.data.images"
+                                class="w-1/6 h-[110px] cursor-pointer p-0.5"
+                                :class="mainImage.id === image.id ? 'border-[1px] border-black box-border' : ''"
+                            >
+                                <img class="object-cover w-full h-full" :src="`/images/books/${image.link}`" alt="Book image">
                             </div>
                         </div>
                     </div>
@@ -35,7 +25,7 @@
                                     <div v-for="overall in 5" class="opacity-50">
                                         <!-- <component :is="starComponent"/> -->
                                     </div>
-                                    <div class="font-onest-regular">{{ bookInfo.data.overall_rating }} {{ locale === 'ru' ? 'оценка' : 'baho' }}</div>
+                                    <div class="font-onest-regular">{{ bookReview.overall_rating }} {{ locale === 'ru' ? 'оценка' : 'baho' }}</div>
                                 </div>
                                 <div class="flex gap-3 items-center opacity-50 hover:opacity-100 transition-all cursor-pointer">
                                     <div>
@@ -57,7 +47,8 @@
                             <div>
                                 <div class="font-onest-regular opacity-50">
                                     {{
-                                        locale === 'ru' ? book.data.author.first_name.ru + ' ' + book.data.author.last_name.ru :
+                                        locale === 'ru' ?
+                                        book.data.author.first_name.ru + ' ' + book.data.author.last_name.ru :
                                         book.data.author.first_name.uz + ' ' + book.data.author.last_name.uz
                                     }}
                                 </div>
@@ -86,7 +77,7 @@
                             </div>
                             <div class="flex gap-7">
                                 <div>
-                                    <button @click="addToCart()" id="add-to-cart-btn" class="bg-bronze py-7 px-32 font-onest-medium text-white disabled:cursor-not-allowed disabled:bg-nav-bg disabled:text-gray-500">
+                                    <button @click="addToCart" id="add-to-cart-btn" class="bg-bronze py-7 px-32 font-onest-medium text-white disabled:cursor-not-allowed disabled:bg-nav-bg disabled:text-gray-500">
                                         {{ locale === 'ru' ? 'Добавить в корзину' : 'Savatga qo\'shish' }}
                                     </button>
                                 </div>
@@ -119,27 +110,26 @@
 </template>
 
 <script setup>
-import { fetchUrl } from '~/helpers/fetchUrl';
-import axios from "axios";
+import { fetchUrl } from '~/helpers/fetchUrl'
+import axios from "axios"
 
 
 const quantity = ref(1)
 const { locale } = useI18n()
+const bookReview = ref(null)
 const config = useRuntimeConfig()
 const authToken = await useAuthToken()
 const currencyType = useCurrencyType()
 const props = defineProps(['book'])
 const booksInCart = await useBooksInCart()
+const isBookExistsInFavorites = ref(false)
 const { data: bookInfo, load } = fetchUrl()
 const isAuthModalOpen = useIsAuthModalOpen()
-const isBookExistsInFavorites = ref(false)
+const mainImage = ref(props.book.data.images[0])
 
 
-await load(`${config.public.apiUrl}/books/${props.book.data.id}/reviews`, {
-    headers: {
-        'Authorization': `Bearer ${config.public.authToken}`
-    }
-})
+await load(`${config.public.apiUrl}/books/${props.book.data.id}/reviews`)
+bookReview.value = bookInfo.value.data
 
 
 if (authToken.value) {
@@ -160,6 +150,24 @@ onMounted(() => {
         makeBtnDisabled()
     }
 })
+
+
+const isBookExistsInCart = computed(() => {
+    return props.book.data.id === booksInCart.value.find(item => item.book.id === props.book.data.id)?.book.id
+})
+
+
+const changeMainImage = (image) => {
+    mainImage.value = image
+}
+
+
+const makeBtnDisabled = () => {
+    document.getElementById('add-to-cart-btn').setAttribute('disabled' , 'true')
+    locale.value === 'ru' ?
+        document.getElementById('add-to-cart-btn').innerText = 'Добавлено в корзину' :
+        document.getElementById('add-to-cart-btn').innerText = 'Savatga qo\'shildi'
+}
 
 
 const increaseQuantity = () => {
@@ -195,19 +203,6 @@ const addToCart = () => {
         makeBtnDisabled()
     }
 
-}
-
-
-const isBookExistsInCart = computed(() => {
-    return props.book.data.id === booksInCart.value.find(item => item.book.id === props.book.data.id)?.book.id
-})
-
-
-const makeBtnDisabled = () => {
-    document.getElementById('add-to-cart-btn').setAttribute('disabled' , 'true')
-    locale.value === 'ru' ?
-        document.getElementById('add-to-cart-btn').innerText = 'Добавлено в корзину' :
-        document.getElementById('add-to-cart-btn').innerText = 'Savatga qo\'shildi'
 }
 
 
@@ -253,7 +248,6 @@ const addToFavorites = () => {
             })
 
         isBookExistsInFavorites.value = props.book.data
-
     }
 }
 

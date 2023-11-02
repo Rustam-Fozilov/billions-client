@@ -16,7 +16,7 @@
                             <div class="font-onest-medium text-xl">
                                 {{ locale === 'ru' ? 'Мои адреса' : 'Mening manzillarim' }}
                             </div>
-                            <div class="font-onest-medium text-base cursor-pointer hover:opacity-50 transition">
+                            <div @click="openAddAddressModal" class="font-onest-medium text-base cursor-pointer hover:opacity-50 transition">
                                 {{ locale === 'ru' ? '+ Добавить' : '+ Qo\'shish' }}
                             </div>
                         </div>
@@ -53,6 +53,10 @@
         </div>
 
         <div>
+            <add-user-address-modal/>
+        </div>
+
+        <div>
             <the-footer/>
         </div>
     </div>
@@ -61,5 +65,11 @@
 <script setup>
 
 const { locale } = useI18n()
+const isAddUserAddressModalOpen = useIsAddUserAddressModalOpen()
+
+
+const openAddAddressModal = () => {
+    isAddUserAddressModalOpen.value = true
+}
 
 </script>

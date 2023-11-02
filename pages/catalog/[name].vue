@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="flex justify-end py-24">
-                    <the-pagination v-if="paginationData.length !== 1" :pagination-data="paginationData"/>
+                    <the-pagination v-if="paginationData.length > 1" :pagination-data="paginationData"/>
                 </div>
             </div>
         </div>

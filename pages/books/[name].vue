@@ -17,12 +17,12 @@
 </template>
 
 <script setup>
-import { fetchUrl } from '~/helpers/fetchUrl';
+import { fetchUrl } from '~/helpers/fetchUrl'
 
 
-const route = useRoute();
-const config = useRuntimeConfig();
-const {data: bookData, load} = fetchUrl();
+const route = useRoute()
+const config = useRuntimeConfig()
+const {data: bookData, load} = fetchUrl()
 
 
 await load(`${config.public.apiUrl}/books/${route.params.name.split('-').pop()}?withAuthor=true`)
