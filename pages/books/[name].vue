@@ -1,6 +1,8 @@
 <template>
     <div>
-        <the-navbar/>
+        <div>
+            <the-navbar/>
+        </div>
 
         <div class="bg-soft-white py-12">
             <category-path :category_id="bookData.data.category.id" :book_name="bookData.data.name"/>
@@ -10,9 +12,15 @@
             <book-properties :book="bookData"/>
         </div>
 
-        <bestsellers-list/>
+        <div>
+            <bestsellers-list/>
 
-        <the-footer/>
+            <add-review-modal/>
+        </div>
+
+        <div>
+            <the-footer/>
+        </div>
     </div>
 </template>
 
@@ -22,7 +30,7 @@ import { fetchUrl } from '~/helpers/fetchUrl'
 
 const route = useRoute()
 const config = useRuntimeConfig()
-const {data: bookData, load} = fetchUrl()
+const { data: bookData, load } = fetchUrl()
 
 
 await load(`${config.public.apiUrl}/books/${route.params.name.split('-').pop()}?withAuthor=true`)

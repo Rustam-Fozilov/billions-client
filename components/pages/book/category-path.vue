@@ -15,7 +15,7 @@
                     </div>
                 </div>
 
-                <div class="font-onest-regular opacity-50 cursor-pointer hover:opacity-100 hover:text-bronze transition">
+                <div class="font-onest-regular opacity-50">
                     {{ locale === 'ru' ? book_name.ru : book_name.uz }}
                 </div>
             </div>
@@ -24,26 +24,25 @@
 </template>
 
 <script setup>
-import { fetchUrl } from '~/helpers/fetchUrl';
-import { useRouter } from "vue-router";
+import { fetchUrl } from '~/helpers/fetchUrl'
 
 
 const props = defineProps(['category_id', 'book_name'])
 const router = useRouter()
 const { locale } = useI18n()
-const config = useRuntimeConfig();
-const {data: categoryData, load} = fetchUrl();
-const categoriesTree = ref([]);
+const config = useRuntimeConfig()
+const {data: categoryData, load} = fetchUrl()
+const categoriesTree = ref([])
 
 
 await load(`${config.public.apiUrl}/categories/${props.category_id}`)
-categoriesTree.value.push(categoryData.value.data);
+categoriesTree.value.push(categoryData.value.data)
 
 
 while(categoryData.value.data.parent_id !== null){
     await load(`${config.public.apiUrl}/categories/${categoryData.value.data.parent_id}`)
 
-    categoriesTree.value.push(categoryData.value.data);
+    categoriesTree.value.push(categoryData.value.data)
 }
 
 

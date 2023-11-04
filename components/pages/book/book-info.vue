@@ -23,7 +23,8 @@
                             <div class="flex justify-between">
                                 <div class="flex items-center gap-3">
                                     <div v-for="overall in 5" class="opacity-50">
-                                        <!-- <component :is="starComponent"/> -->
+                                        <full-star-icon fill="#D9A53D"/>
+                                        <half-star-icon/>
                                     </div>
                                     <div class="font-onest-regular">{{ bookReview.overall_rating }} {{ locale === 'ru' ? 'оценка' : 'baho' }}</div>
                                 </div>

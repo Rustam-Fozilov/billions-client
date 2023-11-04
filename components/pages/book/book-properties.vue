@@ -79,7 +79,7 @@
                                     {{ locale === 'ru' ? 'Отзывов пока нет, будьте первым.' : 'Hozircha sharhlar yo\'q, birinchi bo\'lib boshlang.' }}
                                 </div>
                                 <div>
-                                    <button class="mt-5 px-14 py-4 bg-bronze font-onest-medium text-white">
+                                    <button @click="openReviewModal" class="mt-5 px-14 py-4 bg-bronze font-onest-medium text-white">
                                         {{ locale === 'ru' ? 'Оставить отзыв' : 'Sharh qoldirish' }}
                                     </button>
                                 </div>
@@ -101,8 +101,11 @@ const reviews = ref(null)
 const { locale } = useI18n()
 const config = useRuntimeConfig()
 const { data, load } = fetchUrl()
+const authToken = await useAuthToken()
 const props = defineProps(['book'])
+const isAuthModalOpen = useIsAuthModalOpen()
 const togglePropertiesValue = ref('what-about')
+const isReviewModalOpen = useIsReviewModalOpen()
 
 
 await load(`${config.public.apiUrl}/books/${props.book.data.id}/reviews`)
@@ -118,8 +121,18 @@ const switchToPropertiesProperty = () => {
     togglePropertiesValue.value = 'properties'
 }
 
+
 const switchToReviewsProperty = () => {
     togglePropertiesValue.value = 'reviews'
+}
+
+
+const openReviewModal = () => {
+    if (!authToken.value) {
+        return isAuthModalOpen.value = true
+    }
+
+    return isReviewModalOpen.value = true
 }
 
 </script>
