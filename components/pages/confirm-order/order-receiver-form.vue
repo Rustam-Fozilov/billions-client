@@ -69,12 +69,12 @@ if (process.client) {
     const user = JSON.parse(localStorage.getItem('user'))
     receiverInfo.value.phoneNumber = user.phone.slice(3)
 
-    if (user.name) {
-        receiverInfo.value.name = user.name
+    if (user.first_name) {
+        receiverInfo.value.name = user.first_name
     }
 
-    if (user.surname) {
-        receiverInfo.value.surname = user.surname
+    if (user.last_name) {
+        receiverInfo.value.surname = user.last_name
     }
 }
 

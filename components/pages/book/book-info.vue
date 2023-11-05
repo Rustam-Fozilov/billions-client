@@ -5,7 +5,7 @@
                 <div class="flex justify-between w-full h-full">
                     <div id="book-images" class="w-2/5 h-full">
                         <div class="w-full h-full">
-                            <img class="w-full h-full object-cover" :src="`/images/books/${mainImage.link}`" alt="book cover">
+                            <img class="w-full h-full object-cover" :src="`${mainImage.link}`" alt="book cover">
                         </div>
                         <div class="mt-3 flex justify-start w-full gap-3">
                             <div
@@ -14,7 +14,7 @@
                                 class="w-1/6 h-[110px] cursor-pointer p-0.5"
                                 :class="mainImage.id === image.id ? 'border-[1px] border-black box-border' : ''"
                             >
-                                <img class="object-cover w-full h-full" :src="`/images/books/${image.link}`" alt="Book image">
+                                <img class="object-cover w-full h-full" :src="`${image.link}`" alt="Book image">
                             </div>
                         </div>
                     </div>
@@ -23,8 +23,9 @@
                             <div class="flex justify-between">
                                 <div class="flex items-center gap-3">
                                     <div v-for="overall in 5" class="opacity-50">
-                                        <full-star-icon fill="#D9A53D"/>
-                                        <half-star-icon/>
+                                        <full-star-icon v-if="overall <= bookReview.overall_rating" fill="#D9A53D"/>
+                                        <half-star-icon v-if="overall - 0.5 === bookReview.overall_rating"/>
+                                        <gray-star-icon v-if="overall > bookReview.overall_rating && overall - 0.5 !== bookReview.overall_rating"/>
                                     </div>
                                     <div class="font-onest-regular">{{ bookReview.overall_rating }} {{ locale === 'ru' ? 'оценка' : 'baho' }}</div>
                                 </div>
@@ -74,7 +75,7 @@
                                 <div v-if="locale === 'uz'" class="font-onest-regular text-stock-green">{{ book.data.inventory[0].quantity }} dona bor</div>
                             </div>
                             <div class="font-onest-medium text-xl">
-                                {{ book.data.prices[1].price }} {{ locale === 'ru' ? book.data.prices[1].currency.name.ru : book.data.prices[1].currency.name.uz }}
+                                {{ book.data.prices[1].price }} {{ locale === 'ru' ? 'сум' : 'so\'m' }}
                             </div>
                             <div class="flex gap-7">
                                 <div>
@@ -113,6 +114,7 @@
 <script setup>
 import { fetchUrl } from '~/helpers/fetchUrl'
 import axios from "axios"
+import GrayStarIcon from "~/components/ui/gray-star-icon.vue";
 
 
 const quantity = ref(1)
@@ -192,7 +194,7 @@ const addToCart = () => {
         booksInCart.value.push(
             {
                 'book': props.book.data,
-                'quantity': 1,
+                'quantity': quantity.value,
                 'originalPrice': props.book.data.prices[1].price,
             }
         )

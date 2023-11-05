@@ -15,7 +15,7 @@
         <div>
             <bestsellers-list/>
 
-            <add-review-modal/>
+            <add-review-modal :book_id="bookData.data.id"/>
         </div>
 
         <div>

@@ -43,14 +43,14 @@ onMounted(() => {
 
 
 const refreshToken = async () => {
-    if (!authUser.value.id) {
+    if (!authUser.value || !authUser.value.id) {
         return
     }
 
     await load(
         `${config.public.apiUrl}/auth/refresh-token`,
         {
-            user_id: authUser.value.id,
+            user_id: authUser.value.phone,
             token: authToken.value
         },
         'POST'

@@ -72,6 +72,38 @@ const authToken = await useAuthToken()
 const isOrderCreated = useIsOrderCreated()
 
 
+onMounted(() => {
+    calculateTotalValue()
+})
+
+
+onUpdated(() => {
+    calculateTotalValue()
+})
+
+
+const calculateTotalValue = () => {
+    if (totalAmountOfCart.value === 0) {
+        totalAmountOfCart.value = +config.public.deliveryAmount
+
+        if (booksInCart.value) {
+            for (let i = 0; i < booksInCart.value.length; i++) {
+                totalAmountOfCart.value += booksInCart.value[i].book.prices[1].price
+            }
+        }
+    } else if (totalAmountOfCart.value === +config.public.deliveryAmount) {
+        if (booksInCart.value) {
+            for (let i = 0; i < booksInCart.value.length; i++) {
+                totalAmountOfCart.value += booksInCart.value[i].book.prices[1].price
+            }
+        }
+    } else {
+        totalAmountOfCart.value = 0
+        calculateTotalValue()
+    }
+}
+
+
 const confirmOrder = () => {
     if (receiverInfo.value.name === '') {
         return nameError.value = true

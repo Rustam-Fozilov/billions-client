@@ -89,14 +89,16 @@
 <script setup>
 import { fetchUrl } from "~/helpers/fetchUrl"
 import axios from "axios";
+import router from "#app/plugins/router";
 
 
-const config = useRuntimeConfig()
-const authToken = await useAuthToken()
 const error = ref(false)
-const isAddUserAddressModalOpen = useIsAddUserAddressModalOpen()
+const router = useRouter()
 const { locale } = useI18n()
 const { data, load } = fetchUrl()
+const config = useRuntimeConfig()
+const authToken = await useAuthToken()
+const isAddUserAddressModalOpen = useIsAddUserAddressModalOpen()
 const addressInfo = ref({
     name: '',
     street: '',
@@ -126,7 +128,7 @@ const addUserAddress = async () => {
             }
         })
         .then(res => {
-            window.location.reload(true)
+            router.go()
             isAddUserAddressModalOpen.value = false
             error.value = false
         })

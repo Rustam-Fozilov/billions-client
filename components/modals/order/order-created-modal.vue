@@ -57,7 +57,7 @@ const gotoMyOrders = () => {
 const gotoMain = () => {
     removeFromLocalStorage()
     isOrderCreated.value = false
-    window.location.reload(true)
+    router.go()
     router.push('/' + locale.value)
 }
 

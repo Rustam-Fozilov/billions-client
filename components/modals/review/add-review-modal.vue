@@ -21,8 +21,15 @@
                             {{ locale === 'ru' ? 'Общая оценка' : 'Umumiy baho' }}
                         </div>
 
+                        <div class="flex gap-3 w-full justify-center">
+                            <div v-for="index in 5" class="opacity-50">
+                                <full-star-icon v-if="reviewIndex >= index" @mouseover="toggleStar(index)" fill="#D9A53D" w="35"/>
+                                <gray-star-icon v-if="reviewIndex < index" @mouseover="toggleStar(index)" w="35"/>
+                            </div>
+                        </div>
+
                         <div>
-                            <textarea :placeholder="locale === 'ru' ? 'Напишите отзыв' : 'Sharh yozing'" rows="5" class="border border-black border-opacity-20 outline-none resize-none p-5 font-onest-regular w-full"></textarea>
+                            <textarea v-model="body" :placeholder="locale === 'ru' ? 'Напишите отзыв' : 'Sharh yozing'" rows="5" class="border border-black border-opacity-20 outline-none resize-none p-5 font-onest-regular w-full"></textarea>
                         </div>
 
                         <div @click="addReview" class="bg-bronze font-onest-medium text-white p-5 text-center cursor-pointer hover:bg-opacity-90 transition">
@@ -36,13 +43,46 @@
 </template>
 
 <script setup>
+import axios from "axios"
 
+
+const body = ref('')
+const router = useRouter()
+const reviewIndex = ref(0)
 const { locale } = useI18n()
+const config = useRuntimeConfig()
+const authToken = await useAuthToken()
+const props = defineProps(['book_id'])
 const isReviewModalOpen = useIsReviewModalOpen()
 
 
 const closeModal = () => {
     isReviewModalOpen.value = false
+}
+
+
+const toggleStar = (index) => {
+    reviewIndex.value = index
+}
+
+
+const addReview = () => {
+    if (reviewIndex.value > 0) {
+        axios
+            .post(`${config.public.apiUrl}/books/${props.book_id}/reviews`, {
+                body: body.value,
+                rating: reviewIndex.value
+            },{
+                headers: {
+                    Authorization: `Bearer ${authToken.value}`
+                }
+            }).then((res) => {
+                closeModal()
+                console.log(res.data)
+            })
+
+        router.go()
+    }
 }
 
 

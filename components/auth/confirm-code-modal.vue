@@ -56,19 +56,20 @@
 </template>
 
 <script setup>
-import { fetchUrl } from "~/helpers/fetchUrl";
+import { fetchUrl } from "~/helpers/fetchUrl"
 
 
-const isAuthModalOpen = useIsAuthModalOpen()
-const authToken = useAuthToken()
-const authUser = useAuthUser()
-const config = useRuntimeConfig()
-const { locale } = useI18n()
-let inputCodes = reactive([])
-const error = ref(false)
 const timer = ref(33)
-const { data, load } = fetchUrl()
+const error = ref(false)
+const router = useRouter()
+const { locale } = useI18n()
 const smsCode = useSMSCode()
+const authUser = useAuthUser()
+const authToken = useAuthToken()
+const config = useRuntimeConfig()
+const { data, load } = fetchUrl()
+let inputCodes = reactive([])
+const isAuthModalOpen = useIsAuthModalOpen()
 const userPhoneNumber = useUserPhoneNumber()
 
 
@@ -82,6 +83,7 @@ onUpdated(() => {
     isAuthModalOpen.value = isAuthModalOpen.value
 
     if (inputCodes.length === 5) {
+        console.log('teng')
         confirmCode()
     }
 })
@@ -107,7 +109,7 @@ const confirmCode = async () => {
             localStorage.setItem('user', JSON.stringify(data.value.data.user))
             closeAuthModal()
 
-            window.location.reload(true)
+            router.go()
         }
     } else {
         inputCodes = []

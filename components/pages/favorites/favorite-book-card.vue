@@ -60,14 +60,14 @@
 </template>
 
 <script setup>
-import axios from "axios";
+import axios from "axios"
 
 
 const router = useRouter()
 const { locale } = useI18n()
 const config = useRuntimeConfig()
-const authToken = await useAuthToken()
 const props = defineProps(['book'])
+const authToken = await useAuthToken()
 const booksInCart = await useBooksInCart()
 const isBookExistsInCart = ref(
     booksInCart.value ? props.book.id === booksInCart.value.find(item => item.book.id === props.book.id)?.book.id : false
@@ -118,7 +118,7 @@ const removeFromFavorite = () => {
             console.log(e)
         })
 
-    window.location.reload(1)
+    router.go()
 }
 
 </script>
