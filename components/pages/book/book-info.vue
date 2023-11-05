@@ -29,7 +29,7 @@
                                     </div>
                                     <div class="font-onest-regular">{{ bookReview.overall_rating }} {{ locale === 'ru' ? 'оценка' : 'baho' }}</div>
                                 </div>
-                                <div class="flex gap-3 items-center opacity-50 hover:opacity-100 transition-all cursor-pointer">
+                                <div v-if="!isCopiedToClipboard" @click="copyToClipboard" class="flex gap-3 items-center opacity-50 hover:opacity-100 transition-all cursor-pointer">
                                     <div>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" fill="none">
                                         <path opacity="1" d="M17.7486 6.34742L12.6054 11.2883C12.4446 11.4428 12.2264 11.5296 11.999 11.5296C11.7715 11.5296 11.5534 11.4428 11.3925 11.2883C11.2317 11.1338 11.1413 10.9242 11.1413 10.7057C11.1413 10.4872 11.2317 10.2776 11.3925 10.1231L15.0731 6.58829H10.8203C8.72949 6.58773 6.69776 7.2548 5.04462 8.4846C3.39149 9.71439 2.21073 11.4372 1.68802 13.382C1.63118 13.5936 1.48919 13.7748 1.29327 13.8858C1.09735 13.9968 0.863553 14.0285 0.643315 13.9739C0.423078 13.9193 0.234439 13.7829 0.118897 13.5946C0.00335435 13.4064 -0.0296274 13.1818 0.027208 12.9702C0.643974 10.6712 2.03921 8.63458 3.99321 7.18101C5.94722 5.72745 8.34899 4.93953 10.8203 4.94133H15.0752L11.3925 1.40655C11.3129 1.33004 11.2497 1.23921 11.2066 1.13924C11.1635 1.03928 11.1413 0.932137 11.1413 0.823937C11.1413 0.715736 11.1635 0.608594 11.2066 0.50863C11.2497 0.408665 11.3129 0.317835 11.3925 0.241325C11.5534 0.0868073 11.7715 0 11.999 0C12.1116 0 12.2231 0.0213118 12.3272 0.0627185C12.4313 0.104125 12.5258 0.164816 12.6054 0.241325L17.7486 5.1822C17.8283 5.25868 17.8915 5.3495 17.9347 5.44947C17.9778 5.54943 18 5.65659 18 5.76481C18 5.87303 17.9778 5.98018 17.9347 6.08015C17.8915 6.18012 17.8283 6.27094 17.7486 6.34742Z" fill="black"/>
@@ -37,6 +37,17 @@
                                     </div>
                                     <div class="font-onest-regular">
                                         {{ locale === 'ru' ? 'поделиться' : 'ulashish' }}
+                                    </div>
+                                </div>
+
+                                <div v-if="isCopiedToClipboard" class="flex gap-3 items-center opacity-50">
+                                    <div class="cursor-not-allowed opacity-50">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="13" viewBox="0 0 27 13" fill="none">
+                                            <path d="M1 7.41667L5.80769 12L17.3462 1M12.5385 10.1667L14.4615 12L26 1" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="font-onest-regular">
+                                        {{ locale === 'ru' ? 'скопировано' : 'nusxa ko\'chirildi' }}
                                     </div>
                                 </div>
                             </div>
@@ -75,7 +86,7 @@
                                 <div v-if="locale === 'uz'" class="font-onest-regular text-stock-green">{{ book.data.inventory[0].quantity }} dona bor</div>
                             </div>
                             <div class="font-onest-medium text-xl">
-                                {{ book.data.prices[1].price }} {{ locale === 'ru' ? 'сум' : 'so\'m' }}
+                                {{ newBook.prices[1].price }} {{ locale === 'ru' ? 'сум' : 'so\'m' }}
                             </div>
                             <div class="flex gap-7">
                                 <div>
@@ -118,12 +129,16 @@ import GrayStarIcon from "~/components/ui/gray-star-icon.vue";
 
 
 const quantity = ref(1)
+const route = useRoute()
 const { locale } = useI18n()
 const bookReview = ref(null)
 const config = useRuntimeConfig()
+const isCopiedToClipboard = ref(false)
 const authToken = await useAuthToken()
 const currencyType = useCurrencyType()
 const props = defineProps(['book'])
+const newBook = ref(props.book.data)
+const originalPrice = ref(props.book.data.prices[1].price)
 const booksInCart = await useBooksInCart()
 const isBookExistsInFavorites = ref(false)
 const { data: bookInfo, load } = fetchUrl()
@@ -173,9 +188,17 @@ const makeBtnDisabled = () => {
 }
 
 
+const copyToClipboard = () => {
+    navigator.clipboard.writeText(window.location.href)
+    isCopiedToClipboard.value = true
+}
+
+
 const increaseQuantity = () => {
     if (props.book.data.inventory[0].quantity > quantity.value) {
         quantity.value++
+
+        newBook.value.prices[1].price += originalPrice.value
     }
 }
 
@@ -185,6 +208,8 @@ const decreaseQuantity = () => {
         quantity.value = 1
     } else {
         quantity.value--
+
+        newBook.value.prices[1].price -= originalPrice.value
     }
 }
 
@@ -193,9 +218,9 @@ const addToCart = () => {
     if (!isBookExistsInCart.value) {
         booksInCart.value.push(
             {
-                'book': props.book.data,
+                'book': newBook.value,
                 'quantity': quantity.value,
-                'originalPrice': props.book.data.prices[1].price,
+                'originalPrice': originalPrice.value,
             }
         )
 

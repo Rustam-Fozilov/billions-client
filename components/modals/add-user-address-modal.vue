@@ -87,15 +87,12 @@
 </template>
 
 <script setup>
-import { fetchUrl } from "~/helpers/fetchUrl"
-import axios from "axios";
-import router from "#app/plugins/router";
+import axios from "axios"
 
 
 const error = ref(false)
 const router = useRouter()
 const { locale } = useI18n()
-const { data, load } = fetchUrl()
 const config = useRuntimeConfig()
 const authToken = await useAuthToken()
 const isAddUserAddressModalOpen = useIsAddUserAddressModalOpen()
