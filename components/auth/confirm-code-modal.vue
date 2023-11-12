@@ -12,7 +12,7 @@
                     <div class="flex flex-col gap-12">
                         <div>
                             <div class="font-onest-medium text-base">{{ locale === 'ru' ? 'Введите код' : 'Kodni kiriting' }}</div>
-                            <div class="font-onest-regular">{{ locale === 'ru' ? 'Чтобы подтвердить телефон, код был отправлен в +998 97 767-20-97.' : 'Telefonni tasdiqlash maqsadida +998 97 767-20-97 raqamiga kod yuborildi' }}</div>
+                            <div class="font-onest-regular">{{ locale === 'ru' ? `Чтобы подтвердить телефон, код был отправлен в +998 ${userPhoneNumber}.` : `Telefonni tasdiqlash maqsadida +998 ${userPhoneNumber} raqamiga kod yuborildi` }}</div>
                             <div v-if="error" class="font-onest-regular text-red-500 text-center transition">Kod notog'ri terildi</div>
                         </div>
                         <div>
@@ -59,7 +59,7 @@
 import { fetchUrl } from "~/helpers/fetchUrl"
 
 
-const timer = ref(33)
+const timer = ref(45)
 const error = ref(false)
 const router = useRouter()
 const { locale } = useI18n()
@@ -90,40 +90,42 @@ onUpdated(() => {
 
 
 const confirmCode = async () => {
-    const code = +inputCodes.join('')
+    if (inputCodes.length === 5) {
+        const code = +inputCodes.join('')
 
-    await load(
-        `${config.public.apiUrl}/auth/verify-sms-code`,
-        {
-            id: smsCode.value.id,
-            code: code
-        },
-        'POST'
-    )
+        await load(
+            `${config.public.apiUrl}/auth/verify-sms-code`,
+            {
+                id: smsCode.value.id,
+                code: code
+            },
+            'POST'
+        )
 
-    if (data.value.success) {
-        error.value = false
-
-        if (process.client) {
-            localStorage.setItem('token', data.value.data.token)
-            localStorage.setItem('user', JSON.stringify(data.value.data.user))
-            closeAuthModal()
-
-            router.go()
-        }
-    } else {
-        inputCodes = []
-        error.value = true
-
-        return setTimeout(() => {
+        if (data.value.success) {
             error.value = false
-        }, 3000)
+
+            if (process.client) {
+                localStorage.setItem('token', data.value.data.token)
+                localStorage.setItem('user', JSON.stringify(data.value.data.user))
+                closeAuthModal()
+
+                return router.go()
+            }
+        } else {
+            inputCodes = []
+            error.value = true
+
+            return setTimeout(() => {
+                error.value = false
+            }, 3000)
+        }
     }
 }
 
 
 const resendCode = async () => {
-    timer.value = 60
+    timer.value = 70
 
     await load(
         `${config.public.apiUrl}/auth/send-sms-code`,
@@ -185,6 +187,7 @@ const numericOnly = (index) => {
     }
 
     focusNext(index)
+    confirmCode()
     
 }
 

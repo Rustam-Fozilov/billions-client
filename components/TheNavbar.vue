@@ -50,7 +50,7 @@ const refreshToken = async () => {
     await load(
         `${config.public.apiUrl}/auth/refresh-token`,
         {
-            user_id: authUser.value.phone,
+            phone: authUser.value.phone,
             token: authToken.value
         },
         'POST'

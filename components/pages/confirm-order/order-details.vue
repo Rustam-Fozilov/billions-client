@@ -57,19 +57,19 @@ import { fetchUrl } from "~/helpers/fetchUrl"
 import axios from "axios"
 
 
-const addressError = ref(false)
+const { locale } = useI18n()
 const nameError = ref(false)
 const phoneError = ref(false)
-const { data, load } = fetchUrl()
-const { locale } = useI18n()
+const addressError = ref(false)
 const config = useRuntimeConfig()
-const totalAmountOfCart = await useTotalAmountOfCart()
-const booksInCart = await useBooksInCart()
-const orderPaymentType = useOrderPaymentType()
+const { data, load } = fetchUrl()
 const receiverInfo = useReceiverInfo()
-const orderAddressId = useOrderAddressId()
 const authToken = await useAuthToken()
+const booksInCart = await useBooksInCart()
+const orderAddressId = useOrderAddressId()
 const isOrderCreated = useIsOrderCreated()
+const orderPaymentType = useOrderPaymentType()
+const totalAmountOfCart = await useTotalAmountOfCart()
 
 
 onMounted(() => {

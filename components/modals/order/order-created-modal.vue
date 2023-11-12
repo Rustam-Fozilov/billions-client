@@ -41,28 +41,43 @@
 </template>
 
 <script setup>
+import axios from "axios"
 
-const isOrderCreated = useIsOrderCreated()
-const { locale } = useI18n()
+
 const router = useRouter()
+const { locale } = useI18n()
+const config = useRuntimeConfig()
 const booksInCart = useBooksInCart()
+const authToken = await useAuthToken()
+const isOrderCreated = useIsOrderCreated()
 const totalAmountOfCart = useTotalAmountOfCart()
 
 
 const gotoMyOrders = () => {
-    console.log('gotoMyOrders')
+    removeFromCart()
+    isOrderCreated.value = false
+    router.push('/' + locale.value + '/personal/orders')
 }
 
 
 const gotoMain = () => {
-    removeFromLocalStorage()
+    removeFromCart()
     isOrderCreated.value = false
-    router.go()
     router.push('/' + locale.value)
 }
 
 
-const removeFromLocalStorage = () => {
+const removeFromCart = () => {
+    axios
+        .delete(`${config.public.apiUrl}/cart`, {
+            headers: {
+                Authorization: `Bearer ${authToken.value}`
+            }
+        })
+        .then(res => {
+            // console.log(res.data)
+        })
+
     if (process.client) {
         localStorage.removeItem('booksInCart')
         localStorage.removeItem('totalAmountOfCart')

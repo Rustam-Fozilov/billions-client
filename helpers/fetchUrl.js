@@ -47,7 +47,16 @@ export function fetchUrl() {
 
                 break;
             case "DELETE":
-                await del(url, params);
+                await axios
+                    .delete(url, params)
+                    .then((response) => {
+                        data.value = response.data;
+                        // console.log(data.value);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        error.value = true;
+                    });
                 break;
         }
 

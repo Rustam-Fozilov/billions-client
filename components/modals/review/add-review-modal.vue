@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="isReviewModalOpen" @click="closeModal" class="fixed w-screen h-screen top-0 bottom-0 left-0 right-0 bg-black opacity-50"></div>
-        <div v-if="isReviewModalOpen" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white">
+        <div v-if="isReviewModalOpen" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white z-10">
             <div class="p-8 outline-none overscroll-none">
                 <div class="flex flex-col gap-7 justify-start w-[500px]">
                     <div class="flex w-full justify-between border-b-2 pb-4">

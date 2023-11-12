@@ -32,14 +32,18 @@
 </template>
 
 <script setup>
+import axios from "axios"
+
 
 const { locale } = useI18n()
+const config = useRuntimeConfig()
+const authToken = await useAuthToken()
 const booksInCart = await useBooksInCart()
 const totalAmountOfCart = await useTotalAmountOfCart()
-const config = useRuntimeConfig()
 
 
 onMounted(() => {
+    // addBooksToUserCart()
     calculateTotalValue()
 })
 
@@ -71,9 +75,53 @@ const calculateTotalValue = () => {
 }
 
 
+const addBooksToUserCart = () => {
+    if (authToken.value && booksInCart.value) {
+        axios
+            .post(`${config.public.apiUrl}/cart`, {
+                'books': refactorBooksToRequest()
+            }, {
+                headers: {
+                    Authorization: `Bearer ${authToken.value}`
+                }
+            })
+            .then(res => {
+                console.log(res)
+            })
+    }
+}
+
+
+const refactorBooksToRequest = () => {
+    let allBooks = []
+    for (let i = 0; i < booksInCart.value.length; i++) {
+        allBooks.push({
+            'book_id': booksInCart.value[i].book.id,
+            'quantity': booksInCart.value[i].quantity,
+            'total': booksInCart.value[i].book.prices[1].price,
+            'originalPrice': booksInCart.value[i].originalPrice
+        })
+    }
+
+    return allBooks
+}
+
+
 const removeAllFromCart = () => {
     booksInCart.value = []
     totalAmountOfCart.value = +config.public.deliveryAmount
+
+    if (authToken.value) {
+        axios
+            .delete(`${config.public.apiUrl}/cart`, {
+                headers: {
+                    Authorization: `Bearer ${authToken.value}`
+                }
+            })
+            .then(res => {
+                console.log(res.data)
+            })
+    }
 
     localStorage.setItem('booksInCart', JSON.stringify(booksInCart.value))
     localStorage.setItem('totalAmountOfCart', totalAmountOfCart.value)

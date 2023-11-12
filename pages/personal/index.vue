@@ -1,6 +1,12 @@
 <template>
     <div>
+        <div>
+            <the-navbar/>
+        </div>
 
+        <div>
+            <the-footer/>
+        </div>
     </div>
 </template>
 

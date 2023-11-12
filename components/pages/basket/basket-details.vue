@@ -2,6 +2,7 @@
     <div>
         <div>
             <div class="w-full mt-12 sticky top-3 bottom-9">
+
                 <div class="font-onest-regular flex flex-col gap-4">
                     <div class="flex justify-between">
                         <div class="opacity-50">{{ locale === 'ru' ? 'Товаров в заказе' : 'Buyurtma bo\'yicha tovarlar' }}</div>
@@ -34,6 +35,7 @@
                         </span>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -49,23 +51,9 @@ const isAuthModalOpen = useIsAuthModalOpen()
 const booksInCart = await useBooksInCart()
 
 
-onUpdated(async () => {
-    if (process.client) {
-        if (localStorage.getItem('redirect')) {
-            await router.push(`/${locale.value}/confirm-order`)
-            localStorage.removeItem('redirect')
-        }
-    }
-})
-
-
 const gotoConfirmOrder = () => {
     if (!authToken.value) {
         isAuthModalOpen.value = true
-
-        if (process.client) {
-            localStorage.setItem('redirect', true)
-        }
     } else {
         router.push(`/${locale.value}/confirm-order`)
     }

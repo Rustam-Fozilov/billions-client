@@ -66,7 +66,7 @@
                                             <half-star-icon v-if="overall - 0.5 === review.rating"/>
                                             <gray-star-icon v-if="overall > review.rating && overall - 0.5 !== review.rating"/>
                                         </div>
-                                        <div class="opacity-50">{{ review.created_at }}</div>
+                                        <div class="opacity-50">{{ review.created_at.split(' ')[0] }}</div>
                                     </div>
                                     <div>{{ review.body }}</div>
                                     <div v-if="review !== reviews.reviews[reviews.reviews.length - 1]" class="w-full h-[1px] bg-black bg-opacity-20"></div>

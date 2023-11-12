@@ -47,15 +47,15 @@
 import { fetchUrl } from "~/helpers/fetchUrl"
 
 
-const pathTitle = ref('')
 const books = ref([])
-const category = ref(null)
 const route = useRoute()
-const config = useRuntimeConfig()
-const { data, load } = fetchUrl()
+const pathTitle = ref('')
+const category = ref(null)
+const countOfBooks = ref(0)
 const { locale } = useI18n()
 const paginationData = ref([])
-const countOfBooks = ref(0)
+const { data, load } = fetchUrl()
+const config = useRuntimeConfig()
 
 
 watch(() => route.query.page, async (name) => {

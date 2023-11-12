@@ -18,7 +18,7 @@
                     <div class="px-2 py-1 border border-bronze text-bronze font-onest-regular">
                         {{ locale === 'ru' ? order.status.name.ru : order.status.name.uz }}
                     </div>
-                    <div @click="isDetailsOpen = !isDetailsOpen" class="opacity-50 cursor-pointer hover:opacity-100 transition">
+                    <div @click="isDetailsOpen = !isDetailsOpen" class="opacity-50 cursor-pointer hover:opacity-100 transition" :class="isDetailsOpen ? 'rotate-180' : ''">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 23" fill="none">
                             <path d="M2 11.7692L12 21L22 11.7692M12 19.718V1" stroke="black" stroke-width="2" stroke-miterlimit="10" stroke-linecap="square"/>
                         </svg>

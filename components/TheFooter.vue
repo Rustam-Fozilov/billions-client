@@ -21,7 +21,7 @@
                                     <div>(+998) 93 123-45-67</div>
 
                                     <div class="px-11 py-4 bg-white cursor-pointer">
-                                        <div class="text-black">{{ locale === 'ru' ? 'Отправить сообщение' : 'Xabar yuborish' }}</div>
+                                        <a href="mailto:thisisrustam@gmail.com" class="text-black">{{ locale === 'ru' ? 'Отправить сообщение' : 'Xabar yuborish' }}</a>
                                     </div>
 
                                     <div id="social-media">

@@ -21,6 +21,10 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="flex justify-end pt-24">
+                    <the-pagination v-if="paginationData.length > 1" :pagination-data="paginationData"/>
+                </div>
             </div>
         </div>
 
@@ -34,33 +38,49 @@
 import { fetchUrl } from '~/helpers/fetchUrl'
 
 
-const { data, load } = fetchUrl()
-const { locale } = useI18n()
-const searchResult = useSearchResult()
 const route = useRoute()
 const router = useRouter()
+const { locale } = useI18n()
+const paginationData = ref([])
 const query = ref(route.query.q)
+const { data, load } = fetchUrl()
 const config = useRuntimeConfig()
+const searchResult = useSearchResult()
 
 
-onMounted( async () => {
-    await search()
-})
-
-
-onUpdated(async () => {
-    query.value = route.query.q
-    await search()
-})
-
-
-const search = async () => {
-    await load(`${config.public.apiUrl}/books/search/${query.value}?withAuthor=true&page=1`)
-
-    if (!data.value.success) {
-        await router.push(`/${locale.value}/search/not-found`)
-    } else {
+watch(() => route.query.page, async (name) => {
+    await load(`${config.public.apiUrl}/books/search/${query.value}?withAuthor=true&page=${name}`)
+    if (data.value.success) {
         searchResult.value = data.value.data.books
+    }
+})
+
+
+watch(() => route.query.q, async (name) => {
+    query.value = name
+    await load(`${config.public.apiUrl}/books/search/${query.value}?withAuthor=true&page=${route.query.page ?? 1}`)
+
+    if (data.value.success) {
+        searchResult.value = data.value.data.books
+    } else {
+        await router.push(`/${locale.value}/search/not-found`)
+    }
+})
+
+
+await load(`${config.public.apiUrl}/books/search/${query.value}?withAuthor=true&page=1`)
+
+if (!data.value.success) {
+    await router.push(`/${locale.value}/search/not-found`)
+} else {
+    searchResult.value = data.value.data.books
+    paginationData.value.push(data.value.data)
+}
+
+if (data.value.data && data.value.data.links) {
+    while (data.value.data.links.next) {
+        await load(data.value.data.links.next)
+        paginationData.value.push(data.value.data)
     }
 }
 

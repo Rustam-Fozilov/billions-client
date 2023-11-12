@@ -55,7 +55,9 @@
                         <div id="book-info-text" class="flex flex-col gap-7">
                             <div>
                                 <div class="font-onest-medium text-xl">{{ locale === 'ru' ? book.data.name.ru : book.data.name.uz }}</div>
-                                <div class="font-onest-medium text-base">Как решать нерешаемые задачи, посмотрев на проблему с другой стороны</div>
+                                <div class="font-onest-medium text-base">
+                                    {{ locale === 'ru' ? book.data.short_description.ru : book.data.short_description.uz }}
+                                </div>
                             </div>
                             <div>
                                 <div class="font-onest-regular opacity-50">
@@ -82,8 +84,19 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div v-if="locale === 'ru'" class="font-onest-regular text-stock-green">Есть {{ book.data.inventory[0].quantity }} штуки</div>
-                                <div v-if="locale === 'uz'" class="font-onest-regular text-stock-green">{{ book.data.inventory[0].quantity }} dona bor</div>
+                                <div
+                                    v-if="locale === 'ru'"
+                                    class="font-onest-regular"
+                                    :class="book.data.inventory[0].quantity <= 0 ? 'text-red-500' : 'text-stock-green'"
+                                >Есть {{ book.data.inventory[0].quantity }} штуки
+                                </div>
+
+                                <div
+                                    v-if="locale === 'uz'"
+                                    class="font-onest-regular text-stock-green"
+                                    :class="book.data.inventory[0].quantity <= 0 ? 'text-red-500' : 'text-stock-green'"
+                                >{{ book.data.inventory[0].quantity }} dona bor
+                                </div>
                             </div>
                             <div class="font-onest-medium text-xl">
                                 {{ newBook.prices[1].price }} {{ locale === 'ru' ? 'сум' : 'so\'m' }}
@@ -125,7 +138,6 @@
 <script setup>
 import { fetchUrl } from '~/helpers/fetchUrl'
 import axios from "axios"
-import GrayStarIcon from "~/components/ui/gray-star-icon.vue";
 
 
 const quantity = ref(1)
@@ -133,17 +145,17 @@ const route = useRoute()
 const { locale } = useI18n()
 const bookReview = ref(null)
 const config = useRuntimeConfig()
+const props = defineProps(['book'])
+const newBook = ref(props.book.data)
 const isCopiedToClipboard = ref(false)
 const authToken = await useAuthToken()
 const currencyType = useCurrencyType()
-const props = defineProps(['book'])
-const newBook = ref(props.book.data)
-const originalPrice = ref(props.book.data.prices[1].price)
 const booksInCart = await useBooksInCart()
 const isBookExistsInFavorites = ref(false)
 const { data: bookInfo, load } = fetchUrl()
 const isAuthModalOpen = useIsAuthModalOpen()
 const mainImage = ref(props.book.data.images[0])
+const originalPrice = ref(props.book.data.prices[1].price)
 
 
 await load(`${config.public.apiUrl}/books/${props.book.data.id}/reviews`)
@@ -166,6 +178,11 @@ if (authToken.value) {
 onMounted(() => {
     if (isBookExistsInCart.value) {
         makeBtnDisabled()
+        console.log('book exists in cart')
+    }
+
+    if (props.book.data.inventory[0].quantity <= 0) {
+        document.getElementById('add-to-cart-btn').setAttribute('disabled' , 'true')
     }
 })
 
@@ -216,6 +233,8 @@ const decreaseQuantity = () => {
 
 const addToCart = () => {
     if (!isBookExistsInCart.value) {
+        addToUserCart()
+
         booksInCart.value.push(
             {
                 'book': newBook.value,
@@ -230,7 +249,25 @@ const addToCart = () => {
 
         makeBtnDisabled()
     }
+}
 
+
+const addToUserCart = () => {
+    if (authToken.value) {
+        axios
+            .post(`${config.public.apiUrl}/cart`, {
+                'book_id': newBook.value.id,
+                'quantity': quantity.value,
+                'originalPrice': originalPrice.value,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${authToken.value}`
+                }
+            })
+            .then(res => {
+                // console.log(res.data)
+            })
+    }
 }
 
 

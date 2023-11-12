@@ -16,19 +16,39 @@
             <NuxtLink :to="'/' + locale + '/personal/reviews'" class="cursor-pointer font-onest-medium text-sm hover:opacity-100 transition" :class="routeFromPersonal === 'reviews' ? 'opacity-100' : 'opacity-50'">
                 {{ locale === 'ru' ? 'Отзывы' : 'Sharhlar' }}
             </NuxtLink>
-            <NuxtLink :to="'/' + locale + '/'" class="cursor-pointer font-onest-medium text-sm opacity-50 hover:opacity-100 transition">
+            <div @click="logout" class="cursor-pointer font-onest-medium text-sm opacity-50 hover:opacity-100 transition">
                 {{ locale === 'ru' ? 'Выход' : 'Chiqish' }}
-            </NuxtLink>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
+import axios from "axios"
 
 
-const { locale } = useI18n()
 const route = useRoute()
+const { locale } = useI18n()
+const config = useRuntimeConfig()
+const authToken = await useAuthToken()
 const routeFromPersonal = route.path.split('/').pop()
+
+
+const logout = () => {
+    axios
+        .post(`${config.public.apiUrl}/auth/logout`, {}, {
+            headers: {
+                Authorization: `Bearer ${authToken.value}`
+            }
+        })
+        .then((res) => {
+            // console.log(res.data)
+            localStorage.removeItem('token')
+            localStorage.removeItem('user')
+
+            window.location.href = `/${locale.value}`
+        })
+}
 
 
 </script>

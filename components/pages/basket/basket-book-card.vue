@@ -40,7 +40,7 @@
                 <div>
                     <div class="font-onest-medium text-base whitespace-nowrap">
                         {{ book.book.prices[1].price }}
-                        {{ locale === 'ru' ? book.book.prices[1].currency.name.ru : book.book.prices[1].currency.name.uz }}
+                        {{ locale === 'ru' ? 'сум' : 'so\'m' }}
                     </div>
                 </div>
                 <div>
@@ -56,13 +56,17 @@
 </template>
 
 <script setup>
+import axios from "axios"
 
+
+const { locale } = useI18n()
+const config = useRuntimeConfig()
 const currencyType = useCurrencyType()
+const authToken = await useAuthToken()
 const props = defineProps(['book'])
 const booksInCart = await useBooksInCart()
-const totalAmountOfCart = await useTotalAmountOfCart()
-const { locale } = useI18n()
 const bookPrice = props.book.originalPrice
+const totalAmountOfCart = await useTotalAmountOfCart()
 
 
 const increaseBookQuantity = () => {
@@ -73,6 +77,22 @@ const increaseBookQuantity = () => {
 
         book.book.prices[1].price += bookPrice
         totalAmountOfCart.value += bookPrice
+
+        if (authToken.value && book.id) {
+            axios
+                .put(`${config.public.apiUrl}/cart/${book.id}`, {
+                    'book_id': book.book.id,
+                    'quantity': book.quantity,
+                    'originalPrice': bookPrice
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${authToken.value}`
+                    }
+                })
+                .then(res => {
+                    // console.log(res.data)
+                })
+        }
 
         if (process.client) {
             localStorage.setItem('booksInCart', JSON.stringify(booksInCart.value))
@@ -94,6 +114,22 @@ const decreaseBookQuantity = () => {
         totalAmountOfCart.value -= bookPrice
     }
 
+    if (authToken.value && book.id) {
+        axios
+            .put(`${config.public.apiUrl}/cart/${book.id}`, {
+                'book_id': book.book.id,
+                'quantity': book.quantity,
+                'originalPrice': book.originalPrice
+            }, {
+                headers: {
+                    Authorization: `Bearer ${authToken.value}`
+                }
+            })
+            .then(res => {
+                // console.log(res.data)
+            })
+    }
+
     if (process.client) {
         localStorage.setItem('booksInCart', JSON.stringify(booksInCart.value))
         localStorage.setItem('totalAmountOfCart', totalAmountOfCart.value)
@@ -105,6 +141,18 @@ const removeFromCart = () => {
     const index = booksInCart.value.findIndex((item) => item.book.id === props.book.book.id);
 
     if (index !== -1) {
+        if (authToken.value && booksInCart.value[index].id) {
+            axios
+                .delete(`${config.public.apiUrl}/cart/${booksInCart.value[index].id}`, {
+                    headers: {
+                        Authorization: `Bearer ${authToken.value}`
+                    }
+                })
+                .then(res => {
+                    // console.log(res.data)
+                })
+        }
+
         const removedBook = booksInCart.value.splice(index, 1)[0];
         totalAmountOfCart.value -= removedBook.quantity * bookPrice;
     }
@@ -114,6 +162,5 @@ const removeFromCart = () => {
         localStorage.setItem('totalAmountOfCart', totalAmountOfCart.value)
     }
 }
-
 
 </script>
