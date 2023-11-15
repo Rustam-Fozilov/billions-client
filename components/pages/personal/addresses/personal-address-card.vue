@@ -72,6 +72,7 @@ import axios from "axios"
 
 
 const error = ref(false)
+const router = useRouter()
 const config = useRuntimeConfig()
 const isAddressUpdated = ref(false)
 const authToken = await useAuthToken()
@@ -122,7 +123,7 @@ const deleteAddress = async () => {
         }
     })
 
-    location.reload()
+    router.go()
 }
 
 </script>

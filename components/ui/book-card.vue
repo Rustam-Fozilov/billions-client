@@ -2,7 +2,7 @@
     <div id="books-card">
         <div class="w-72">
             <div @click="gotoBook" class="w-full h-80 cursor-pointer">
-                <img class="w-full h-full object-cover" src="~/assets/images/books/book-cover.png" alt="book cover">
+                <img class="w-full h-full object-cover" :src="`${config.public.imageUrl}/images/books/book-cover.png`" alt="book cover">
             </div>
             <div class="mt-5 flex flex-col gap-2 font-onest-regular">
                 <div class="flex justify-between">

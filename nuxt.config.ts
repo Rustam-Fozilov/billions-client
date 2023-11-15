@@ -36,7 +36,8 @@ export default defineNuxtConfig({
     public: {
       apiUrl: process.env.NUXT_API_URL,
       authToken: process.env.NUXT_AUTH_TOKEN,
-      deliveryAmount: process.env.NUXT_DELIVERY_AMOUNT
+      deliveryAmount: process.env.NUXT_DELIVERY_AMOUNT,
+      imageUrl: process.env.NUXT_IMAGE_SERVER_URL
     }
   },
 })

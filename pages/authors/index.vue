@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="flex justify-end pt-24">
-                    <the-pagination v-if="paginationData.length" :pagination-data="paginationData"/>
+                    <the-pagination v-if="paginationData.length > 1" :pagination-data="paginationData"/>
                 </div>
             </div>
         </div>
@@ -72,12 +72,6 @@ watch(() => route.query.page, async (name) => {
 })
 
 
-watch(() => authorsData, async (name) => {
-    await load(`${config.public.apiUrl}/authors?withBooks=true&page=1`)
-    authorsData.value = data.value.data.authors
-})
-
-
 await load(`${config.public.apiUrl}/authors?withBooks=true&page=${route.query.page ?? 1}`)
 authorsData.value = data.value.data.authors
 
@@ -92,9 +86,27 @@ const search = async () => {
             `${config.public.apiUrl}/authors/search/${query.value}?withBooks=true`
         )
 
-        authorsData.value = data.value.data.authors
+        if (data.value.success) {
+            authorsData.value = data.value.data.authors
+        } else {
+            authorsData.value = []
+        }
+
+        paginationData.value = []
     } else {
         await load(`${config.public.apiUrl}/authors?withBooks=true%&page=1`)
+        authorsData.value = data.value.data.authors
+
+        if (paginationData.value.length < 1) {
+            paginationData.value.push(data.value.data)
+
+            if (data.value.data && data.value.data.links) {
+                while (data.value.data.links.next) {
+                    await load(data.value.data.links.next)
+                    paginationData.value.push(data.value.data)
+                }
+            }
+        }
     }
 }
 
