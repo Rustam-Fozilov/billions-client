@@ -2,11 +2,11 @@
     <div>
         <nav-top-item />
 
-        <div class="my-7">
+        <div class="my-7 sm:mb-0">
             <div class="container">
                 
                 <!-- SEARCH -->
-                <div class="flex items-center justify-between">
+                <div class="flex items-center justify-between xl:gap-7 sm:flex-col">
                     <div>
                         <ui-brand w="150" />
                     </div>
@@ -14,7 +14,7 @@
                         <ui-search-input />
                     </div>
                     <div>
-                        <nav-actions/>
+                        <nav-actions class="xl:hidden"/>
                     </div>
                 </div>
 
@@ -24,22 +24,32 @@
                 </div>
             </div>
         </div>
+
+        <mobile-nav v-if="screenSize"/>
     </div>
 </template>
 
 <script setup>
-import { fetchUrl } from "~/helpers/fetchUrl";
+import { fetchUrl } from "~/helpers/fetchUrl"
 
 
-const authToken = await useAuthToken()
-const authUser = await useAuthUser()
 const config = useRuntimeConfig()
 const { data, load } = fetchUrl()
+const authUser = await useAuthUser()
+const authToken = await useAuthToken()
+const { locale, setLocale } = useI18n()
+const screenSize = await useScreenSize()
 
 
 onMounted(() => {
     refreshToken()
+    redirectWithLocale()
 })
+
+
+const redirectWithLocale = () => {
+    return 0
+}
 
 
 const refreshToken = async () => {

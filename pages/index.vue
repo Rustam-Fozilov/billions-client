@@ -18,8 +18,4 @@
 
 <script setup>
 
-// const booksInCart = await useBooksInCart()
-//
-// console.log(booksInCart.value)
-
 </script>

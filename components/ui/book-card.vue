@@ -1,7 +1,7 @@
 <template>
     <div id="books-card">
-        <div class="w-72">
-            <div @click="gotoBook" class="w-full h-80 cursor-pointer">
+        <div class="w-72 lg:w-full">
+            <div @click="gotoBook" class="w-full h-80 sm:h-48 cursor-pointer ">
                 <img class="w-full h-full object-cover" :src="`${config.public.imageUrl}/images/books/book-cover.png`" alt="book cover">
             </div>
             <div class="mt-5 flex flex-col gap-2 font-onest-regular">
@@ -27,14 +27,14 @@
                         {{ locale === 'ru' ? 'Распродано' : 'Sotuvda yo\'q' }}
                     </div>
                 </div>
-                <div class="opacity-50">
+                <div class="opacity-50 sm:text-xs">
                     {{ locale === 'ru' ? book.inventory[0].cover_type.ru : book.inventory[0].cover_type.uz }}
                     {{ locale === 'ru' ? 'обложка' : 'muqova' }}
                 </div>
 
-                <div>{{ locale === 'ru' ? book.name.ru : book.name.uz }}</div>
+                <div class="sm:text-xs">{{ locale === 'ru' ? book.name.ru : book.name.uz }}</div>
 
-                <div class="opacity-50">
+                <div class="opacity-50 sm:text-xs">
                     {{
                         locale === 'ru' ? book.author.first_name.ru + ' ' + book.author.last_name.ru :
                         book.author.first_name.uz + ' ' + book.author.last_name.uz

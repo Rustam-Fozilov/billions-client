@@ -18,3 +18,9 @@
     margin: 0 auto;
   }
 }
+
+@media only screen and (max-width: 1536px) {
+    .container {
+        width: 90%;
+    }
+}

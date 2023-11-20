@@ -3,24 +3,24 @@
         <div>
             <footer class="bg-soft-black">
                 <div class="container">
-                    <div class="p-[100px] w-full">
+                    <div class="p-[100px] w-full 2xl:px-0">
                         <div class="flex justify-center">
                             <ui-brand w="150" fill="white"/>
                         </div>
                         <div class="mt-12">
-                            <div class="flex justify-between text-white font-onest-regular">
-                                <div v-for="footer in footerData" class="flex flex-col gap-5">
+                            <div class="flex justify-between text-white font-onest-regular xl:flex-wrap sm:flex-col">
+                                <div v-for="footer in footerData" class="flex flex-col gap-5 mb-7">
                                     <div class="font-onest-medium">{{ locale === 'ru' ? footer.title.ru : footer.title.uz }}</div>
                                     <nuxt-link v-for="link in footer.links" :to="link.link" class="opacity-70 hover:opacity-100 transition">{{ locale === 'ru' ? link.title.ru : link.title.uz }}</nuxt-link>
                                 </div>
 
-                                <div id="contacts" class="flex flex-col gap-5 font-onest-medium text-base">
+                                <div id="contacts" class="flex flex-col gap-5 font-onest-medium text-base sm:text-sm">
                                     <div class="text-sm">{{ locale === 'ru' ? 'Контакты' : 'Kontaktlar' }}</div>
                                     <div>shop@billions.uz</div>
                                     <div>(+998) 97 767-20-97</div>
                                     <div>(+998) 93 123-45-67</div>
 
-                                    <div class="px-11 py-4 bg-white cursor-pointer">
+                                    <div class="px-11 py-4 bg-white cursor-pointer text-center">
                                         <a href="mailto:thisisrustam@gmail.com" class="text-black">{{ locale === 'ru' ? 'Отправить сообщение' : 'Xabar yuborish' }}</a>
                                     </div>
 

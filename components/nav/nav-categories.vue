@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div id="nav-categories" class="w-full flex justify-between mt-7">
+        <div id="nav-categories" class="w-full flex flex-wrap justify-between mt-7">
             <div @click="gotoCatalog(category.path_name)" v-for="category in categories">
                 <div class="font-onest-regular cursor-pointer">
                     {{ locale === 'ru' ? category.name.ru : category.name.uz }}
@@ -11,14 +11,13 @@
 </template>
 
 <script setup>
-import axios from 'axios';
-import { useRouter } from 'vue-router';
+import axios from 'axios'
 
 
-const { locale } = useI18n()
 const router = useRouter()
-const config = useRuntimeConfig()
 const categories = ref([])
+const { locale } = useI18n()
+const config = useRuntimeConfig()
 
 
 await axios
@@ -40,3 +39,13 @@ const gotoCatalog = (name) => {
 }
 
 </script>
+
+<style scoped>
+
+@media only screen and (max-width: 1400px) {
+    #nav-categories {
+        display: none;
+    }
+}
+
+</style>

@@ -5,13 +5,13 @@
         </div>
 
         <div class="bg-soft-white w-full">
-            <div class="container pt-12">
+            <div class="container pt-12 sm:pt-7">
                 <breadcrumbs-path/>
 
                 <favorites-list/>
 
             </div>
-        </div>
+        </div>,
 
         <div>
             <the-footer/>

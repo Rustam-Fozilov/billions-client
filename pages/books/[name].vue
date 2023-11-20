@@ -4,9 +4,9 @@
             <the-navbar/>
         </div>
 
-        <div class="bg-soft-white py-12">
+        <div class="bg-soft-white py-12 sm:py-7">
             <category-path :category_id="bookData.data.category.id" :book_name="bookData.data.name"/>
-            
+
             <book-info :book="bookData"/>
 
             <book-properties :book="bookData"/>

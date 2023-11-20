@@ -11,7 +11,7 @@
                         <personal-nav/>
                     </div>
                     <div class="w-full">
-                        <div class="flex gap-5">
+                        <div class="flex gap-5 sm:gap-3">
                             <div class="font-onest-medium text-xl">
                                 {{ locale === 'ru' ? 'Избранное' : 'Sevimlilar' }}
                             </div>

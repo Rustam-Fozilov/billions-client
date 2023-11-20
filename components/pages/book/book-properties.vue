@@ -3,8 +3,8 @@
         <div class="container mt-12">
             <div>
                 <div>
-                    <div class="flex gap-7 font-onest-medium text-base cursor-pointer">
-                        <div @click="switchToWhatAboutProperty" class="">
+                    <div class="flex gap-7 font-onest-medium text-base cursor-pointer sm:text-[16px]">
+                        <div @click="switchToWhatAboutProperty">
                             {{ $t('book_properties.description') }}
                             <div v-if="togglePropertiesValue === 'what-about'" class="-mb-6 mt-4 bg-bronze h-2"></div>
                         </div>
@@ -22,11 +22,11 @@
                         <div id="long-line" class="w-full h-[1px] opacity-20 bg-black"></div>
                     </div>
                 </div>
-                <div class="mt-12">
-                    <div class="w-2/5 relative left-1/4">
-                        <div v-if="togglePropertiesValue === 'what-about'" id="what-about" class="flex flex-col gap-7">
-                            <div class="font-onest-medium text-xl">{{ $t('book_properties.what_about') }}</div>
-                            <div class="font-onest-regular text-base">
+                <div class="mt-12 sm:mt-7">
+                    <div class="w-2/5 relative left-1/4 lg:w-full lg:left-0">
+                        <div v-if="togglePropertiesValue === 'what-about'" id="what-about" class="flex flex-col gap-7 sm:gap-5">
+                            <div class="font-onest-medium text-xl sm:text-base">{{ $t('book_properties.what_about') }}</div>
+                            <div class="font-onest-regular text-base sm:text-[16px]">
                                 {{ locale === 'ru' ? props.book.data.description.ru : props.book.data.description.uz }}
                             </div>
                         </div>
@@ -50,10 +50,10 @@
                         </div>
 
                         <div v-if="togglePropertiesValue === 'reviews'" id="what-about">
-                            <div class="font-onest-medium text-xl">{{ $t('book_properties.reviews') }}, <span class="opacity-50">({{ reviews.reviews_count }})</span></div>
+                            <div class="font-onest-medium text-xl sm:text-base">{{ $t('book_properties.reviews') }}, <span class="opacity-50">({{ reviews.reviews_count }})</span></div>
 
-                            <div v-if="reviews.reviews_count > 0" class="mt-7 flex flex-col gap-5">
-                                <div @click="openReviewModal" class="font-onest-medium text-sm text-bronze cursor-pointer hover:opacity-80 transition">
+                            <div v-if="reviews.reviews_count > 0" class="mt-7 flex flex-col gap-5 sm:mt-5">
+                                <div @click="openReviewModal" class="font-onest-medium text-sm text-bronze cursor-pointer hover:opacity-80 transition sm:text-[16px]">
                                     {{ locale === 'ru' ? 'Оставить отзыв' : 'Sharh qoldirish' }}
                                 </div>
                                 <div v-for="(review, index) in reviews.reviews" :key="index" class="font-onest-regular flex flex-col gap-2">
@@ -130,6 +130,7 @@ const openReviewModal = () => {
     if (!authToken.value) {
         return isAuthModalOpen.value = true
     }
+    console.log('review modal open')
 
     return isReviewModalOpen.value = true
 }

@@ -1,8 +1,8 @@
 <template>
     <div>
         <div>
-            <div class="bg-nav-bg h-12">
-                <div class="flex justify-between container items-center h-full">
+            <div class="bg-nav-bg">
+                <div class="flex justify-between container items-center h-full flex-wrap sm:justify-evenly">
                     <div class="flex gap-8">
                         <div class="flex gap-2 items-center">
                             <div>
@@ -11,7 +11,7 @@
                                 </svg>
                             </div>
                             <div class="font-onest-regular">
-                                (+998) 71 200 00 00
+                                (+998) 97 767 20 97
                             </div>
                         </div>
                         <div class="flex gap-2 items-center">
@@ -31,12 +31,12 @@
                     </div>
                     <div>
                         <div class="relative">
-                            <div @click="showLang = !showLang" class="m-3 h-full cursor-pointer flex items-center gap-2">
+                            <button @click="showLang = !showLang" class="m-3 h-full cursor-pointer flex items-center gap-2">
                                 <div class="w-7 h-7">
                                     <img class="w-full h-full object-cover rounded-2xl" :src='"/images/" + localeValues.value.details.icon' alt="language icon"/>
                                 </div>
                                 <div class="font-onest-regular">{{ localeValues.value.details.code === 'ru' ? 'Русский' : 'O\'zbekcha' }}</div>
-                            </div>
+                            </button>
 
                             <div v-if="showLang" @click="changeLang" class="bg-white p-3 shadow-lg absolute top-full cursor-pointer mt-2 z-10">
                                 <div class="flex gap-2 items-center h-full w-full">
@@ -55,15 +55,15 @@
 </template>
 
 <script setup>
-import { fetchUrl } from '~/helpers/fetchUrl';
+import { fetchUrl } from '~/helpers/fetchUrl'
 
 
 const route = useRoute()
 const router = useRouter()
-const config = useRuntimeConfig()
-const { locale, setLocale } = useI18n()
-const { data, load } = fetchUrl()
 const showLang = ref(false)
+const config = useRuntimeConfig()
+const { data, load } = fetchUrl()
+const { locale, setLocale } = useI18n()
 
 
 await load(`${config.public.apiUrl}/guest-settings`)
@@ -88,8 +88,8 @@ const changeLang = async () => {
         localeValues.value = data.value.data
 
 
-        const routePath = split(route.path, '/')
-        await router.push(`/uz/${routePath.slice(1).join('/')}`)
+        const routePath = route.path.split('/')
+        routePath[0] !== '' ? await router.push(`/uz/${routePath.slice(1).join('/')}`) : await router.push(`/uz`)
 
     } else if (locale.value === 'uz') {
         await load(`${config.public.apiUrl}/guest-settings/1`, {
@@ -102,8 +102,8 @@ const changeLang = async () => {
         localeValues.value = data.value.data
 
 
-        const routePath = split(route.path, '/')
-        await router.push(`/ru/${routePath.slice(1).join('/')}`)
+        const routePath = route.path.split('/')
+        routePath[0] !== '' ? await router.push(`/ru/${routePath.slice(1).join('/')}`) : await router.push(`/ru`)
     }
 }
 

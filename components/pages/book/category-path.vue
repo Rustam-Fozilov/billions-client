@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 flex-wrap sm:text-xs">
                 <div v-for="category in categoriesTree.slice().reverse()">
                     <div @click="gotoCategory(category)" class="flex items-center gap-3 cursor-pointer opacity-50 hover:opacity-100 hover:text-bronze transition">
                         <div class="font-onest-regular">

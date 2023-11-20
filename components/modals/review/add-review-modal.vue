@@ -1,11 +1,11 @@
 <template>
     <div>
         <div v-if="isReviewModalOpen" @click="closeModal" class="fixed w-screen h-screen top-0 bottom-0 left-0 right-0 bg-black opacity-50"></div>
-        <div v-if="isReviewModalOpen" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white z-10">
-            <div class="p-8 outline-none overscroll-none">
-                <div class="flex flex-col gap-7 justify-start w-[500px]">
+        <div v-if="isReviewModalOpen" class="flex flex-col items-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white z-10 sm:w-11/12">
+            <div class="p-8 outline-none overscroll-none w-full">
+                <div class="flex flex-col gap-7 justify-start w-[500px] sm:w-full sm:gap-3">
                     <div class="flex w-full justify-between border-b-2 pb-4">
-                        <div class="font-onest-medium text-base">
+                        <div class="font-onest-medium text-base sm:text-sm">
                             {{ locale === 'ru' ? 'Оставить отзыв' : 'Sharh qoldirish' }}
                         </div>
 
@@ -16,8 +16,8 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col gap-7">
-                        <div class="font-onest-regular text-sm">
+                    <div class="flex flex-col gap-7 sm:gap-5">
+                        <div class="font-onest-regular">
                             {{ locale === 'ru' ? 'Общая оценка' : 'Umumiy baho' }}
                         </div>
 
@@ -51,9 +51,16 @@ const router = useRouter()
 const reviewIndex = ref(0)
 const { locale } = useI18n()
 const config = useRuntimeConfig()
+const screenSize = await useScreenSize()
 const authToken = await useAuthToken()
 const props = defineProps(['book_id'])
 const isReviewModalOpen = useIsReviewModalOpen()
+
+
+onUpdated(() => {
+    screenSize.value = !isReviewModalOpen.value
+    console.log(screenSize.value)
+})
 
 
 const closeModal = () => {

@@ -1,7 +1,7 @@
 <template>
     <div id="books-card">
-        <div class="w-72">
-            <div @click="gotoBook(book)" class="w-full h-80 relative cursor-pointer">
+        <div class="w-72 lg:w-full">
+            <div @click="gotoBook(book)" class="w-full h-80 sm:h-48 relative cursor-pointer">
                 <div class="absolute top-3 right-3">
                     <div @click.stop="removeFromFavorite" class="bg-white w-7 h-7 rounded-full flex justify-center items-center hover:opacity-80 transition">
                         <div>
@@ -43,14 +43,14 @@
                         {{ locale === 'ru' ? 'Распродано' : 'Sotuvda yo\'q' }}
                     </div>
                 </div>
-                <div class="opacity-50">
+                <div class="opacity-50 sm:text-xs">
                     {{ locale === 'ru' ? book.inventory[0].cover_type.ru : book.inventory[0].cover_type.uz }}
                     {{ locale === 'ru' ? 'обложка' : 'muqova' }}
                 </div>
 
-                <div>{{ locale === 'ru' ? book.name.ru : book.name.uz }}</div>
+                <div class="sm:text-xs">{{ locale === 'ru' ? book.name.ru : book.name.uz }}</div>
 
-                <div class="opacity-50">
+                <div class="opacity-50 sm:text-xs">
                     {{
                         locale === 'ru' ?
                         book.author.first_name.ru + ' ' + book.author.last_name.ru :
