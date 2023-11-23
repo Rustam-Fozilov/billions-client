@@ -4,25 +4,25 @@
             <the-navbar/>
         </div>
 
-        <div class="bg-soft-white pt-12 pb-24">
+        <div class="bg-soft-white pt-12 pb-24 sm:pt-7 sm:pb-12">
             <div class="container">
-                <div class="flex">
-                    <div class="w-1/4">
+                <div class="flex lg:flex-col lg:gap-5">
+                    <div class="w-1/4 lg:w-full">
                         <personal-nav/>
                     </div>
 
                     <div class="w-full">
                         <div class="flex justify-between">
-                            <div class="font-onest-medium text-xl">
+                            <div class="font-onest-medium text-xl sm:text-base">
                                 {{ locale === 'ru' ? 'Мои адреса' : 'Mening manzillarim' }}
                             </div>
-                            <div @click="openAddAddressModal" class="font-onest-medium text-base cursor-pointer hover:opacity-50 transition">
+                            <div @click="openAddAddressModal" class="font-onest-medium text-base sm:text-sm cursor-pointer hover:opacity-50 transition">
                                 {{ locale === 'ru' ? '+ Добавить' : '+ Qo\'shish' }}
                             </div>
                         </div>
 
                         <div class="mt-5">
-                            <div class="flex flex-col gap-7">
+                            <div class="flex flex-col gap-7 sm:gap-5">
                                 <div v-for="address in data ? data.data : 0" :key="address.id">
                                     <personal-address-card :address="address"/>
                                 </div>

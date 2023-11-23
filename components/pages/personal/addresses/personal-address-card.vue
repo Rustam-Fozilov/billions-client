@@ -20,42 +20,42 @@
             </div>
         </div>
 
-        <div v-if="isAddressDetailsOpen" class="mt-7 flex flex-col gap-7">
+        <div v-if="isAddressDetailsOpen" class="mt-7 flex flex-col gap-7 sm:mt-5 sm:gap-5">
             <div class="flex">
-                <div class="font-onest-medium text-base opacity-50 w-1/4">
+                <div class="font-onest-medium text-base sm:text-sm opacity-50 w-1/4">
                     Tuman
                 </div>
                 <div class="w-9/12">
-                    <input v-model="addressInfo.region" placeholder="Tuman nomini kiriting" type="text" class="w-1/2 border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
+                    <input v-model="addressInfo.region" placeholder="Tuman nomini kiriting" type="text" class="w-1/2 sm:w-full sm:text-sm border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
                 </div>
             </div>
             <div class="flex items-center">
-                <div class="font-onest-medium text-base opacity-50 w-1/4">
+                <div class="font-onest-medium text-base sm:text-sm opacity-50 w-1/4">
                     Ko’cha nomi
                 </div>
                 <div class="w-9/12">
-                    <input v-model="addressInfo.street" placeholder="Ko'cha nomini kiriting" type="text" class="w-1/2 border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
+                    <input v-model="addressInfo.street" placeholder="Ko'cha nomini kiriting" type="text" class="w-1/2 sm:w-full sm:text-sm border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
                 </div>
             </div>
             <div class="flex items-center">
-                <div class="font-onest-medium text-base opacity-50 w-1/4">
+                <div class="font-onest-medium text-base sm:text-sm opacity-50 w-1/4">
                     Uy raqami
                 </div>
                 <div class="w-9/12">
-                    <input v-model="addressInfo.house" placeholder="Uy raqamini kiriting" type="text" class="w-1/2 border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
+                    <input v-model="addressInfo.house" placeholder="Uy raqamini kiriting" type="text" class="w-1/2 sm:w-full sm:text-sm border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
                 </div>
             </div>
             <div class="flex">
-                <div class="font-onest-medium text-base opacity-50 w-1/4">
+                <div class="font-onest-medium text-base sm:text-sm opacity-50 w-1/4">
                     Qo’shimcha ma’lumot
                 </div>
                 <div class="w-9/12">
-                    <input v-model="addressInfo.additional_info" placeholder="Qo'shimcha ma'lumot (majburiy emas)" type="text" class="w-1/2 border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
-                    <div class="flex gap-5">
+                    <input v-model="addressInfo.additional_info" placeholder="Qo'shimcha ma'lumot (majburiy emas)" type="text" class="w-1/2 sm:w-full sm:text-sm border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
+                    <div class="flex gap-5 sm:flex-col sm:gap-3">
                         <div @click="updateAddress" class="py-4 px-20 bg-bronze text-white font-onest-medium w-min cursor-pointer mt-12">
                             Saqlash
                         </div>
-                        <div @click="deleteAddress" class="py-4 px-20 bg-nav-bg font-onest-medium w-min cursor-pointer mt-12">
+                        <div @click="deleteAddress" class="py-4 px-20 bg-nav-bg font-onest-medium w-min cursor-pointer mt-12 sm:mt-0">
                             O'chirish
                         </div>
                     </div>

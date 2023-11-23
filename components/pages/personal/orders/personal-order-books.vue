@@ -2,7 +2,7 @@
     <div>
         <div class="flex justify-between mt-5 font-onest-regular sm:flex-col sm:w-full sm:gap-3">
             <div class="flex gap-5 items-center sm:gap-3">
-                <div class="w-[36px] h-[40px] sm:w-[60px] sm:h-[65px]">
+                <div class="w-[36px] h-[40px] sm:min-w-[50px] sm:h-[65px]">
                     <img class="w-full h-full object-cover" :src="book.images[0].link" alt="">
                 </div>
                 <div>

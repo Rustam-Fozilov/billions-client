@@ -1,1 +1,2 @@
 - fix: mobile-nav visibility when auth-modal toggled
+- make address modal responsive

@@ -4,51 +4,51 @@
             <the-navbar/>
         </div>
 
-        <div class="bg-soft-white pt-12 pb-24">
+        <div class="bg-soft-white pt-12 pb-24 sm:pt-7 sm:pb-12">
             <div class="container">
-                <div class="flex">
-                    <div class="w-1/4">
+                <div class="flex lg:flex-col lg:gap-5">
+                    <div class="w-1/4 lg:w-full">
                         <personal-nav/>
                     </div>
 
                     <div class="w-full">
-                        <div class="font-onest-medium text-xl">
+                        <div class="font-onest-medium text-xl sm:text-base">
                             {{ locale === 'ru' ? 'Мои данные' : 'Mening ma\'lumotlarim' }}
                         </div>
 
                         <div class="mt-5 flex flex-col gap-7">
                             <div class="flex">
-                                <div class="font-onest-medium text-base opacity-50 w-1/4">
+                                <div class="font-onest-medium text-base sm:text-sm opacity-50 w-1/4">
                                     {{ locale === 'ru' ? 'Имя' : 'Ism' }}
                                 </div>
                                 <div class="w-9/12">
-                                    <input v-model="newUserInfo.first_name" :placeholder="locale === 'ru' ? 'Введите ваше имя' : 'Ismingizni kiriting'" type="text" class="w-1/2 border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
+                                    <input v-model="newUserInfo.first_name" :placeholder="locale === 'ru' ? 'Введите ваше имя' : 'Ismingizni kiriting'" type="text" class="w-1/2 sm:w-full border-b-2 outline-none bg-transparent font-onest-medium text-base sm:text-sm border-opacity-20">
                                 </div>
                             </div>
                             <div class="flex items-center">
-                                <div class="font-onest-medium text-base opacity-50 w-1/4">
+                                <div class="font-onest-medium text-base sm:text-sm opacity-50 w-1/4">
                                     {{ locale === 'ru' ? 'Фамилия' : 'Familiya' }}
                                 </div>
                                 <div class="w-9/12">
-                                    <input v-model="newUserInfo.last_name" :placeholder="locale === 'ru' ? 'Введите вашу фамилию' : 'Familiyangizni kiriting'" type="text" class="w-1/2 border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
+                                    <input v-model="newUserInfo.last_name" :placeholder="locale === 'ru' ? 'Введите вашу фамилию' : 'Familiyangizni kiriting'" type="text" class="w-1/2 sm:w-full border-b-2 outline-none bg-transparent font-onest-medium text-base sm:text-sm border-opacity-20">
                                 </div>
                             </div>
                             <div class="flex items-center">
-                                <div class="font-onest-medium text-base opacity-50 w-1/4">
+                                <div class="font-onest-medium text-base sm:text-sm opacity-50 w-1/4">
                                     {{ locale === 'ru' ? 'Телефон' : 'Telefon' }}
                                 </div>
                                 <div class="w-9/12 flex gap-3 border-">
-                                    <div class="font-onest-medium text-base">+998</div>
-                                    <input v-model="newUserInfo.phone" @input="numericOnly" maxlength="9" :placeholder="locale === 'ru' ? 'Введите свой номер телефона' : 'Telefon raqamingizni kiriting'" type="text" class="w-1/2 border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
+                                    <div class="font-onest-medium text-base sm:text-sm">+998</div>
+                                    <input v-model="newUserInfo.phone" @input="numericOnly" maxlength="9" :placeholder="locale === 'ru' ? 'Введите свой номер телефона' : 'Telefon raqamingizni kiriting'" type="text" class="w-1/2 sm:w-full border-b-2 outline-none bg-transparent font-onest-medium text-base sm:text-sm border-opacity-20">
                                 </div>
                             </div>
                             <div class="flex">
-                                <div class="font-onest-medium text-base opacity-50 w-1/4">
+                                <div class="font-onest-medium text-base sm:text-sm opacity-50 w-1/4">
                                     {{ locale === ru ? 'Электронная почта' : 'Email'}}
                                 </div>
                                 <div class="w-9/12">
-                                    <input v-model="newUserInfo.email" :placeholder="locale === 'ru' ? 'Введите свой адрес электронной почты (необязательно)' : 'Emailingizni kiriting (majburiy emas)'" type="text" class="w-1/2 border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
-                                    <div @click="updateUserInfo" class="py-4 px-20 bg-bronze text-white font-onest-medium w-min cursor-pointer mt-12">
+                                    <input v-model="newUserInfo.email" :placeholder="locale === 'ru' ? 'Введите свой адрес электронной почты (необязательно)' : 'Emailingizni kiriting (majburiy emas)'" type="text" class="w-1/2 sm:w-full border-b-2 outline-none bg-transparent font-onest-medium text-base sm:text-sm border-opacity-20">
+                                    <div @click="updateUserInfo" class="py-4 px-20 bg-bronze text-white font-onest-medium w-min cursor-pointer mt-12 sm:mt-7">
                                         Saqlash
                                     </div>
                                     <div v-if="error" class="text-red-600 font-onest-regular mt-2">

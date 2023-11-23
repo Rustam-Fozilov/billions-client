@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="bg-white w-4/5">
-            <div class=" p-7 flex justify-between items-center" :class="review.body ? 'border-b-black border-b-[1px] border-opacity-20' : ''">
+        <div class="bg-white w-4/5 xl:w-full">
+            <div class="p-7 flex flex-wrap justify-between items-center sm:p-5 xl:gap-3 sm:flex-col sm:items-start" :class="review.body ? 'border-b-black border-b-[1px] border-opacity-20' : ''">
                 <div class="flex gap-5 items-center">
-                    <div class="w-16 h-20">
+                    <div class="w-16 h-20 min-w-[64px]">
                         <img class="object-cover w-full h-full" :src="review.book.images[0].link" :alt="review.book.name.ru">
                     </div>
                     <div class="font-onest-regular">
@@ -11,7 +11,7 @@
                     </div>
                 </div>
 
-                <div class="flex items-center gap-5 font-onest-regular">
+                <div class="flex items-center gap-5 font-onest-regular flex-wrap">
                     <div class="opacity-50">
                         {{ review.created_at.split(' ')[0] }}
                     </div>
@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <div v-if="review.body" class="p-7">
+            <div v-if="review.body" class="p-7 sm:p-5">
                 <div class="font-onest-regular flex gap-2">
                     <div class="opacity-50">
                         {{ locale === 'ru' ? 'Отзыв:' : 'Sharh:' }}
