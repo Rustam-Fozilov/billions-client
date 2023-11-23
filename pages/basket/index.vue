@@ -1,11 +1,11 @@
-<template>
+    <template>
     <div>
         <div>
             <the-navbar/>
         </div>
 
         <div class="bg-soft-white w-full">
-            <div class="container pt-12">
+            <div class="container pt-12 sm:pt-7">
                 <breadcrumbs-path/>
 
                 <div v-if="booksInBasket ? booksInBasket.length : 0">

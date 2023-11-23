@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="bg-white p-7 w-2/3">
-            <div class="flex items-center justify-between">
+        <div class="bg-white p-7 w-2/3 2xl:w-full sm:p-5">
+            <div class="flex items-center justify-between flex-wrap md:gap-2">
                 <div class="font-onest-medium">
                     {{ locale === 'ru' ? 'Номер заказа: ' : 'Buyurtma raqami: ' }} {{ order.id }}
                 </div>

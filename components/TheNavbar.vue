@@ -25,6 +25,10 @@
             </div>
         </div>
 
+        <div class="z-10">
+            <auth-modal/>
+        </div>
+
         <mobile-nav v-if="screenSize"/>
     </div>
 </template>

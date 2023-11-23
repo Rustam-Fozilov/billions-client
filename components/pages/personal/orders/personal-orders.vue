@@ -2,10 +2,10 @@
     <div>
         <div class="flex flex-col gap-7">
             <div class="flex gap-5">
-                <div class="font-onest-medium text-xl">
+                <div class="font-onest-medium text-xl sm:text-base">
                     {{ locale === 'ru' ? 'Заказы' : 'Buyurtmalar' }}
                 </div>
-                <div class="font-onest-regular opacity-50 mt-4">
+                <div class="font-onest-regular opacity-50 mt-4 sm:mt-1">
                     {{ locale === 'ru' ? `${data ? data.data.orders.length : ''} заказов` : `${data ? data.data.orders.length : ''}ta buyurtma` }}
                 </div>
             </div>
@@ -14,7 +14,7 @@
                 <personal-orders-block :order="order"/>
             </div>
         </div>
-        <div class="flex justify-end pt-24">
+        <div class="flex justify-end pt-24 sm:pt-12">
             <the-pagination v-if="paginationData.length > 1" :pagination-data="paginationData"/>
         </div>
     </div>

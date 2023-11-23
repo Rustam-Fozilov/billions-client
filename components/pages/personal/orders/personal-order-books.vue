@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div class="flex justify-between mt-5 font-onest-regular">
-            <div class="flex gap-5 items-center">
-                <div class="w-9 h-10">
+        <div class="flex justify-between mt-5 font-onest-regular sm:flex-col sm:w-full sm:gap-3">
+            <div class="flex gap-5 items-center sm:gap-3">
+                <div class="w-[36px] h-[40px] sm:w-[60px] sm:h-[65px]">
                     <img class="w-full h-full object-cover" :src="book.images[0].link" alt="">
                 </div>
                 <div>
@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div @click="openReviewModal" class="font-onest-medium text-bronze hover:opacity-80 cursor-pointer">
-                Sharh qoldirish
+                {{ locale === 'ru' ? 'Оставить отзыв' : 'Sharh qoldirish' }}
             </div>
         </div>
 

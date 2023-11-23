@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container py-12 flex flex-col gap-12 sm:gap-7 sm:py-7">
+        <div class="container py-12 flex flex-col gap-12 sm:gap-7 sm:py-7 xl:w-full">
             <div class="flex gap-7 items-end">
                 <div class="text-xl font-onest-medium sm:text-base">{{ $t('bestseller_books.title') }}</div>
                 <div class="font-onest-regular opacity-50 hover:opacity-100">

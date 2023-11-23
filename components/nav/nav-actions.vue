@@ -40,11 +40,6 @@
                     </span>
                 </NuxtLink>
 
-
-                <div class="z-10">
-                    <auth-modal/>
-                </div>
-
             </div>
         </div>
     </div>

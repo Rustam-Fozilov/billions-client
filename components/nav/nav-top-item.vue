@@ -2,9 +2,9 @@
     <div>
         <div>
             <div class="bg-nav-bg">
-                <div class="flex justify-between container items-center h-full flex-wrap sm:justify-evenly">
+                <div class="flex justify-between container items-center h-full flex-wrap">
                     <div class="flex gap-8">
-                        <div class="flex gap-2 items-center">
+                        <div class="flex gap-2 items-center sm:hidden">
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                     <path d="M3.93333 2.22222C4 3.21111 4.16667 4.17778 4.43333 5.1L3.1 6.43333C2.64444 5.1 2.35556 3.68889 2.25556 2.22222H3.93333ZM14.8889 15.5778C15.8333 15.8444 16.8 16.0111 17.7778 16.0778V17.7333C16.3111 17.6333 14.9 17.3444 13.5556 16.9L14.8889 15.5778ZM5 0H1.11111C0.5 0 0 0.5 0 1.11111C0 11.5444 8.45556 20 18.8889 20C19.5 20 20 19.5 20 18.8889V15.0111C20 14.4 19.5 13.9 18.8889 13.9C17.5111 13.9 16.1667 13.6778 14.9222 13.2667C14.8119 13.2267 14.6951 13.2078 14.5778 13.2111C14.2889 13.2111 14.0111 13.3222 13.7889 13.5333L11.3444 15.9778C8.19492 14.3671 5.6329 11.8051 4.02222 8.65556L6.46667 6.21111C6.77778 5.9 6.86667 5.46667 6.74444 5.07778C6.32295 3.79784 6.10913 2.45866 6.11111 1.11111C6.11111 0.5 5.61111 0 5 0Z" fill="black"/>
@@ -26,7 +26,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="font-onest-regular">
+                    <div class="font-onest-regular sm:hidden">
                         {{ $t('top_nav.delivery') }}
                     </div>
                     <div>

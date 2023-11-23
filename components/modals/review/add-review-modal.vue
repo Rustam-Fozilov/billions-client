@@ -59,7 +59,6 @@ const isReviewModalOpen = useIsReviewModalOpen()
 
 onUpdated(() => {
     screenSize.value = !isReviewModalOpen.value
-    console.log(screenSize.value)
 })
 
 
