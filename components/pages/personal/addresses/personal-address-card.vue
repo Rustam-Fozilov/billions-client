@@ -23,44 +23,48 @@
         <div v-if="isAddressDetailsOpen" class="mt-7 flex flex-col gap-7 sm:mt-5 sm:gap-5">
             <div class="flex">
                 <div class="font-onest-medium text-base sm:text-sm opacity-50 w-1/4">
-                    Tuman
+                    {{ locale === 'ru' ? 'Округ' : 'Tuman' }}
                 </div>
                 <div class="w-9/12">
-                    <input v-model="addressInfo.region" placeholder="Tuman nomini kiriting" type="text" class="w-1/2 sm:w-full sm:text-sm border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
+                    <input v-model="addressInfo.region" :placeholder="locale === 'ru' ? 'Введите название округа' : 'Tuman nomini kiriting'" type="text" class="w-1/2 sm:w-full sm:text-sm border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
                 </div>
             </div>
             <div class="flex items-center">
                 <div class="font-onest-medium text-base sm:text-sm opacity-50 w-1/4">
-                    Ko’cha nomi
+                    {{ locale === 'ru' ? 'Hазвание улицы' : 'Ko\'cha nomi' }}
                 </div>
                 <div class="w-9/12">
-                    <input v-model="addressInfo.street" placeholder="Ko'cha nomini kiriting" type="text" class="w-1/2 sm:w-full sm:text-sm border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
+                    <input v-model="addressInfo.street" :placeholder="locale === 'ru' ? 'Введите название улицы' : 'Ko\'cha nomini kiriting'" type="text" class="w-1/2 sm:w-full sm:text-sm border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
                 </div>
             </div>
             <div class="flex items-center">
                 <div class="font-onest-medium text-base sm:text-sm opacity-50 w-1/4">
-                    Uy raqami
+                    {{ locale === 'ru' ? 'Номер дома' : 'Uy raqami' }}
                 </div>
                 <div class="w-9/12">
-                    <input v-model="addressInfo.house" placeholder="Uy raqamini kiriting" type="text" class="w-1/2 sm:w-full sm:text-sm border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
+                    <input v-model="addressInfo.house" :placeholder="locale === 'ru' ? 'Введите номер дома' : 'Uy raqamini kiriting'" type="text" class="w-1/2 sm:w-full sm:text-sm border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
                 </div>
             </div>
             <div class="flex">
                 <div class="font-onest-medium text-base sm:text-sm opacity-50 w-1/4">
-                    Qo’shimcha ma’lumot
+                    {{ locale === 'ru' ? 'Дополнительная информация' : 'Qo’shimcha ma’lumot' }}
                 </div>
                 <div class="w-9/12">
-                    <input v-model="addressInfo.additional_info" placeholder="Qo'shimcha ma'lumot (majburiy emas)" type="text" class="w-1/2 sm:w-full sm:text-sm border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
+                    <input v-model="addressInfo.additional_info" :placeholder="locale === 'ru' ? 'Дополнительная информация (необязательно)' : 'Qo\'shimcha ma\'lumot (majburiy emas)'" type="text" class="w-1/2 sm:w-full sm:text-sm border-b-2 outline-none bg-transparent font-onest-medium text-base border-opacity-20">
                     <div class="flex gap-5 sm:flex-col sm:gap-3">
                         <div @click="updateAddress" class="py-4 px-20 bg-bronze text-white font-onest-medium w-min cursor-pointer mt-12">
-                            Saqlash
+                            {{ locale === 'ru' ? 'Сохранить' : 'Saqlash' }}
                         </div>
                         <div @click="deleteAddress" class="py-4 px-20 bg-nav-bg font-onest-medium w-min cursor-pointer mt-12 sm:mt-0">
-                            O'chirish
+                            {{ locale === 'ru' ? 'Удалить' : 'O\'chirish' }}
                         </div>
                     </div>
-                    <div v-if="error" class="text-red-600 font-onest-regular mt-2">* Iltomos barcha kerakli maydonlarni to'ldiring</div>
-                    <div v-if="isAddressUpdated" class="text-xs font-onest-regular mt-2"><span class="text-green-600">✓</span> O'zgarishlar saqlandi</div>
+                    <div v-if="error" class="text-red-600 font-onest-regular mt-2">
+                        {{ locale === 'ru' ? '* Пожалуйста, заполните все необходимые поля' : '* Iltomos barcha kerakli maydonlarni to\'ldiring' }}
+                    </div>
+                    <div v-if="isAddressUpdated" class="text-xs font-onest-regular mt-2"><span class="text-green-600">✓</span>
+                        {{ locale === 'ru' ? 'Изменения сохранены' : 'O\'zgarishlar saqlandi' }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -73,6 +77,7 @@ import axios from "axios"
 
 const error = ref(false)
 const router = useRouter()
+const { locale } = useI18n()
 const config = useRuntimeConfig()
 const isAddressUpdated = ref(false)
 const authToken = await useAuthToken()

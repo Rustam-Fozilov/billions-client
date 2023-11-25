@@ -40,7 +40,7 @@
                                     </div>
                                 </div>
 
-                                <div v-if="isCopiedToClipboard" class="flex gap-3 items-center opacity-50">
+                                <div v-if="isCopiedToClipboard" class="flex gap-3 items-center opacity-50 sm:gap-1">
                                     <div class="cursor-not-allowed opacity-50">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="27" height="13" viewBox="0 0 27 13" fill="none">
                                             <path d="M1 7.41667L5.80769 12L17.3462 1M12.5385 10.1667L14.4615 12L26 1" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>

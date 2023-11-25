@@ -12,7 +12,7 @@
             <book-properties :book="bookData"/>
         </div>
 
-        <div>
+        <div class="container">
             <bestsellers-list/>
 
             <add-review-modal :book_id="bookData.data.id"/>

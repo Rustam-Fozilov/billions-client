@@ -1,2 +1,2 @@
-- fix: mobile-nav visibility when auth-modal toggled
-- make address modal responsive
+- fix: mobile-nav visibility when all modals toggled.
+- create books filter functionality. (for future)

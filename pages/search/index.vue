@@ -5,25 +5,25 @@
         </div>
 
         <div class="bg-soft-white">
-            <div class="container pt-12 pb-24">
+            <div class="container pt-12 pb-24 sm:pt-7 sm:pb-12">
                 <div>
                     <search-query-title :title="query"/>
                 </div>
 
-                <div class="flex mt-12">
-                    <div class="w-1/5">
-                        <search-books-filter/>
-                    </div>
+                <div class="flex mt-12 lg:mt-7 lg:flex-col">
+<!--                    <div class="w-1/5 lg:w-full">-->
+<!--                        <search-books-filter/>-->
+<!--                    </div>-->
 
-                    <div class=" w-4/5 flex flex-wrap gap-5">
-                        <div v-for="result in searchResult">
+                    <div class="flex flex-wrap gap-5 lg:justify-between">
+                        <div v-for="result in searchResult" class="lg:w-[47%]">
                             <book-card :book="result"/>
                         </div>
                     </div>
                 </div>
 
-                <div class="flex justify-end pt-24">
-                    <the-pagination v-if="paginationData.length > 1" :pagination-data="paginationData"/>
+                <div v-if="paginationData.length > 1" class="flex justify-end pt-24 sm:pt-16">
+                    <the-pagination :pagination-data="paginationData"/>
                 </div>
             </div>
         </div>

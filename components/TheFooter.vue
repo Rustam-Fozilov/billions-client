@@ -20,9 +20,9 @@
                                     <div>(+998) 97 767-20-97</div>
                                     <div>(+998) 93 123-45-67</div>
 
-                                    <div class="px-11 py-4 bg-white cursor-pointer text-center">
-                                        <a href="mailto:thisisrustam@gmail.com" class="text-black">{{ locale === 'ru' ? 'Отправить сообщение' : 'Xabar yuborish' }}</a>
-                                    </div>
+<!--                                    <div class="px-11 py-4 bg-white cursor-pointer text-center">-->
+<!--                                        <a href="mailto:thisisrustam@gmail.com" class="text-black">{{ locale === 'ru' ? 'Отправить сообщение' : 'Xabar yuborish' }}</a>-->
+<!--                                    </div>-->
 
                                     <div id="social-media">
                                         <div class="flex gap-3">

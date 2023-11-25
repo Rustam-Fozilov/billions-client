@@ -15,21 +15,22 @@
                         <div class="font-onest-medium text-xl lg:text-base">{{ pathTitle }}</div>
                         <div class="font-onest-regular opacity-50 relative top-[3px] lg:top-1">{{ locale === 'ru' ? `${countOfBooks.value} книги` : `${countOfBooks.value}ta kitob` }}</div>
                     </div>
-                    <div @click="openFilterModal" class="mt-3 flex gap-3 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="12" viewBox="0 0 20 12" fill="none">
-                            <rect y="8" width="20" height="2" rx="1" fill="#949599"/>
-                            <rect y="2" width="20" height="2" rx="1" fill="#949599"/>
-                            <circle cx="6" cy="3" r="2" fill="white" stroke="#949599" stroke-width="2"/>
-                            <circle cx="14" cy="9" r="2" fill="white" stroke="#949599" stroke-width="2"/>
-                        </svg>
-                        <div>
-                            {{ locale === 'ru' ? 'Фильтр' : 'Filtr' }}
-                        </div>
-                    </div>
+
+<!--                    <div @click="openFilterModal" class="mt-3 flex gap-3 items-center">-->
+<!--                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="12" viewBox="0 0 20 12" fill="none">-->
+<!--                            <rect y="8" width="20" height="2" rx="1" fill="#949599"/>-->
+<!--                            <rect y="2" width="20" height="2" rx="1" fill="#949599"/>-->
+<!--                            <circle cx="6" cy="3" r="2" fill="white" stroke="#949599" stroke-width="2"/>-->
+<!--                            <circle cx="14" cy="9" r="2" fill="white" stroke="#949599" stroke-width="2"/>-->
+<!--                        </svg>-->
+<!--                        <div>-->
+<!--                            {{ locale === 'ru' ? 'Фильтр' : 'Filtr' }}-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
 
-                <div class="mt-12 flex lg:mt-7">
-                    <div class="w-1/5 xl:hidden">
+                <div class="mt-12 flex lg:mt-7 lg:flex-col lg:gap-5">
+                    <div class="w-1/5 lg:w-full">
                         <books-filter :category="category" :path-title="pathTitle"/>
                     </div>
 
@@ -46,9 +47,9 @@
             </div>
         </div>
 
-        <div>
-            <book-filter-modal v-if="isFilterModalOpen"/>
-        </div>
+<!--        <div>-->
+<!--            <book-filter-modal v-if="isFilterModalOpen"/>-->
+<!--        </div>-->
 
         <div>
             <the-footer/>

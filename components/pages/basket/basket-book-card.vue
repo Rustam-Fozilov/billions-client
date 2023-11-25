@@ -1,15 +1,15 @@
 <template>
     <div>
-        <div class="bg-white p-10 flex justify-between items-center lg:flex-col lg:w-full lg:gap-7 lg:p-6">
-            <div class="flex gap-7 items-center w-2/5 lg:w-full lg:gap-5">
+        <div class="bg-white p-10 flex justify-between items-center lg:flex-col lg:w-full lg:gap-6 lg:p-6">
+            <div class="flex gap-7 items-center w-2/5 lg:w-full lg:gap-5 lg:flex-col">
                 <div class="w-5/12 h-[190px] xl:w-[160px]">
                     <img class="w-full h-full object-cover" src="~/assets/images/books/book-cover.png" alt="book cover" />
                 </div>
-                <div class="font-onest-regular flex flex-col gap-7 w-1/2">
+                <div class="font-onest-regular flex flex-col gap-7 w-1/2 lg:items-center lg:gap-0">
                     <div class="opacity-50">
                         {{ locale === 'ru' ? book.book.inventory[0].cover_type.ru : book.book.inventory[0].cover_type.uz }}
                     </div>
-                    <div>
+                    <div class="text-center">
                         {{ locale === 'ru' ? book.book.name.ru : book.book.name.uz }}
                     </div>
                 </div>

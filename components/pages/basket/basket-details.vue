@@ -29,7 +29,7 @@
                 </div>
 
                 <div @click="gotoConfirmOrder" id="cart-confirm-button">
-                    <div class="mt-12 cursor-pointer">
+                    <div class="mt-12 cursor-pointer sm:mt-7">
                         <span>
                             <div class="w-full bg-bronze py-7 text-white text-center font-onest-regular sm:py-5">{{ locale === 'ru' ? 'Перейти к оформлению' : 'Rasmiylashtirish' }}</div>
                         </span>

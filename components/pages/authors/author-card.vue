@@ -1,13 +1,13 @@
 <template>
     <div>
         <div @click="gotoAuthor" class="cursor-pointer">
-            <div class="flex flex-col gap-7 w-72 bg-white p-7">
-                <div class="w-full h-60 rounded-full">
+            <div class="flex flex-col gap-7 w-72 bg-white p-7 sm:w-full sm:h-full sm:py-5 sm:gap-5">
+                <div class="w-full h-60 rounded-full sm:h-full">
                     <img class="w-full h-full object-cover rounded-full" :src="author.photo" alt="author name">
                 </div>
 
                 <div class="font-onest-regular">
-                    <div class="text-base">
+                    <div class="text-base sm:text-sm">
                         {{
                             locale === 'ru' ?
                             author.first_name.ru + ' ' + author.last_name.ru :
@@ -25,9 +25,9 @@
 
 <script setup>
 
-const props = defineProps(['author'])
-const { locale } = useI18n()
 const router = useRouter()
+const { locale } = useI18n()
+const props = defineProps(['author'])
 
 
 const gotoAuthor = () => {
