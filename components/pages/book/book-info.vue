@@ -88,14 +88,14 @@
                                     v-if="locale === 'ru'"
                                     class="font-onest-regular"
                                     :class="book.data.inventory[0].quantity <= 0 ? 'text-red-500' : 'text-stock-green'"
-                                >Есть {{ book.data.inventory[0].quantity }} штуки
+                                >В продаже есть {{ book.data.inventory[0].quantity }} штуки
                                 </div>
 
                                 <div
                                     v-if="locale === 'uz'"
                                     class="font-onest-regular text-stock-green"
                                     :class="book.data.inventory[0].quantity <= 0 ? 'text-red-500' : 'text-stock-green'"
-                                >{{ book.data.inventory[0].quantity }} dona bor
+                                >Sotuvda {{ book.data.inventory[0].quantity }} dona bor
                                 </div>
                             </div>
                             <div class="font-onest-medium text-xl sm:text-base">
@@ -125,7 +125,6 @@
                             <div class="font-onest-regular opacity-50">
                                 <div>{{ $t('delivery.day') }}</div>
                                 <div>{{ $t('delivery.price') }}</div>
-                                <div>{{ locale === 'ru' ? '300 заказов.' : '300 ta buyurtma' }}</div>
                             </div>
                         </div>
                     </div>

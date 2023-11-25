@@ -11,7 +11,7 @@
 
                 <div class="mt-5">
                     <div>
-                        <select @input="selectAddress" class="w-1/3 p-3 cursor-pointer outline-none bg-white border border-black border-opacity-20 font-onest-regular" name="" id="">
+                        <select @input="selectAddress" class="w-1/3 xl:w-full p-3 cursor-pointer outline-none bg-white border border-black border-opacity-20 font-onest-regular" name="" id="">
                             <option class="p-2" value="null" disabled selected>{{ locale === 'ru' ? 'Выберите адрес' : 'Manzilni tanlang' }}</option>
                             <option v-for="address in userAddresses" :value="address.id" class="font-onest-regular">
                                 {{ address.address_name }},

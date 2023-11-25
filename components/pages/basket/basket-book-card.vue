@@ -7,9 +7,9 @@
                 </div>
                 <div class="font-onest-regular flex flex-col gap-7 w-1/2 lg:items-center lg:gap-0">
                     <div class="opacity-50">
-                        {{ locale === 'ru' ? book.book.inventory[0].cover_type.ru : book.book.inventory[0].cover_type.uz }}
+                        {{ locale === 'ru' ? book.book.inventory[0].cover_type.ru + ' обложка' : book.book.inventory[0].cover_type.uz + ' muqova' }}
                     </div>
-                    <div class="text-center">
+                    <div class="lg:text-center">
                         {{ locale === 'ru' ? book.book.name.ru : book.book.name.uz }}
                     </div>
                 </div>
@@ -33,7 +33,7 @@
             </div>
             <div>
                 <div class="font-onest-regular text-stock-green">
-                    {{ locale === 'ru' ? `Есть ${book.book.inventory[0].quantity} штуки` : `${book.book.inventory[0].quantity} dona bor` }}
+                    {{ locale === 'ru' ? `В продаже есть ${book.book.inventory[0].quantity} штуки` : `Sotuvda ${book.book.inventory[0].quantity} dona bor` }}
                 </div>
             </div>
             <div>

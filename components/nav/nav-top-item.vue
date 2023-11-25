@@ -33,17 +33,17 @@
                         <div class="relative">
                             <button @click="showLang = !showLang" class="m-3 h-full cursor-pointer flex items-center gap-2">
                                 <div class="w-7 h-7">
-                                    <img class="w-full h-full object-cover rounded-2xl" :src='"/images/" + localeValues.value.details.icon' alt="language icon"/>
+                                    <img class="w-full h-full object-cover rounded-2xl" :src='"/images/" + locale + ".png"' alt="language icon"/>
                                 </div>
-                                <div class="font-onest-regular">{{ localeValues.value.details.code === 'ru' ? 'Русский' : 'O\'zbekcha' }}</div>
+                                <div class="font-onest-regular">{{ locale === 'ru' ? 'Русский' : 'O\'zbekcha' }}</div>
                             </button>
 
                             <div v-if="showLang" @click="changeLang" class="bg-white p-3 shadow-lg absolute top-full cursor-pointer mt-2 z-10">
                                 <div class="flex gap-2 items-center h-full w-full">
                                     <div class="w-7 h-7">
-                                        <img class="w-full h-full object-cover rounded-2xl" :src="localeValues.value.details.code === 'ru' ? '/images/uzb-flag.png' : '/images/russia-flag.png'" alt="language icon">
+                                        <img class="w-full h-full object-cover rounded-2xl" :src="locale === 'ru' ? '/images/uz.png' : '/images/ru.png'" alt="language icon">
                                     </div>
-                                    <div class="font-onest-regular">{{ localeValues.value.details.code === 'ru' ? 'O\'zbekcha' : 'Русский' }}</div>
+                                    <div class="font-onest-regular">{{ locale === 'ru' ? 'O\'zbekcha' : 'Русский' }}</div>
                                 </div>
                             </div>
                         </div>
@@ -66,44 +66,38 @@ const { data, load } = fetchUrl()
 const { locale, setLocale } = useI18n()
 
 
+onUpdated(() => {
+    locale.value = locale.value
+})
+
+
 await load(`${config.public.apiUrl}/guest-settings`)
+// const localeValues = ref(data.value.data[0])
 
 
-const localeValues = ref(data.value.data[0])
-const localeCode = data.value.data[0].value.details.code
-setLocale(localeCode)
+if (route.fullPath === '/') {
+    setLocale('ru')
+} else if (route.fullPath.split('/')[1] === 'uz') {
+    setLocale('uz')
+} else if (route.fullPath.split('/')[1] === 'ru') {
+    setLocale('ru')
+}
 
 
-const changeLang = async () => {
+const changeLang = () => {
     showLang.value = !showLang.value
 
     if (locale.value === 'ru') {
-        await load(`${config.public.apiUrl}/guest-settings/1`, {
-            'setting_id': 1,
-            'value_id': 10,
-        }, 'PUT')
-        
-        
-        await setLocale('uz')
-        localeValues.value = data.value.data
-
+        setLocale('uz')
 
         const routePath = route.path.split('/')
-        routePath[0] !== '' ? await router.push(`/uz/${routePath.slice(1).join('/')}`) : await router.push(`/uz`)
-
+        routePath[2] === undefined ? router.push(`/uz`) : router.push(`/uz/${routePath.slice(2).join('/')}`)
     } else if (locale.value === 'uz') {
-        await load(`${config.public.apiUrl}/guest-settings/1`, {
-            'setting_id': 1,
-            'value_id': 11,
-        }, 'PUT')
-        
-        
-        await setLocale('ru')
-        localeValues.value = data.value.data
-
+        setLocale('ru')
 
         const routePath = route.path.split('/')
-        routePath[0] !== '' ? await router.push(`/ru/${routePath.slice(1).join('/')}`) : await router.push(`/ru`)
+        // console.log('routePath: ', routePath.slice(2))
+        routePath[2] === undefined ? router.push(`/ru`) : router.push(`/ru/${routePath.slice(2).join('/')}`)
     }
 }
 

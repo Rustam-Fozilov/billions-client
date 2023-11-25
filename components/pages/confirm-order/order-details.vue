@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <div class="w-full mt-12 sticky top-3 bottom-9">
+            <div class="w-full mt-12 sticky top-3 bottom-9 sm:mt-7 sm:bottom-5">
                 <div class="font-onest-regular flex flex-col gap-4">
                     <div class="flex justify-between">
                         <div class="opacity-50">{{ locale === 'ru' ? 'Товаров в заказе' : 'Buyurtma bo\'yicha tovarlar' }}</div>
@@ -14,7 +14,7 @@
                 </div>
 
                 <div>
-                    <div class="mt-7 flex flex-col gap-5">
+                    <div class="mt-7 flex flex-col gap-5 sm:mt-5">
                         <div class="font-onest-medium text-base">{{ locale === 'ru' ? 'Информация о доставке' : 'Yetkazib berish haqida ma\'lumot' }}</div>
                         <div class="font-onest-regular opacity-50">
                             <div>{{ $t('delivery.day')  }}</div>
@@ -22,15 +22,15 @@
                         </div>
                         <div class="font-onest-medium text-base flex justify-between">
                             <div>{{ locale === 'ru' ? 'Итого:' : 'Jami' }}</div>
-                            <div>{{ locale === 'ru' ? `${totalAmountOfCart} сум` : `${totalAmountOfCart} sum` }}</div>
+                            <div>{{ locale === 'ru' ? `${totalAmountOfCart} сум` : `${totalAmountOfCart} so'm` }}</div>
                         </div>
                     </div>
                 </div>
 
                 <div @click="confirmOrder" id="cart-confirm-button">
-                    <div class="mt-12 cursor-pointer">
+                    <div class="mt-12 cursor-pointer sm:mt-5">
                         <span>
-                            <div class="w-full bg-bronze py-7 text-white text-center font-onest-regular">{{ locale === 'ru' ? 'Подтвердить' : 'Tasdiqlash' }}</div>
+                            <div class="w-full bg-bronze py-7 text-white text-center font-onest-regular sm:py-5">{{ locale === 'ru' ? 'Подтвердить' : 'Tasdiqlash' }}</div>
                         </span>
                     </div>
                 </div>

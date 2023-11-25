@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="w-9/12 flex gap-3 border-">
                                     <div class="font-onest-medium text-base sm:text-sm">+998</div>
-                                    <input v-model="newUserInfo.phone" @input="numericOnly" maxlength="9" :placeholder="locale === 'ru' ? 'Введите свой номер телефона' : 'Telefon raqamingizni kiriting'" type="text" class="w-1/2 sm:w-full border-b-2 outline-none bg-transparent font-onest-medium text-base sm:text-sm border-opacity-20">
+                                    <input v-model="newUserInfo.phone" @input="numericOnly" maxlength="9" :placeholder="locale === 'ru' ? 'Введите номер телефона' : 'Telefon raqamingizni kiriting'" type="text" class="w-1/2 sm:w-full border-b-2 outline-none bg-transparent font-onest-medium text-base sm:text-sm border-opacity-20">
                                 </div>
                             </div>
                             <div class="flex">
@@ -47,9 +47,9 @@
                                     {{ locale === ru ? 'Электронная почта' : 'Email'}}
                                 </div>
                                 <div class="w-9/12">
-                                    <input v-model="newUserInfo.email" :placeholder="locale === 'ru' ? 'Введите свой адрес электронной почты (необязательно)' : 'Emailingizni kiriting (majburiy emas)'" type="text" class="w-1/2 sm:w-full border-b-2 outline-none bg-transparent font-onest-medium text-base sm:text-sm border-opacity-20">
+                                    <input v-model="newUserInfo.email" :placeholder="locale === 'ru' ? 'Введите адрес электронной почты (необязательно)' : 'Emailingizni kiriting (majburiy emas)'" type="text" class="w-1/2 sm:w-full border-b-2 outline-none bg-transparent font-onest-medium text-base sm:text-sm border-opacity-20">
                                     <div @click="updateUserInfo" class="py-4 px-20 bg-bronze text-white font-onest-medium w-min cursor-pointer mt-12 sm:mt-7">
-                                        Saqlash
+                                        {{ locale === 'ru' ? 'Сохранить' : 'Saqlash' }}
                                     </div>
                                     <div v-if="error" class="text-red-600 font-onest-regular mt-2">
                                         {{ locale === 'ru' ? '* Пожалуйста, заполните все необходимые поля' : '* Iltomos barcha kerakli maydonlarni to\'ldiring' }}

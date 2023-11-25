@@ -9,7 +9,7 @@
             </div>
 
             <div>
-                <div class="pt-12 pb-24 flex justify-start gap-5 flex-wrap sm:justify-between sm:gap-0">
+                <div class="pt-12 pb-24 flex justify-start gap-5 flex-wrap sm:justify-between sm:gap-0 sm:pt-7 sm:pb-12">
                     <div v-for="book in data ? data.data : []" class="mb-5 lg:w-[48%]">
                         <favorite-book-card :book="book"/>
                     </div>

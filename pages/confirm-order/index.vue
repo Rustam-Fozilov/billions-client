@@ -11,7 +11,7 @@
                 <confirm-order-info/>
             </div>
 
-            <div class="mt-[100px]">
+            <div class="mt-[100px] sm:mt-16">
                 <the-footer/>
             </div>
         </div>

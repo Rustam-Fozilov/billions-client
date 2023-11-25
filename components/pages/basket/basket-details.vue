@@ -23,7 +23,7 @@
                         </div>
                         <div class="font-onest-medium text-base flex justify-between sm:text-sm">
                             <div>{{ locale === 'ru' ? 'Итого:' : 'Jami' }}</div>
-                            <div>{{ locale === 'ru' ? `${totalAmountOfCart} сум` : `${totalAmountOfCart} sum` }}</div>
+                            <div>{{ locale === 'ru' ? `${totalAmountOfCart} сум` : `${totalAmountOfCart} so'm` }}</div>
                         </div>
                     </div>
                 </div>

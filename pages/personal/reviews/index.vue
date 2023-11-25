@@ -17,7 +17,7 @@
                                 {{ locale === 'ru' ? 'Отзывы' : 'Izohlar' }}
                             </div>
                             <div class="mt-2 font-onest-regular opacity-50 sm:mt-1">
-                                {{ data ? data.data.length : 0 }} {{ locale === 'ru' ? 'отзывов' : 'izoh' }}
+                                {{ data ? data.data.reviews.length : 0 }} {{ locale === 'ru' ? 'отзывов' : 'izoh' }}
                             </div>
                         </div>
 

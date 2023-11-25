@@ -11,32 +11,32 @@
                     </div>
                 </div>
 
-                <div class="mt-5 flex flex-col gap-5">
-                    <div class="flex justify-between">
+                <div class="mt-5 flex flex-col gap-5 sm:w-full">
+                    <div class="flex justify-between 2xl:flex-col 2xl:gap-3">
                         <div>
                             <div class="font-onest-medium">{{ locale === 'ru' ? 'Имя' : 'Ism' }}</div>
                             <div>
-                                <input required v-model="receiverInfo.name" type="text" :placeholder="locale === 'ru' ? 'Введите ваше имя' : 'Ismingizni kiriting'" class="w-[400px] outline-none px-6 py-4 font-onest-regular bg-transparent border border-black border-opacity-20 mt-1">
+                                <input required v-model="receiverInfo.name" type="text" :placeholder="locale === 'ru' ? 'Введите ваше имя' : 'Ismingizni kiriting'" class="w-[400px] xl:w-full outline-none px-6 py-4 font-onest-regular bg-transparent border border-black border-opacity-20 mt-1">
                             </div>
                         </div>
                         <div>
                             <div class="font-onest-medium">{{ locale === 'ru' ? 'Фамилия' : 'Familiya' }}</div>
                             <div>
-                                <input required v-model="receiverInfo.surname" type="text" :placeholder="locale === 'ru' ? 'Введите вашу фамилию' : 'Familiyangizni kiriting'" class="w-[400px] outline-none px-6 py-4 font-onest-regular bg-transparent border border-black border-opacity-20 mt-1">
+                                <input required v-model="receiverInfo.surname" type="text" :placeholder="locale === 'ru' ? 'Введите вашу фамилию' : 'Familiyangizni kiriting'" class="w-[400px] xl:w-full outline-none px-6 py-4 font-onest-regular bg-transparent border border-black border-opacity-20 mt-1">
                             </div>
                         </div>
                     </div>
-                    <div class="flex justify-between">
+                    <div class="flex justify-between 2xl:flex-col 2xl:gap-3">
                         <div>
                             <div class="font-onest-medium">
                                 {{ locale === 'ru' ? 'Телефон' : 'Telefon' }}
                             </div>
-                            <div class="flex gap-2 items-center border border-black border-opacity-20 px-6 py-4 w-[400px]">
+                            <div class="flex gap-2 items-center border border-black border-opacity-20 px-6 py-4 w-[400px] xl:w-full">
                                 <div class="font-onest-regular">+998</div>
                                 <input required v-model="receiverInfo.phoneNumber" @input="numericOnly" type="text" placeholder="90 000-00-00" maxlength="9" class="w-full outline-none font-onest-regular bg-transparent">
                             </div>
                         </div>
-                        <div class="w-[400px] mt-5">
+                        <div class="w-[400px] mt-5 xl:w-full">
                             <div class="font-onest-regular opacity-50">
                                 {{ locale === 'ru' ? 'Курьер свяжется с вами по телефону для подтверждения времени доставки.' : 'Yetkazib berish vaqtini aniqlashtirish uchun kuryer siz bilan telefon orqali bog\'lanadi.' }}
                             </div>

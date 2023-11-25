@@ -12,7 +12,7 @@
                 <div class="mt-5 flex flex-col gap-5">
                     <div @click="changePaymentType('online')" id="order-payment-online" class="p-5 w-full border-2 border-bronze cursor-pointer">
                         <div class="flex gap-2 items-start">
-                            <div id="order-payment-online-radio" class="w-4 h-4 bg-transparent rounded-full border-bronze border-4"></div>
+                            <div id="order-payment-online-radio" class="w-4 h-4 sm:min-w-[16px] sm:min-h-[16px] bg-transparent rounded-full border-bronze border-4"></div>
                             <div>
                                 <div class="font-onest-regular">{{ locale === 'ru' ? 'Онлайн-картой (Click, Payme, Узумбанк...)' : 'Onlayn karta orqali (Click, Payme, Uzumbank...)' }}</div>
                                 <div class="flex gap-3 items-center mt-2">
