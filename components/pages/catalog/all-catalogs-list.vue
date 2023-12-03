@@ -9,7 +9,7 @@
                     <div class="flex gap-7 flex-wrap sm:justify-evenly sm:gap-5">
                         <div @click="gotoCatalog(category.path_name)" v-for="category in data.data" class="w-52 sm:w-24">
                             <div class="w-full h-52 bg-white cursor-pointer sm:h-24">
-                                <!--                                 <img class="w-full h-full object-cover" src="~/assets/images/uz.png" alt="catalog image">-->
+                                 <img class="w-full h-full object-cover" :src="`${config.public.imageUrl}/images/categories/${category.image.link}`" alt="catalog image">
                             </div>
                             <div class="text-center mt-5 font-onest-medium text-base sm:text-xs sm:mt-3">{{ locale === 'ru' ? category.name.ru : category.name.uz }}</div>
                         </div>

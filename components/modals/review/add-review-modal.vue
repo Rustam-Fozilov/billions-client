@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div v-if="isReviewModalOpen" @click="closeModal" class="fixed w-screen h-screen top-0 bottom-0 left-0 right-0 bg-black opacity-50"></div>
-        <div v-if="isReviewModalOpen" class="flex flex-col items-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white z-10 sm:w-11/12">
+        <div v-if="isReviewModalOpen" @click="closeModal" class="fixed w-screen h-screen top-0 bottom-0 left-0 right-0 bg-black opacity-50 z-[1000]"></div>
+        <div v-if="isReviewModalOpen" class="flex flex-col items-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white z-[1000] sm:w-11/12">
             <div class="p-8 outline-none overscroll-none w-full">
                 <div class="flex flex-col gap-7 justify-start w-[500px] sm:w-full sm:gap-3">
                     <div class="flex w-full justify-between border-b-2 pb-4">
@@ -51,15 +51,9 @@ const router = useRouter()
 const reviewIndex = ref(0)
 const { locale } = useI18n()
 const config = useRuntimeConfig()
-const screenSize = await useScreenSize()
 const authToken = await useAuthToken()
 const props = defineProps(['book_id'])
 const isReviewModalOpen = useIsReviewModalOpen()
-
-
-onUpdated(() => {
-    screenSize.value = !isReviewModalOpen.value
-})
 
 
 const closeModal = () => {
@@ -90,6 +84,5 @@ const addReview = () => {
         router.go()
     }
 }
-
 
 </script>

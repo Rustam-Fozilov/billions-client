@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div v-if="isAddUserAddressModalOpen" @click="closeModal" class="fixed w-screen h-screen top-0 bottom-0 left-0 right-0 bg-black opacity-50"></div>
-        <div v-if="isAddUserAddressModalOpen" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white z-10 sm:w-11/12">
+        <div v-if="isAddUserAddressModalOpen" @click="closeModal" class="fixed w-screen h-screen top-0 bottom-0 left-0 right-0 bg-black opacity-50 z-[1000]"></div>
+        <div v-if="isAddUserAddressModalOpen" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white z-[1000] sm:w-11/12">
             <div class="p-8 outline-none overscroll-none sm:p-5">
                 <div class="flex flex-col gap-12 justify-start w-[520px] sm:w-full sm:gap-3 sm:h-[430px]">
                     <div @click.stop="closeModal" class="cursor-pointer opacity-50 hover:opacity-100 transition flex w-full justify-end">
@@ -95,18 +95,12 @@ const router = useRouter()
 const { locale } = useI18n()
 const config = useRuntimeConfig()
 const authToken = await useAuthToken()
-const screenSize = await useScreenSize()
 const isAddUserAddressModalOpen = useIsAddUserAddressModalOpen()
 const addressInfo = ref({
     name: '',
     street: '',
     home: '',
     additional: ''
-})
-
-
-onUpdated(() => {
-    // screenSize.value = false
 })
 
 
@@ -143,7 +137,6 @@ const addUserAddress = async () => {
 
 const closeModal = () => {
     isAddUserAddressModalOpen.value = false
-    // screenSize.value = true
 }
 
 </script>

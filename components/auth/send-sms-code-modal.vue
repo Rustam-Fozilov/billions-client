@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div v-if="isAuthModalOpen" @click="closeAuthModal" class="fixed w-screen h-screen top-0 bottom-0 left-0 right-0 bg-black opacity-50"></div>
-        <div v-if="isAuthModalOpen" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white z-10 sm:w-11/12">
+        <div v-if="isAuthModalOpen" @click="closeAuthModal" class="fixed w-screen h-screen top-0 bottom-0 left-0 right-0 bg-black opacity-50 z-[1000]"></div>
+        <div v-if="isAuthModalOpen" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white z-[1000] sm:w-11/12">
             <div id="auth-dialog" class="p-8 outline-none overscroll-none">
                 <div class="flex flex-col justify-between h-[480px] w-[400px] sm:w-full sm:gap-3 sm:h-[450px]">
                     <div @click.stop="closeAuthModal" class="cursor-pointer opacity-50 hover:opacity-100 transition flex w-full justify-end">
@@ -54,17 +54,11 @@ const smsCode = useSMSCode()
 const { data, load } = fetchUrl()
 const config = useRuntimeConfig()
 const isSMSCodeSent = useIsSMSCodeSent()
-const screenSize = await useScreenSize()
-const oldScreenSizeValue = screenSize.value
 const isAuthModalOpen = useIsAuthModalOpen()
 const userPhoneNumber = useUserPhoneNumber()
 
 
 onUpdated(() => {
-    if (screenSize.value) {
-        screenSize.value = false
-    }
-
     isAuthModalOpen.value = isAuthModalOpen.value
 })
 
@@ -92,10 +86,6 @@ const sendSMSCode = async () => {
 
 const closeAuthModal = () => {
     isAuthModalOpen.value = false
-    if (oldScreenSizeValue) {
-        console.log(oldScreenSizeValue)
-        screenSize.value = true
-    }
 }
 
 

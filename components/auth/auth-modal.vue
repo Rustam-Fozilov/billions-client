@@ -10,7 +10,6 @@
 
 <script setup>
 
-
 const isSMSCodeSent = useIsSMSCodeSent()
 const isAuthModalOpen = useIsAuthModalOpen()
 

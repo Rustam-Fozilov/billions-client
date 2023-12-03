@@ -130,7 +130,6 @@ const openReviewModal = () => {
     if (!authToken.value) {
         return isAuthModalOpen.value = true
     }
-    console.log('review modal open')
 
     return isReviewModalOpen.value = true
 }

@@ -1,6 +1,6 @@
 <template>
     <div>
-        fjkdsla
+        book filter modal for mobile devices
     </div>
 </template>
 

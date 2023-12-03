@@ -14,7 +14,7 @@ export function fetchUrl() {
                         // console.log(data.value);
                     })
                     .catch((error) => {
-                        console.log(error);
+                        // console.log(error);
                         error.value = true;
                     });
 
@@ -28,7 +28,7 @@ export function fetchUrl() {
                         // console.log('data in fetchUrl.js file: ', data.value);
                     })
                     .catch((error) => {
-                        console.log(error);
+                        // console.log(error);
                         error.value = true;
                     });
 
@@ -41,7 +41,7 @@ export function fetchUrl() {
                         data.value = response.data;
                     })
                     .catch((error) => {
-                        console.log(error);
+                        // console.log(error);
                         error.value = true;
                     });
 
@@ -54,7 +54,7 @@ export function fetchUrl() {
                         // console.log(data.value);
                     })
                     .catch((error) => {
-                        console.log(error);
+                        // console.log(error);
                         error.value = true;
                     });
                 break;

@@ -38,5 +38,11 @@
         "cover": "Muqova",
         "pages": "Sahifalar soni",
         "year": "Nashr yili"
+    },
+    "howtobuy": {
+        "intro": "Siz Billions nashriyot guruhining kitoblarini onlayn-do'konimizdan onlayn xarid qilishingiz mumkin. Sizga veb-saytimizda qanday buyurtma berish kerakligini o'rgatamiz.",
+        "intro_2": "Kitoblar katalogdagi bo'limlarga bo'lingan. Siz ularni tematik bo'limlarda tanlashingiz, qidiruvdan foydalanishingiz yoki eng mashhur kitoblar to'plangan \"Bestsellerlar\" katalogini kuzatishingiz mumkin. Va \"Yangi kitoblar\" bo'limi haqida unutmang — biz unga har kuni eng yangi kitoblarni qo'shamiz.",
+        "option_1": "1. Sizni qiziqtirgan kitob sahifasiga o'ting va \"Savatga qo'shish\" tugmasini bosing. Sotib olmoqchi bo'lgan har bir kitob bilan ushbu amalni takrorlang.",
+        "option_2": "2. Yuqori o'ng burchakdagi \"Savatga\" belgini bosish orqali savatingizga o'ting. Sizga kerak bo'lgan barcha kitoblar Savatga joylashtirilganligini, nusxalar soni to'g'ri belgilanganligini tekshiring. Tayyor bo'lgach, \"buyurtmani rasmiylashtirish\" tugmasini bosing."
     }
 }

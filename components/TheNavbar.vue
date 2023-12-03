@@ -29,7 +29,7 @@
             <auth-modal/>
         </div>
 
-        <mobile-nav v-if="screenSize"/>
+        <mobile-nav class="hidden xl:block"/>
     </div>
 </template>
 
@@ -42,7 +42,6 @@ const { data, load } = fetchUrl()
 const authUser = await useAuthUser()
 const authToken = await useAuthToken()
 const { locale, setLocale } = useI18n()
-const screenSize = await useScreenSize()
 
 
 onMounted(() => {

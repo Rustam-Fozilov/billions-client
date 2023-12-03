@@ -10,11 +10,9 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div class="flex flex-wrap justify-between">
-                        <div v-for="book in data.data" class="mb-5 lg:w-[48%]">
-                            <book-card :book="book"/>
-                        </div>
+                <div class="flex flex-wrap justify-between">
+                    <div v-for="book in data.data" class="mb-5 lg:w-[48%]">
+                        <book-card :book="book"/>
                     </div>
                 </div>
             </div>
@@ -31,6 +29,6 @@ const config = useRuntimeConfig()
 const { data, load} = fetchUrl()
 
 
-await load(`${config.public.apiUrl}/books?limit=10&withAuthor=true&orderByDesc=true`)
+await load(`${config.public.apiUrl}/books/newest?limit=10&withAuthor=true`)
 
 </script>

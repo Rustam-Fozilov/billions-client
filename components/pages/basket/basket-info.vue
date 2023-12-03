@@ -41,7 +41,6 @@ const totalAmountOfCart = await useTotalAmountOfCart()
 
 
 onMounted(() => {
-    // addBooksToUserCart()
     calculateTotalValue()
 })
 
@@ -73,38 +72,6 @@ const calculateTotalValue = () => {
 }
 
 
-const addBooksToUserCart = () => {
-    if (authToken.value && booksInCart.value) {
-        axios
-            .post(`${config.public.apiUrl}/cart`, {
-                'books': refactorBooksToRequest()
-            }, {
-                headers: {
-                    Authorization: `Bearer ${authToken.value}`
-                }
-            })
-            .then(res => {
-                console.log(res)
-            })
-    }
-}
-
-
-const refactorBooksToRequest = () => {
-    let allBooks = []
-    for (let i = 0; i < booksInCart.value.length; i++) {
-        allBooks.push({
-            'book_id': booksInCart.value[i].book.id,
-            'quantity': booksInCart.value[i].quantity,
-            'total': booksInCart.value[i].book.prices[1].price,
-            'originalPrice': booksInCart.value[i].originalPrice
-        })
-    }
-
-    return allBooks
-}
-
-
 const removeAllFromCart = () => {
     booksInCart.value = []
     totalAmountOfCart.value = +config.public.deliveryAmount
@@ -117,7 +84,7 @@ const removeAllFromCart = () => {
                 }
             })
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
             })
     }
 

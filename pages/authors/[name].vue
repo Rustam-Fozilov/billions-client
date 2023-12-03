@@ -20,7 +20,7 @@
                                 {{ locale === 'ru' ? data.data.first_name.ru + ' ' + data.data.last_name.ru : data.data.first_name.uz + ' ' + data.data.last_name.uz }}
                             </div>
                             <div class="font-onest-regular">
-                                {{ 'description' }}
+                                {{ locale === 'ru' ? data.data.description.ru : data.data.description.uz }}
                             </div>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="z-[1000] px-7 py-3 font-onest-regular fixed bottom-0 drop-shadow-md bg-white flex items-center justify-between w-full border-t-[1px] border-black border-opacity-20">
+        <div class="z-[100] px-7 py-3 font-onest-regular fixed bottom-0 drop-shadow-md bg-white flex items-center justify-between w-full border-t-[1px] border-black border-opacity-20">
             <NuxtLink :to="`/${locale}`" class="flex flex-col gap-2 items-center">
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">

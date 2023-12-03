@@ -23,14 +23,14 @@ const config = useRuntimeConfig()
 await axios
     .get(`${config.public.apiUrl}/categories`, {
         params: {
-            'only_parents': true
+            'limit': 10
         }
     })
     .then((res) => {
         categories.value = res.data.data
     })
     .catch((err) => {
-        console.log(err)
+        // console.log(err)
     })
 
 
