@@ -29,20 +29,22 @@
 </template>
 
 <script setup>
-import { fetchUrl } from "~/helpers/fetchUrl";
+import { fetchUrl } from "~/helpers/fetchUrl"
 
 
-const props = defineProps(['paginationData'])
 const route = useRoute()
 const router = useRouter()
 const config = useRuntimeConfig()
 const { data, load } = fetchUrl()
+const props = defineProps(['paginationData'])
 
 
 const paginate = (pagination) => {
+    // console.log(route.query)
     router.push({
         path: route.path,
         query: {
+            q: route.query.q,
             page: pagination.meta.current_page,
         }
     })
@@ -58,6 +60,7 @@ const paginateNext = () => {
         router.push({
             path: route.path,
             query: {
+                q: route.query.q,
                 page: 2,
             }
         })
@@ -67,6 +70,7 @@ const paginateNext = () => {
     router.push({
         path: route.path,
         query: {
+            q: route.query.q,
             page: +route.query.page + 1,
         }
     })
@@ -81,6 +85,7 @@ const paginatePrev = () => {
     router.push({
         path: route.path,
         query: {
+            q: route.query.q,
             page: +route.query.page - 1,
         }
     })

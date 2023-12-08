@@ -70,16 +70,18 @@
 </template>
 
 <script setup>
-import { fetchUrl } from '~/helpers/fetchUrl';
+import { fetchUrl } from '~/helpers/fetchUrl'
 
 
-const { locale } = useI18n()
-const config = useRuntimeConfig();
 const footerData = ref([])
-const { data, load} = fetchUrl();
+const { locale } = useI18n()
+const { data, load} = fetchUrl()
+const config = useRuntimeConfig()
+const authToken = await useAuthToken()
+const isAuthModalOpen = useIsAuthModalOpen()
 
 
-await load(`${config.public.apiUrl}/categories?only_parents=true`);
+await load(`${config.public.apiUrl}/categories?only_parents=true`)
 
 
 footerData.value = [
@@ -230,14 +232,17 @@ footerData.value = [
                     'uz': 'Mening buyurtmalarim',
                     'ru': 'Мои заказы'
                 },
-                link: `/${locale.value}/personal/orders`
+                link: authToken.value ? `/${locale.value}/personal/orders` : () => {
+                    isAuthModalOpen.value = true
+                    return '/'
+                }
             },
             {
                 title: {
                     'uz': 'Shaxsiy kabinet',
                     'ru': 'Личный кабинет'
                 },
-                link: `/${locale.value}/personal`
+                link: authToken.value ? `/${locale.value}/personal` : '#'
             },
         ]
     },

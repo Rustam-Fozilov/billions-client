@@ -58,12 +58,14 @@ watch(() => route.query.page, async (name) => {
 
 watch(() => route.query.q, async (name) => {
     query.value = name
+    console.log(query.value)
     await load(`${config.public.apiUrl}/books/search/${query.value}?withAuthor=true&page=${route.query.page ?? 1}`)
 
     if (data.value.success) {
         searchResult.value = data.value.data.books
     } else {
         await router.push(`/${locale.value}/search/not-found`)
+        // console.log(data.value)
     }
 })
 
@@ -72,6 +74,7 @@ await load(`${config.public.apiUrl}/books/search/${query.value}?withAuthor=true&
 
 if (!data.value.success) {
     await router.push(`/${locale.value}/search/not-found`)
+    // console.log(data.value)
 } else {
     searchResult.value = data.value.data.books
     paginationData.value.push(data.value.data)

@@ -2,7 +2,7 @@
     <div>
         <div>
             <div class="container">
-                <div class="py-[100px] flex flex-col gap-12 md:py-7 sm:gap-7">
+                <div class="py-[80px] flex flex-col gap-12 md:py-7 sm:gap-7">
                     <div class="flex gap-7 items-end">
                         <div class="text-xl font-onest-medium sm:text-base">{{ $t('catalog.title') }}</div>
                         <div class="font-onest-regular opacity-50 hover:opacity-100">

@@ -8,9 +8,7 @@
 
         <new-books-list/>
 
-        <div class="container">
-            <bestsellers-list/>
-        </div>
+       <bestsellers-list/>
 
         <purchased-today/>
 
