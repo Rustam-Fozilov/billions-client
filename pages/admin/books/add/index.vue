@@ -5,7 +5,7 @@
         <div class="font-onest-medium">* add new book</div>
 
         <div class="mt-5 mb-10">
-            <form @submit="submit">
+            <form @submit.prevent="submit">
                 <div class="flex gap-3 flex-col">
                     <div>
                         <div class="mb-1">Name uz</div>
@@ -116,8 +116,6 @@
 <script setup>
 import axios from "axios"
 
-// base64:+AahgkKRbUoRWM1ygpDjO7ZNPIdPVD3lZYywSXTPy+k=
-
 
 const year = ref(0)
 const price = ref(0)
@@ -145,6 +143,7 @@ const description_ru = ref('')
 const config = useRuntimeConfig()
 const short_description_uz = ref('')
 const short_description_ru = ref('')
+
 
 function sortImages() {
     if (image_1.value !== '') {
@@ -183,6 +182,7 @@ function sortImages() {
         })
     }
 }
+
 
 const submit = () => {
     sortImages()
@@ -226,10 +226,9 @@ const submit = () => {
         })
         .then(res => {
             response.value = res.data.message
-            images.value = []
         })
         .catch(res => {
-            console.log(res)
+            response.value = res.data
         })
 }
 
