@@ -3,7 +3,7 @@
         <div class="bg-white p-10 flex justify-between items-center lg:flex-col lg:w-full lg:gap-6 lg:p-6">
             <div class="flex gap-7 items-center w-2/5 lg:w-full lg:gap-5 lg:flex-col">
                 <div class="w-5/12 h-[190px] xl:w-[160px]">
-                    <img class="w-full h-full object-cover" src="~/assets/images/books/book-cover.png" alt="book cover" />
+                    <img class="w-full h-full object-cover" :src="`${book.book.images[0].link}`" alt="book cover" />
                 </div>
                 <div class="font-onest-regular flex flex-col gap-7 w-1/2 lg:items-center lg:gap-0">
                     <div class="opacity-50">
